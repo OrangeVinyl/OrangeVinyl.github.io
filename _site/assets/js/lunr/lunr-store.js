@@ -41,6 +41,12 @@ var store = [{
         "url": "/CS/Module/",
         "teaser": null
       },{
+        "title": "[Data Structure] 우선순위 큐",
+        "excerpt":"우선순위 큐 우선순위를 가진 항목들을 저장하는 큐 FIFO 순서가 아니라 우선순위가 높은 데이터가 먼저 나가게 된다. 가장 중요한 연산은 insert 연산(요소 삽입), delete 연산(요소 삭제)이다. 우선순위 큐는 2가지로 구분 최소 우선순위 큐 최대 우선순위 큐 우선순위 큐 구현하는 방법 배열을 이용한 우선순위 큐 연결리스트를 이용한 우선순위 큐 히프(heap)를 이용한 우선순위...","categories": ["Data Structure"],
+        "tags": ["Data Structure","Priority Queue","Queue","C"],
+        "url": "/CS/Data_Structure_PriorityQueue/",
+        "teaser": null
+      },{
         "title": "[Scope] 스코프",
         "excerpt":"스코프는 자바스크립트를 이용하는 데에 있어 필수적인 개념입니다. 이 포스팅 뒤로 클로저에 대해 알아볼 건데, 그전에 앞서 스코프의 정의가 먼저 필요하기 때문에 스코프 정의를 먼저 정리해보겠습니다. 스코프(Scope)의 정의 함수를 작성할 때 아래와 같이 중괄호 ‘{ }’를 이용하여 함수의 범위를 작성합니다. function hello(){ alert('함수 작성'); } 즉, [변수가 영향을 미치는 범위], [변수의 유효 범위],  [코드가...","categories": ["CS"],
         "tags": ["CS","Knowledge","Scope","JS"],
