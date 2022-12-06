@@ -53,6 +53,12 @@ var store = [{
         "url": "/CS/Scope/",
         "teaser": null
       },{
+        "title": "[Data Structure] Graph",
+        "excerpt":"그래프의 정의 그래프 G 는 (V,E)로 표시 정점(vertices) 여러가지 특성을 가질 수 있는 객체 의미 V(G): 그래프 G의 정점들의 집합 노드라고도 불린다 간선(edge) 정점들 간의 관계 의미 E(G): 그래프 G의 간선들의 집합 링크라고도 불림 네트워크 가중치 그래프는 네트워크라고도 함 간선에 비용이나 가중치가 할당된 그래프 부분 그래프(Subgraph) 정점 집합 V(G)와 간선...","categories": ["Data Structure"],
+        "tags": ["Data Structure","Graph","C"],
+        "url": "/CS/Data_Structure_Graph/",
+        "teaser": null
+      },{
         "title": "[Data Structure] 리스트",
         "excerpt":"✅ 원형 연결 리스트 하나의 노드에서 다른 모든 노드로의 접근이 가능하다는 장점이 존재한다. 삭제나 삽입 시에는 항상 선행 노드를 가리키는 **포인터**가 필요하다 원형 리스트의 헤드 포인터인 head가 마지막 노드를 가리키는 것을 명심 원형리스트의 처음에 삽입 ListNode* insert_first(ListNode* head, element data) { ListNode* node = (ListNode *)malloc(sizeof(ListNode)); node -&gt; data = data;...","categories": ["Data Structure"],
         "tags": ["Data Structure","List","C"],

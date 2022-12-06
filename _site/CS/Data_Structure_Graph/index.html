@@ -1,0 +1,1284 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Data Structure] Graph | Hwan’s Devlog</title>
+<meta name="description" content="Data Structure Graph">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Data Structure] Graph">
+<meta property="og:url" content="http://localhost:4000/CS/Data_Structure_Graph/">
+
+
+  <meta property="og:description" content="Data Structure Graph">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-06T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-06T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/CS/Data_Structure_Graph/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 16</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Data Structure] Graph">
+    <meta itemprop="description" content="Data Structure Graph">
+    <meta itemprop="datePublished" content="2022-12-06T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-06T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Data Structure] Graph
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-06T00:00:00+09:00">December 6, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#그래프의-정의">그래프의 정의</a></li><li><a href="#네트워크">네트워크</a></li><li><a href="#부분-그래프subgraph">부분 그래프(Subgraph)</a></li><li><a href="#그래프">그래프</a></li><li><a href="#그래프-표현-방법">그래프 표현 방법</a></li><li><a href="#그래프-탐색">그래프 탐색</a></li><li><a href="#신장-트리spanning-tree">신장 트리(Spanning tree)</a></li><li><a href="#최소비용-신장-트리minimum-spanning-tree">최소비용 신장 트리(Minimum Spanning Tree)</a></li><li><a href="#kruskal의-mst-알고르짐">Kruskal의 MST 알고르짐</a></li><li><a href="#prim-mst-알고리즘">Prim MST 알고리즘</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h3 id="그래프의-정의">그래프의 정의</h3>
+
+<ul>
+  <li>그래프 G 는 (V,E)로 표시</li>
+  <li>정점(vertices)
+    <ul>
+      <li>여러가지 특성을 가질 수 있는 객체 의미</li>
+      <li>V(G): 그래프 G의 정점들의 집합</li>
+      <li>노드라고도 불린다</li>
+    </ul>
+  </li>
+  <li>간선(edge)
+    <ul>
+      <li>정점들 간의 관계 의미</li>
+      <li>E(G): 그래프 G의 간선들의 집합</li>
+      <li>링크라고도 불림</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="네트워크">네트워크</h3>
+
+<ul>
+  <li>가중치 그래프는 네트워크라고도 함</li>
+  <li>간선에 비용이나 가중치가 할당된 그래프</li>
+</ul>
+
+<h3 id="부분-그래프subgraph">부분 그래프(Subgraph)</h3>
+
+<ul>
+  <li>정점 집합 V(G)와 간선 집합 E(G)의 부분 집합으로 이루어진 그래프</li>
+</ul>
+
+<h3 id="그래프">그래프</h3>
+
+<ul>
+  <li>인접 정점
+    <ul>
+      <li>하나의 정점에서 간선에 의해 연결된 정점</li>
+    </ul>
+  </li>
+  <li>무방향 그래프의 차수
+    <ul>
+      <li>하나의 정점에 연결된 다른 정점의 수</li>
+    </ul>
+  </li>
+  <li>방향 그래프의 차수
+    <ul>
+      <li>진입 차수 : 외부에서 오는 간선의 수</li>
+      <li>진출 차수 : 외부로 향하는 간선의 수</li>
+      <li><strong>방향 그래프</strong>의 모든 진입 차수의 합은 간선의 수</li>
+    </ul>
+  </li>
+  <li>무방향 그래프의 정점 s로부터 정점 e까지의 경로
+    <ul>
+      <li>나열된 정점들 간에 반드시 간선</li>
+    </ul>
+  </li>
+  <li>단순 경로
+    <ul>
+      <li>경로 중에서 반복되는 간선이 없는 경로</li>
+    </ul>
+  </li>
+  <li>사이클
+    <ul>
+      <li>단순 경로의 시작 정점과 종료 정점이 동일한 경로</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_1.png" alt="Graph_1" /></p>
+
+<ul>
+  <li>연결 그래프
+    <ul>
+      <li>무방향 그래프 G에 있는 모든 정점쌍에 대하여 항상 경로 존재</li>
+      <li>비연결 그래프도 존재</li>
+    </ul>
+  </li>
+  <li>완전 그래프(complete graph)
+    <ul>
+      <li>모든 정점이 연결되어 있는 그래프</li>
+      <li>n개의 정점을 가진 <strong>무방향 완전그래프</strong>의 간선의 수 : <strong>n*(n-1)/2</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="그래프-표현-방법">그래프 표현 방법</h3>
+
+<p><strong>인접행렬(adjacent matrix) 방법</strong></p>
+
+<ul>
+  <li>
+    <p>if(간선 (i,j)가 그래프에 존재) M[i][j] = 1,</p>
+
+    <p>그렇지 않으면                       M[i][j] = 0</p>
+  </li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_2.png" alt="Graph_" /></p>
+
+<p><strong>인접 행렬 구현</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define MAX_VERTICES 50
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">GraphType</span> <span class="p">{</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// 정점의 개수</span>
+<span class="kt">int</span> <span class="n">adj_mat</span><span class="p">[</span><span class="n">MAX_VERTICES</span><span class="p">][</span><span class="n">MAX_VERTICES</span><span class="p">];</span>
+<span class="p">}</span><span class="n">GraphType</span><span class="p">;</span>
+
+<span class="c1">//그래프 초기화</span>
+<span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
+	<span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">r</span><span class="o">&lt;</span><span class="n">MAX_VERTICES</span><span class="p">;</span><span class="n">r</span><span class="o">++</span><span class="p">)</span>
+		<span class="k">for</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">c</span><span class="o">&lt;</span><span class="n">MAX_VERTICES</span><span class="p">;</span><span class="n">c</span><span class="o">++</span><span class="p">)</span>
+			<span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_mat</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+
+<span class="c1">//정점 삽입 연산</span>
+<span class="kt">void</span> <span class="nf">insert_vertex</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(((</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">MAX_VERTICES</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"그래프: 정점의 개수 초과"</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//간선 삽입 연산</span>
+<span class="kt">void</span> <span class="nf">insert_edge</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">||</span> <span class="n">end</span> <span class="o">&gt;=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"그래프: 정점 번호 오류"</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_mat</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_mat</span><span class="p">[</span><span class="n">end</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">;</span>
+	<span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">GraphType</span><span class="p">));</span>
+	<span class="n">init</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+		<span class="n">insert_vertex</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+	
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+	<span class="n">print_adj_mat</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+
+	<span class="n">free</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>인접 리스트(adjacent list) 방법</strong></p>
+
+<ul>
+  <li>각 정점에 인접한 정점들을 연결리스트로 표현</li>
+  <li>정점의 수가 n개이고 간선의 수가 e개인 무방향 그래프를 표시하기 위해서는 n개의 연결 리스트가 필요하고, n개의 헤더 노드와 2e개의 노드가 필요하다. 따라서 인접 행렬 표현은 간선의 개수가 적은 <strong>희소 그래프(sparse graph)</strong>의 표현에 적합하다<strong>.</strong></li>
+  <li>n개 정점과 e개의 간선을 가진 그래프에서 <strong>전체 간선의 수</strong>를 알아내려면 헤더노드를 포함하여 모든 인접 리스트를 조사해야 하므로 <strong>O(n+e)</strong>의 연산이 요구됨</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_3.png" alt="Graph_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define MAX_VERTICES 50
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">GraphNode</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">vertex</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">GraphNode</span> <span class="o">*</span><span class="n">link</span><span class="p">;</span>
+<span class="p">}</span><span class="n">GraphNode</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">GraphType</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+	<span class="n">GraphNode</span><span class="o">*</span> <span class="n">adj_list</span><span class="p">[</span><span class="n">MAX_VERTICES</span><span class="p">];</span>
+<span class="p">}</span><span class="n">GraphType</span><span class="p">;</span>
+
+<span class="c1">//그래프 초기화</span>
+<span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">v</span><span class="p">;</span>
+		<span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">v</span><span class="o">&lt;</span><span class="n">MAX_VERTICES</span><span class="p">;</span><span class="n">v</span><span class="o">++</span><span class="p">)</span>
+		<span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_list</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="c1">//정점 삽입 연산</span>
+<span class="kt">void</span> <span class="nf">insert_vertex</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(((</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">MAX_VERTICES</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"그래프: 정점의 개수 초과"</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//간선 삽입 연산</span>
+<span class="kt">void</span> <span class="nf">insert_edge</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">u</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">GraphNode</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">||</span> <span class="n">end</span> <span class="o">&gt;=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"그래프: 정점 번호 오류"</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">GraphNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">GraphNode</span><span class="p">));</span>
+	<span class="c1">//node-&gt;vertex = v;</span>
+	<span class="c1">//node-&gt;link = g-&gt;adj_list[u];</span>
+	<span class="c1">//g-&gt;adj_list[u] = node;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_list</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">node</span><span class="o">-&gt;</span><span class="n">vertex</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+		<span class="n">node</span><span class="o">-&gt;</span><span class="n">link</span> <span class="o">=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_list</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+		<span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_list</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="p">{</span>
+		<span class="n">node</span><span class="o">-&gt;</span><span class="n">vertex</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+		<span class="n">q</span> <span class="o">=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_list</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+		<span class="n">whlie</span><span class="p">(</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">link</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+			<span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">link</span><span class="p">;</span>
+		<span class="n">q</span><span class="o">-&gt;</span><span class="n">link</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">;</span>
+	<span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">GraphType</span><span class="p">));</span> <span class="c1">//동적 할당</span>
+	<span class="n">init</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+		<span class="n">insert_vertex</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+	
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+	<span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+	<span class="n">print_adj_list</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+
+	<span class="n">free</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="그래프-탐색">그래프 탐색</h3>
+
+<ul>
+  <li>하나의 정점으로부터 시작하여 차례대로 모든 정점들을 한번씩 방문</li>
+  <li>많은 문제들이 단순히 그래프의 노드를 탐색하는 것으로 해결</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_4.png" alt="Graph_" /></p>
+
+<p><strong>깊이 우선 탐색(DFS : Depth First Search)</strong></p>
+
+<ul>
+  <li>한 방향으로 갈 수 있을 때까지 가다가 더 이상 갈 수 없게 되면 가장 가까운 갈림길로 돌아와서 이 곳으로부터 다른 방향으로 다시 탐색 진행</li>
+  <li>되돌아가기 위해서는 스택 필요(순환함수 호출로 묵시적인 스택 이용 가능)</li>
+  <li>방문 여부를 기록하기 위해 배열 visited를 사용하며, 모든 정점의 visited 배열값은 FALSE으로 초기화되고 정점이 방문될 때마다 해당 정점의 visited 배열값은 TRUE로 변경된다.</li>
+  <li>자기 자신을 다시 호출하는 순환 알고리즘의 형태</li>
+</ul>
+
+<center><img src="/assets/images/posts_img/DataStructure_Graph/graph_19.png" /></center>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_5.png" alt="Graph_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_6.png" alt="Graph_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 인접 행렬로 표현된 그래프에 대한 깊이 우선 탐색</span>
+<span class="kt">void</span> <span class="nf">dfs_mat</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">w</span><span class="p">;</span>
+	<span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>  <span class="c1">// 정점 v의 방문 표시</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"정점 %d -&gt;"</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>  <span class="c1">// 방문한 정점 출력</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">;</span> <span class="n">w</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// 인접 정점 탐색</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_mat</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
+			<span class="n">dfs_mat</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">w</span><span class="p">);</span> <span class="c1">// 정점 w에서 DFS 새로 시작</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 인접 리스트로 표현된 그래프에 대한 깊이 우선 탐색</span>
+<span class="kt">void</span> <span class="nf">dfs_list</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">GraphNode</span><span class="o">*</span> <span class="n">w</span><span class="p">;</span>
+	<span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>  <span class="c1">// 정점 v의 방문 표시</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"정점 %d -&gt;"</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>  <span class="c1">// 방문한 정점 출력</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_list</span><span class="p">[</span><span class="n">v</span><span class="p">];</span> <span class="n">w</span><span class="p">;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">-&gt;</span><span class="n">link</span><span class="p">)</span>  <span class="c1">// 인접 정점 탐색</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">])</span>
+			<span class="n">dfs_list</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">w</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">);</span> <span class="c1">// 정점 w에서 DFS 새로 시작</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>깊이 우선 탐색의 분석
+    <ul>
+      <li>깊이 우선 탐색은 그래프의 모든 간선을 조사하므로 정점의 수가 n이고 간선의 수가 e인 그래프인 경우, 그래프가 <strong>인접 리스트로 표현되어 있다면 시간 복잡도가 O(n+e)</strong>이고, <strong>인접 행렬로 표시되어 있다면 O(n^2)</strong>이다. 이는 희소 그래프인 경우 깊이 우선 탐색은 인접 리스트의 사용이 인접 행렬보다 시간적으로 유리함을 뜻함.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>너비 우선 탐색(BFS : Breath First Search)</strong></p>
+
+<ul>
+  <li>시작 정점으로부터 가까운 정점을 먼저 방문하고 멀리 떨어져 있는 정점을 나중에 방문하는 순회 방법</li>
+  <li>큐를 사용하여 구현 됨</li>
+  <li>너비 우선 탐색은 거리가 d인 정점들을 모두 방문한 다음, 거리가 (d+1)인 정점들을 모두 방문하게 된다. 즉 거리가 0인 시작 정점을 방문한 후, 거리가 1인 정점, 거리가 2인 정점, 거리가 3인 정점 등의 순서로 정점들을 방문해간다.</li>
+</ul>
+
+<center><img src="/assets/images/posts_img/DataStructure_Graph/graph_7.png" /></center>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_8.png" alt="Graph_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_9.png" alt="Graph_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 인접 행렬로 구현한 너비 우선 탐색</span>
+<span class="kt">void</span> <span class="nf">bfs_mat</span><span class="p">(</span><span class="n">GraphType</span><span class="o">*</span> <span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">w</span><span class="p">;</span>
+	<span class="n">QueueType</span> <span class="n">q</span><span class="p">;</span>
+	
+	<span class="n">queue_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span> <span class="c1">// 큐 초기화</span>
+	<span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>  <span class="c1">// 정점 v 방문표시</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%d 방문 -&gt;"</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span> 
+	<span class="n">enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>  <span class="c1">// 시작 정점을 큐에 저장</span>
+	<span class="n">whlie</span><span class="p">(</span><span class="o">!</span><span class="n">is_empty</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">))</span> <span class="p">{</span>
+		<span class="n">v</span> <span class="o">=</span> <span class="n">dequeue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span> <span class="c1">// 큐에서 정점 추출</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">w</span> <span class="o">&lt;</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">;</span> <span class="n">w</span><span class="o">++</span><span class="p">)</span> <span class="c1">// 인접 정점 탐색</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_mat</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">]){</span>
+				<span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span> <span class="c1">// 방문 표시</span>
+				<span class="n">printf</span><span class="p">(</span><span class="s">"%d 방문 -&gt;"</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+				<span class="n">enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span><span class="n">w</span><span class="p">);</span> <span class="c1">// 방문한 정점을 큐에 저장</span>
+			<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 인접 리스트로 구현한 너비 우선 탐색</span>
+<span class="kt">void</span> <span class="nf">bfs_list</span><span class="p">(</span><span class="n">GraphType</span><span class="o">*</span> <span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">GraphNode</span><span class="o">*</span> <span class="n">w</span><span class="p">;</span>
+	<span class="n">QueueType</span> <span class="n">q</span><span class="p">;</span>
+	
+	<span class="n">queue_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span> <span class="c1">// 큐 초기화</span>
+	<span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>  <span class="c1">// 정점 v 방문표시</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%d 방문 -&gt;"</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span> 
+	<span class="n">enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>  <span class="c1">// 시작 정점을 큐에 저장</span>
+	<span class="n">whlie</span><span class="p">(</span><span class="o">!</span><span class="n">is_empty</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">))</span> <span class="p">{</span>
+		<span class="n">v</span> <span class="o">=</span> <span class="n">dequeue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span> <span class="c1">// 큐에서 정점 추출</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">adj_list</span><span class="p">[</span><span class="n">v</span><span class="p">];</span><span class="n">w</span><span class="p">;</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">-&gt;</span><span class="n">link</span><span class="p">)</span> <span class="c1">// 인접 정점 탐색</span>
+			<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">]){</span>
+				<span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span> <span class="c1">// 방문 표시</span>
+				<span class="n">printf</span><span class="p">(</span><span class="s">"%d 방문 -&gt;"</span><span class="p">,</span> <span class="n">w</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">);</span>
+				<span class="n">enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span><span class="n">w</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">);</span> <span class="c1">// 방문한 정점을 큐에 저장</span>
+			<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>너비우선 탐색의 분석
+    <ul>
+      <li>너비 우선 탐색은 그래프가 <strong>인접 리스트로 표현되어 있으면 전체 수행시간이 O(n+e)</strong>이며, <strong>인접 행렬로 표현되어 있는 경우는 O(n^2)</strong> 시간이 걸린다. 너비우선 탐색도 깊이우선 탐색과 같이 희소 그래프를 사용할 경우 인접 리스트를 사용하는 것이 효율적이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="신장-트리spanning-tree">신장 트리(Spanning tree)</h3>
+
+<ul>
+  <li>그래프 내의 모든 정점을 포함하는 트리</li>
+  <li><strong>n개의 정점</strong>을 가지는 그래프의 신장트리는 <strong>n-1개의 간선</strong>을 가진다</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_10.png" alt="Graph_" /></p>
+
+<h3 id="최소비용-신장-트리minimum-spanning-tree">최소비용 신장 트리(Minimum Spanning Tree)</h3>
+
+<ul>
+  <li>네트워크에 있는 모든 정점들을 가장 적은 수의 간선과 비용으로 연결</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_11.png" alt="Graph_" /></p>
+
+<h3 id="kruskal의-mst-알고르짐">Kruskal의 MST 알고르짐</h3>
+
+<ul>
+  <li>탐욕적인 방법(Greedy method)
+    <ul>
+      <li>각 단계에서 최선의 답을 선택하는 과정을 반복함으로써 최종적인 해답에 도달</li>
+      <li>탐욕적인 방법은 항상 최적의 해답을 주는지 검증 필요</li>
+      <li>Kruskal MST 알고리즘은 최적의 해답 임이 증명됨</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_12.png" alt="Graph_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_13.png" alt="Graph_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_14.png" alt="Graph_" /></p>
+
+<p><strong>union-find 알고리즘</strong></p>
+
+<ul>
+  <li>원소가 어떤 집합에 속하는 지 알아냄</li>
+  <li>Kruskal의 MST 알고리즘에서 사이클 검사에 사용</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_15.png" alt="Graph_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_16.png" alt="Graph_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_17.png" alt="Graph_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">UNION</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">:</span>
+<span class="err">  </span> <span class="n">root1</span> <span class="o">=</span> <span class="n">FIND</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="err"> </span> <span class="c1">// 노드 a의 루트를 찾는다. </span>
+<span class="err">  </span> <span class="n">root2</span> <span class="o">=</span> <span class="n">FIND</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="err"> </span> <span class="c1">// 노드 b의 루트를 찾는다. </span>
+<span class="err">  </span> <span class="k">if</span> <span class="n">root1</span> <span class="err">≠</span> <span class="n">root2</span> <span class="err"> </span> <span class="c1">// 합한다. </span>
+<span class="err">     </span> <span class="n">parent</span><span class="p">[</span><span class="n">root1</span><span class="p">]</span> <span class="o">=</span> <span class="n">root2</span><span class="p">;</span>
+
+<span class="n">FIND</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span><span class="o">:</span><span class="err"> </span> <span class="c1">// curr의 루트를 찾는다. </span>
+<span class="err">  </span> <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+<span class="err">     </span> <span class="k">return</span> <span class="n">curr</span><span class="p">;</span> <span class="err"> </span> <span class="c1">// 루트 </span>
+<span class="err">  </span> <span class="k">while</span> <span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">curr</span><span class="p">];</span>
+<span class="err">  </span> <span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define TRUE 1
+#define FALSE 0
+</span>
+<span class="cp">#define MAX_VERTICES 100
+#define INF 1000
+</span>
+<span class="kt">int</span> <span class="n">parent</span><span class="p">[</span><span class="n">MAX_VERTICES</span><span class="p">];</span><span class="err"> </span> <span class="c1">// 부모 노드</span>
+<span class="err"> </span> <span class="c1">// 초기화</span>
+<span class="kt">void</span> <span class="nf">set_init</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">      </span> <span class="k">for</span><span class="err">   </span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+<span class="err">  </span> <span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// curr가 속하는 집합을 반환한다.</span>
+<span class="kt">int</span> <span class="nf">set_find</span><span class="p">(</span><span class="kt">int</span> <span class="n">curr</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">      </span> <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="err">          </span> <span class="k">return</span> <span class="n">curr</span><span class="p">;</span><span class="err">     </span> <span class="c1">// 루트 </span>
+<span class="err">      </span> <span class="k">while</span> <span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">curr</span><span class="p">];</span>
+<span class="err">      </span> <span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 두개의 원소가 속한 집합을 합친다.</span>
+<span class="kt">void</span> <span class="nf">set_union</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">    </span> <span class="kt">int</span> <span class="n">root1</span> <span class="o">=</span> <span class="n">set_find</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="err">   </span> <span class="c1">// 노드 a의 루트를 찾는다. </span>
+<span class="err">    </span> <span class="kt">int</span> <span class="n">root2</span> <span class="o">=</span> <span class="n">set_find</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="err">   </span> <span class="c1">// 노드 b의 루트를 찾는다. </span>
+<span class="err">    </span> <span class="k">if</span> <span class="p">(</span><span class="n">root1</span> <span class="o">!=</span> <span class="n">root2</span><span class="p">)</span> <span class="err"> </span> <span class="c1">// 합한다. </span>
+<span class="err">        </span> <span class="n">parent</span><span class="p">[</span><span class="n">root1</span><span class="p">]</span> <span class="o">=</span> <span class="n">root2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">Edge</span> <span class="p">{</span><span class="err"> </span> <span class="c1">// 간선을 나타내는 구조체</span>
+<span class="err">    </span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">weight</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">GraphType</span> <span class="p">{</span>
+<span class="err">     </span> <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="err"> </span> <span class="c1">// 간선의 개수</span>
+<span class="err">     </span> <span class="k">struct</span> <span class="n">Edge</span> <span class="n">edges</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">MAX_VERTICES</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">GraphType</span><span class="p">;</span>
+
+<span class="c1">// 그래프 초기화 </span>
+<span class="kt">void</span> <span class="nf">graph_init</span><span class="p">(</span><span class="n">GraphType</span><span class="o">*</span> <span class="n">g</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">    </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="err">    </span> <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">MAX_VERTICES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err"> </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">weight</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+<span class="err">    </span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 간선 삽입 연산</span>
+<span class="kt">void</span> <span class="nf">insert_edge</span><span class="p">(</span><span class="n">GraphType</span><span class="o">*</span> <span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">    </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">[</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">].</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+<span class="err">    </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">[</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">].</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span><span class="p">;</span>
+<span class="err">    </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">[</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">].</span><span class="n">weight</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+<span class="err">    </span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// qsort()에 사용되는 함수</span>
+<span class="kt">int</span> <span class="nf">compare</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span> <span class="k">struct</span> <span class="n">Edge</span><span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Edge</span><span class="o">*</span><span class="p">)</span><span class="n">a</span><span class="p">;</span>
+<span class="err">    </span> <span class="k">struct</span> <span class="n">Edge</span><span class="o">*</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">Edge</span><span class="o">*</span><span class="p">)</span><span class="n">b</span><span class="p">;</span>
+<span class="err">    </span> <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">weight</span> <span class="o">-</span> <span class="n">y</span><span class="o">-&gt;</span><span class="n">weight</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// kruskal의 최소 비용 신장 트리 프로그램</span>
+<span class="kt">void</span> <span class="nf">kruskal</span><span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">     </span> <span class="kt">int</span> <span class="n">edge_accepted</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="err"> </span> <span class="c1">// 현재까지 선택된 간선의 수  </span>
+<span class="err">     </span> <span class="kt">int</span> <span class="n">uset</span><span class="p">,</span> <span class="n">vset</span><span class="p">;</span><span class="err"> </span> <span class="c1">// 정점 u와 정점 v의 집합 번호</span>
+<span class="err">     </span> <span class="k">struct</span> <span class="n">Edge</span> <span class="n">e</span><span class="p">;</span>
+
+<span class="err">     </span> <span class="n">set_init</span><span class="p">(</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">);</span><span class="err"> </span> <span class="c1">// 집합 초기화</span>
+<span class="err">     </span> <span class="n">qsort</span><span class="p">(</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">,</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Edge</span><span class="p">),</span> <span class="n">compare</span><span class="p">);</span>
+
+<span class="err">     </span> <span class="n">printf</span><span class="p">(</span><span class="s">"크루스칼 최소 신장 트리 알고리즘 </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err">     </span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="err">     </span> <span class="k">while</span> <span class="p">(</span><span class="n">edge_accepted</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">g</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="err"> </span> <span class="c1">// 간선의 수 &lt; (n-1)</span>
+<span class="err">     </span> <span class="p">{</span>
+<span class="err">          </span> <span class="n">e</span> <span class="o">=</span> <span class="n">g</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="err">          </span> <span class="n">uset</span> <span class="o">=</span> <span class="n">set_find</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">start</span><span class="p">);</span><span class="err"> </span> <span class="err">         </span> <span class="c1">// 정점 u의 집합 번호 </span>
+<span class="err">          </span> <span class="n">vset</span> <span class="o">=</span> <span class="n">set_find</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">);</span><span class="err"> </span> <span class="err">         </span> <span class="c1">// 정점 v의 집합 번호</span>
+<span class="err">          </span> <span class="k">if</span><span class="err">  </span> <span class="p">(</span><span class="n">uset</span> <span class="o">!=</span> <span class="n">vset</span><span class="p">)</span> <span class="p">{</span><span class="err"> </span> <span class="err">         </span> <span class="c1">// 서로 속한 집합이 다르면</span>
+<span class="err">                </span> <span class="n">printf</span><span class="p">(</span><span class="s">"간선 (%d,%d) %d 선택"</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">start</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">weight</span><span class="p">);</span>
+<span class="err">      </span> <span class="err"> </span> <span class="n">edge_accepted</span><span class="o">++</span><span class="p">;</span>
+<span class="err">                </span> <span class="n">set_union</span><span class="p">(</span><span class="n">uset</span><span class="p">,</span> <span class="n">vset</span><span class="p">);</span><span class="err"> </span> <span class="c1">// 두개의 집합을 합친다.</span>
+<span class="err">                </span> <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err"> </span> <span class="err">   </span> <span class="n">printf</span><span class="p">(</span><span class="s">"  [%d] %2d "</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">parent</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span><span class="err"> </span> <span class="p">}</span>
+<span class="err">                </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err">          </span> <span class="p">}</span>
+<span class="err">          </span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="err">     </span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">      </span> <span class="n">GraphType</span> <span class="o">*</span><span class="n">g</span><span class="p">;</span>
+<span class="err">      </span> <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">GraphType</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">GraphType</span><span class="p">));</span>
+<span class="err">      </span> <span class="n">graph_init</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">29</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">27</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">18</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">insert_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+
+<span class="err">      </span> <span class="n">kruskal</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+<span class="err">      </span> <span class="n">free</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+<span class="err">      </span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Kruskal의 MST 알고리즘 복잡도</p>
+
+<ul>
+  <li>대부분 간선들을 정렬하는 시간에 좌우됨
+    <ul>
+      <li>사이클 테스트 등의 작업은 정렬에 비해 매우 신속하게 수행됨</li>
+    </ul>
+  </li>
+  <li>네트워크의 간선 e개를 퀵정렬과 같은 효율적인 알고리즘으로 정렬한다면 Kruskal 알고리즘의 시간 복잡도는 $O(e*log(e))$</li>
+</ul>
+
+<h3 id="prim-mst-알고리즘">Prim MST 알고리즘</h3>
+
+<ul>
+  <li>시작 정점에서부터 출발하여 신장 트리 집합을 단계적으로 확장해 나가마</li>
+  <li>신장 트리 집합에 인접한 정점 중에서 최저 간선으로 연결된 정점 선택하여 신장 트리 집합에 추가</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Graph/graph_18.png" alt="Graph_" /></p>
+
+<ul>
+  <li>주 반복문이 정점의 수 n만큼 반복하고, 내부 반복문이 n번 반복하므로 Prim의 알고리즘은 $O(n^2)$의 복잡도를 가진다</li>
+  <li>희박한 그래프
+    <ul>
+      <li>Kruskal의 알고리즘이 유리</li>
+    </ul>
+  </li>
+  <li>밀집한 그래프
+    <ul>
+      <li>Prim 알고리즘이 유리</li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#data-structure" class="page__taxonomy-item" rel="tag">Data Structure</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-06">December 6, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Scope/" class="pagination--pager" title="[Scope] 스코프
+">Prev</a>
+    
+    
+      <a href="/CS/Data_Structure_List/" class="pagination--pager" title="[Data Structure] 리스트
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/" rel="permalink">[Python_Greedy] 전구와 스위치
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-11T00:00:00+09:00">January 11, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_2138
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" rel="permalink">[Python_Greedy] 행렬
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1080
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Database/" rel="permalink">[DataBase] 데이터베이스 프로그래밍
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-07T00:00:00+09:00">January 7, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">DataBase Programming(C#)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Implementation/" rel="permalink">[Python_Implementation] 상하좌우
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-06T00:00:00+09:00">January 6, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이것이 코딩테스트다 with Python Implementation
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
