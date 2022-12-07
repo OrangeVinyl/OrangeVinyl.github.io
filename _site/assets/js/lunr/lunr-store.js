@@ -53,6 +53,12 @@ var store = [{
         "url": "/CS/Data_Structure_List/",
         "teaser": null
       },{
+        "title": "[Data Structure] 트리",
+        "excerpt":"✅ 트리에 대한 기본 성질 루트 : 부모가 없는 노드 단말노드 → 자식이 없는 노드, 같은 말로 차수 = 0 비단말 노드 → 적어도 하나의 자식을 가진 노드 이진트리 모든 노드가 2개의 서브 트리를 가지고 있는 트리 이진트리의 노드에는 최대 2개까지의 자식 노드가 존재 모든 노드의 차수가 2 이하 → 구현하기가...","categories": ["Data Structure"],
+        "tags": ["Data Structure","Tree","C"],
+        "url": "/CS/Data_Structure_Tree/",
+        "teaser": null
+      },{
         "title": "[DataBase] 데이터베이스 프로그래밍",
         "excerpt":"데이터베이스 구축 과정 DB 설계 DBMS 결정 사용자 계정 설정과 권한 부여 테이블 생성 레코드 추가 질의어로 업무에 필요한 정보 활용 conn 관리자/관리자 create user 관리자이름 idetified by 비밀번호; grant create session to 관리자이름; grant resource, create view, create to table to 관리자이름; SQL(Structed Query Language) : 구조화된 질의 언어...","categories": ["CS"],
         "tags": ["CS","Knowledge","Database","C#"],

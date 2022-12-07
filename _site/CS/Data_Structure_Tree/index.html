@@ -1,0 +1,1105 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Data Structure] 트리 | Hwan’s Devlog</title>
+<meta name="description" content="Data Structure Tree">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Data Structure] 트리">
+<meta property="og:url" content="http://localhost:4000/CS/Data_Structure_Tree/">
+
+
+  <meta property="og:description" content="Data Structure Tree">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-07T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-07T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/CS/Data_Structure_Tree/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 13</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Data Structure] 트리">
+    <meta itemprop="description" content="Data Structure Tree">
+    <meta itemprop="datePublished" content="2022-12-07T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-07T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Data Structure] 트리
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-07T00:00:00+09:00">December 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#트리에-대한-기본-성질">✅ 트리에 대한 기본 성질</a><ul><li><a href="#이진트리">이진트리</a></li><li><a href="#이진트리의-순회">이진트리의 순회</a></li><li><a href="#이진트리의-추가-연산">이진트리의 추가 연산</a></li><li><a href="#스레드-이진트리">스레드 이진트리</a></li><li><a href="#이진탐색-트리">이진탐색 트리</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="트리에-대한-기본-성질">✅ 트리에 대한 기본 성질</h2>
+
+<ul>
+  <li>루트 : 부모가 없는 노드</li>
+  <li>단말노드 → <strong>자식이 없는 노드</strong>, 같은 말로 <strong>차수 = 0</strong></li>
+  <li>비단말 노드 → 적어도 하나의 자식을 가진 노드</li>
+</ul>
+
+<h3 id="이진트리">이진트리</h3>
+
+<ul>
+  <li>모든 노드가 2개의 서브 트리를 가지고 있는 트리</li>
+  <li>이진트리의 노드에는 최대 2개까지의 자식 노드가 존재</li>
+  <li>모든 노드의 차수가 2 이하 → 구현하기가 편리함</li>
+</ul>
+
+<p><strong>이진트리의 성질</strong></p>
+
+<ul>
+  <li><strong>노드의 개수가 n개이면 간선의 개수는 n-1</strong></li>
+  <li><strong>높이가 h인 이진트리의 경우, 최소 h개의 노드를 가지며 최대 2^h -1개의 노드를 가진다.</strong></li>
+  <li>n개의 노드를 가지는 이진트리의 높이는 최소 log2(n+1) 최대 n</li>
+</ul>
+
+<p><strong>이진트리의 분류</strong></p>
+
+<ul>
+  <li>포화 이진트리</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_1.png" alt="Tree" /></p>
+
+<ul>
+  <li>완전 이진트리</li>
+  <li>기타 이진트리</li>
+</ul>
+
+<p><strong>이진트리의 표현</strong></p>
+
+<ul>
+  <li>배열을 이용한 방법(배열 표현법)
+    <ul>
+      <li>모든 이진 트리를  포화 이진 트리라고 가정하고 각 노드에 번호를 붙여서 그 번호를 배열의 인덱스로 삼아 노드의 데이터를 배열에 저장하는 방법</li>
+      <li>노드 i의 부모 노드 인덱스 = i/2</li>
+      <li>노드 i의 왼쪽 자식 노드 인덱스 = 2i</li>
+      <li>노드 i의 오른쪽 자식 노드 인덱스 = 2i +1</li>
+    </ul>
+
+    <p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_2.png" alt="Tree" /></p>
+  </li>
+  <li>포인터를 이용하는 방법(링크 표현법)
+    <ul>
+      <li>노드는 <strong>구조체</strong>로 표현</li>
+      <li>링크는 <strong>포인터</strong>로 표현</li>
+    </ul>
+
+    <p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_3.png" alt="Tree" /></p>
+  </li>
+</ul>
+
+<h3 id="이진트리의-순회">이진트리의 순회</h3>
+
+<ul>
+  <li>순회(traversal) :  트리의 노드들을 체계적으로 방문하는 것(노드에 저장된 데이터를 읽는 것)</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_4.png" alt="Tree" /></p>
+
+<ul>
+  <li>전위 순회(preorder traversal) : VLR
+    <ul>
+      <li>자손노드보다 루트노드를 먼저 방문한다.</li>
+    </ul>
+  </li>
+  <li>중위 순회(inorder traversal) : LVR
+    <ul>
+      <li>왼쪽 자손, 루트, 오른쪽 자손 순으로 방문한다.</li>
+    </ul>
+  </li>
+  <li>후위 순회(postorder traversal) : LRV
+    <ul>
+      <li>루트노드보다 자손을 먼저 방문한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">inorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">inorder</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"[%d] "</span><span class="p">,</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">);</span>	
+		<span class="n">inorder</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">preorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"[%d] "</span><span class="p">,</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">);</span>	
+		<span class="n">preorder</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+		<span class="n">preorder</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">postorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">postorder</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+		<span class="n">postorder</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"[%d] "</span><span class="p">,</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">);</span>	
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>반복적 (트리)순회</strong></p>
+
+<ul>
+  <li>스택을 이용해서 구현 가능하다.</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 반복적인 중위 순회</span>
+<span class="c1">// 스택 이용, 스택의 기본적인 요소는 있다고 가정</span>
+
+<span class="kt">void</span> <span class="nf">inorder_iter</span><span class="p">(</span><span class="n">Treenode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">whlie</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">for</span><span class="p">(;</span><span class="n">root</span><span class="p">;</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span>
+			<span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+		<span class="n">root</span> <span class="o">=</span> <span class="n">pop</span><span class="p">();</span> <span class="c1">// -&gt; root가 NUll이면 pop</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span> <span class="c1">//  -&gt; 종료시 root가 NUll 이면 break</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"[%d] "</span><span class="p">,</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">data</span><span class="p">);</span>
+		<span class="n">root</span> <span class="o">=</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_5.jpeg" alt="Tree" /></p>
+
+<p><strong>레벨 순회</strong></p>
+
+<ul>
+  <li>각 노드를 레벨 순으로 검사하는 방법</li>
+  <li>큐를 사용한다</li>
+  <li>먼저 큐에 있는 노드를 꺼내어 방문한 다음, 그 노드의 자식 노드를 큐에 삽입하는 것으로 한번의 반복을 끝낸다. 이러한 반복을 큐에 더 이상의 노드가 없을 때까지 계속한다.</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_6.png" alt="Tree" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_7.png" alt="Tree" /></p>
+
+<p><strong>수식트리</strong></p>
+
+<ul>
+  <li>산술식을 트리형태로 표현한 것</li>
+  <li>비단말노드 : 연산자</li>
+  <li>단말노드 : 피연산자</li>
+  <li><strong>후위순회를 사용한다</strong></li>
+  <li>서브트리의 값을 순환호출로 계산</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_8.png" alt="Tree" /></p>
+
+<p><strong>디렉토리 용량 계산</strong></p>
+
+<ul>
+  <li>후위 순회</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_9.png" alt="Tree" /></p>
+
+<h3 id="이진트리의-추가-연산">이진트리의 추가 연산</h3>
+
+<p><strong>노드 개수</strong></p>
+
+<ul>
+  <li>탐색 트리 안의 노드의 개수를 계산</li>
+  <li>각각의 서브트리에 대항 순환 호출한 다음, 반화되는 값에 1을 다하여 반환</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">get_node_count</span> <span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span> <span class="n">node</span><span class="o">!=</span> <span class="n">Null</span><span class="p">)</span>
+			<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">get_node_count</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">get_node_count</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>단말 노드 개수 구하기</strong></p>
+
+<ul>
+  <li>트리 안의 노드들을 전체적으로 순회하여야 한다</li>
+  <li>순회하면서 왼쪽자식과 오른쪽 자식 동시에 0이 된다면 단말노드이므로, 1을 반환한다. 그렇지 않으면 비단말 노드이므로 각각의 서브트리에 대하여 순환 호출한 다음, 반환되는 값을 서로 더하면 된다.</li>
+  <li><strong>추가적으로 max값을 구한 뒤 +1을 하면 트리의 높이가 된다.</strong></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">get_leaf_count</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="k">else</span>
+			<span class="n">count</span> <span class="o">=</span> <span class="n">get_leaf_count</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">get_leaf_count</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>높이 구하기</strong></p>
+
+<ul>
+  <li>서브트리에 대하여 순환 호출하고 서브트리들의 반환값 중에서 최대값을 구하여 반환</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">get_height</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="o">!</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span>
+		<span class="n">height</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">get_height</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">),</span><span class="n">get_height</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">));</span>
+	<span class="k">return</span> <span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="스레드-이진트리">스레드 이진트리</h3>
+
+<ul>
+  <li><strong>이진트리의 NULL링크를 이용하여 순환 호출 없이도 트리의 노드들을 순회</strong></li>
+  <li>NULL링크에 중위 순회시에 선행노드인 <strong>중위 선행자(inorder predecessor)</strong>나 후속 노드인 <strong>중위 후속자(inorder successor)</strong>를 저장시켜 놓은 트리</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//단말 노드와 비단말노드의 구별을 위하여 is_thread 필드가 필요하다</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+	<span class="n">bool</span> <span class="n">is_thread</span><span class="p">;</span> <span class="c1">//만약 오른쪽 링크가 스레드이면, TRUE</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 중위 후속자를 찾는 함수 작성</span>
+
+<span class="n">TreeNode</span> <span class="o">*</span><span class="nf">find_successor</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// q는 p의 오른쪽 포인터</span>
+	<span class="n">TreeNode</span> <span class="o">*</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+	<span class="c1">//만약 오른쪽 포인터가 NULL이거나 스레드이면 오른쪽 포인터를 반환</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">q</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">p</span> <span class="o">-&gt;</span><span class="n">is_thread</span> <span class="o">==</span> <span class="n">TRUE</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">q</span><span class="p">;</span>
+
+	<span class="c1">// 만약 오른쪽 자식이면 다시 가장 왼쪽 노드로 이동</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">q</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 스레드 이진 트리에서 중위 순회를 하는 함수</span>
+<span class="kt">void</span> <span class="nf">thread_inorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">TreeNode</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+	<span class="n">q</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">q</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span> <span class="c1">//가장 왼쪽 노드로 간다.</span>
+	<span class="k">do</span><span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"%c -&gt; "</span><span class="p">,</span> <span class="n">q</span><span class="o">-&gt;</span> <span class="n">data</span><span class="p">);</span> <span class="c1">// 데이터 출력</span>
+		<span class="n">q</span> <span class="o">=</span> <span class="n">find_successor</span><span class="p">(</span><span class="n">q</span><span class="p">);</span> <span class="c1">// 후속자 함수 호출</span>
+	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">q</span><span class="p">);</span> <span class="c1">// NULL이 아니면</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="이진탐색-트리">이진탐색 트리</h3>
+
+<ul>
+  <li>탐색작업을 효율적으로 하기 위한 자료구조</li>
+  <li>(왼쪽서브트리) ≤ 루트노드 ≤ 오른쪽 서브트리</li>
+  <li>이진탐색을 중위순회하면 오름차순으로 정렬된 값을 얻을 수 있다.</li>
+</ul>
+
+<p><strong>이진탐색 트리의 정의</strong></p>
+
+<ul>
+  <li>모든 원소의 키는 유일한 키를 가진다</li>
+  <li>왼쪽 서브트리 키들은 루트키보다 작다</li>
+  <li>오른쪽 서브트리 키들은 루트의 키보다 크다</li>
+  <li>왼쪽과 오른쪽 서브트리도 이진 탐색 트리다</li>
+</ul>
+
+<p><strong>이진탐색 트리에서 탐색 연산</strong></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_10.png" alt="Tree" /></p>
+
+<p><strong>이진탐색 트리 순환적 방법</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span> <span class="o">*</span><span class="nf">search</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">// 못찾은 경우</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span> <span class="k">return</span> <span class="n">node</span><span class="p">;</span> 
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">key</span><span class="p">);</span>
+	<span class="k">else</span>
+		<span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">key</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>이진탐색 트리 반복적 방법</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span> <span class="o">*</span><span class="nf">search</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span> <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+		<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span>
+			<span class="n">node</span> <span class="o">=</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span>
+		<span class="k">else</span> 
+			<span class="n">node</span> <span class="o">=</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">// 탐색에 실패했을 경우 NULL 반환</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>이진탐색트리에서의 삽입연산</strong></p>
+
+<ul>
+  <li>먼저 탐색을 수행하는 것이 필요</li>
+  <li>탐색에 실패한 위치가 바로 새로운 노드를 삽입하는 위치</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_11.png" alt="Tree" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_12.png" alt="Tree" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_13.png" alt="Tree" /></p>
+
+<p><strong>이진탐색트리에서의 삭제연산</strong></p>
+
+<ul>
+  <li>삭제하려는 노드가 <strong>단말노드</strong> 일 경우
+    <ul>
+      <li>단말노드의 부모노드를 찾아서 연결을 끊으면 된다.</li>
+      <li>연결을 끊는다는 것은 부모노드 안의 링크 필드를 NULL로 만든다.</li>
+    </ul>
+  </li>
+  <li>삭제하려는 노드가 왼쪽이나 오른쪽 서브트리 중 <strong>하나만</strong> 가지고 있는 경우
+    <ul>
+      <li>자기 노드는 삭제하고 서브트리는 자기 노드의 부모노드에게 붙여주면 된다.</li>
+    </ul>
+  </li>
+  <li>삭제하려는 노드가 <strong>두개의 서브 트리 모두</strong> 가지고 있는 경우
+    <ul>
+      <li>삭제노드와 가장 비슷한 값을 가진 노드를 삭제노드 위치로 가져온다.</li>
+      <li>둘 중 아무거나 사용해도 괜찮다.</li>
+    </ul>
+
+    <p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_14.png" alt="Tree" /></p>
+  </li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 이진 탐색 트리와 키가 주어지면 키가 저장된 노드를 삭제하고</span>
+<span class="c1">// 새로운 루트 노드를 반환하다.</span>
+<span class="c1">// 이 삭제 연산은 오른쪽 서브트리 최솟값을 사용</span>
+<span class="n">TreeNode</span> <span class="o">*</span> <span class="nf">delete_node</span><span class="p">(</span><span class="n">Treenode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> 
+<span class="p">{</span> 
+	<span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+	
+	<span class="c1">//만약 키가 루트보다 작으면 왼쪽 서브트리에 있는 것</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span>
+		<span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">delete_node</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+	<span class="c1">//만약 키가 루트보다 크면 오른쪽 서브트리에 있는 것</span>
+	<span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">)</span>
+		<span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span><span class="n">delete_node</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+	
+	<span class="c1">//키와 루트가 같을 경우 노드 삭제하기</span>
+	<span class="k">else</span> <span class="p">{</span>
+		<span class="c1">// 첫번째 혹은 두번째의 경우</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">TreeNode</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+			<span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+			<span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">TreeNode</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+			<span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+			<span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+	  <span class="p">}</span>
+		
+		<span class="c1">// 세 번째의 경우</span>
+		<span class="n">TreeNode</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">min_value_node</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+		<span class="c1">// 중위 순회시 후계 노드를 복사한다.</span>
+		<span class="n">root</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">;</span>
+		<span class="c1">// 중위 순회시 후계 노드를 삭제한다.</span>
+		<span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">delete_node</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span> <span class="o">*</span> <span class="nf">min_value_node</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">TreeNode</span> <span class="o">*</span><span class="n">current</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+	
+	<span class="c1">// 맨 왼쪽 단말 노드를 찾으러 내려감</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+		<span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+
+	<span class="k">return</span> <span class="n">current</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>이진탐색트리의 분석</strong></p>
+
+<ul>
+  <li>이진 탐색 트리에서의 탐색, 삽입, 삭제 연산의 시간 복잡도는 <strong>트리의 높이를 h</strong>라고 했을 때, <strong>O(h)</strong>가 된다.</li>
+  <li>N개의 노드를 가지는 이진 탐색 트리의 경우, 일반적인 이진트리의 높이는 [log2n]이므로 이진 탐색 트리연산의 <strong>평균</strong>적인 경우 시간복잡도는 <strong>O(log2h)</strong>이다.</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Tree/Tree_15.png" alt="Tree" /></p>
+<ul>
+  <li>최악의 경우는 한쪽으로 치우쳐진 경사 이진트리의 경우로 <strong>h = n</strong></li>
+  <li>순차 탐색과 시간복잡도가 같다. <strong>O(n)</strong></li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#data-structure" class="page__taxonomy-item" rel="tag">Data Structure</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-07">December 7, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Data_Structure_List/" class="pagination--pager" title="[Data Structure] 리스트
+">Prev</a>
+    
+    
+      <a href="/CS/Database/" class="pagination--pager" title="[DataBase] 데이터베이스 프로그래밍
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/" rel="permalink">[Python_Greedy] 전구와 스위치
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-11T00:00:00+09:00">January 11, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_2138
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" rel="permalink">[Python_Greedy] 행렬
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1080
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Database/" rel="permalink">[DataBase] 데이터베이스 프로그래밍
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-07T00:00:00+09:00">January 7, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">DataBase Programming(C#)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Data_Structure_List/" rel="permalink">[Data Structure] 리스트
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-06T00:00:00+09:00">December 6, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Data Structure List
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
