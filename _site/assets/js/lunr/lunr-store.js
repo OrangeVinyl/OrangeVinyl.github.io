@@ -71,6 +71,12 @@ var store = [{
         "url": "/CS/Data_Structure_Tree/",
         "teaser": null
       },{
+        "title": "[Data Structure] 정렬",
+        "excerpt":"정렬 물건을 크기 순으로 오름차순이나 내림차순으로 나열하는 것 단순하지만 비효율적인 방법 삽입정렬, 선택정렬, 버블정렬 복잡하지만 효율적인 방법 퀵정렬, 히프정렬, 합병정렬, 기수정렬 내부 정렬(internal sorting) 모든 데이터가 주기억장치에 저장되어진 상태에서 정렬 외부 정렬(external sorting) 외부기억장치에 대부분의 데이터가 있고 일부만 주기억장치에 저장된 상태에서 정렬 정렬 알고리즘의 안정성(stability) 동일한 키 값을 갖는 레코드들의...","categories": ["Data Structure"],
+        "tags": ["Data Structure","Sort","C"],
+        "url": "/CS/Data_Structure_Sort/",
+        "teaser": null
+      },{
         "title": "[Python_Implementation] 상하좌우",
         "excerpt":"✅ 문제 여행가 A는 N × N 크기의 정사각형 공간 위에 서 있다. 이 공간은 1 × 1 크기의 정사각형으로 나누어져 있다. 가장 왼쪽 위 좌표는 (1, 1)이며, 가장 오른쪽 아래 좌표는 (N, N)에 해당한다. 여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며, 시작 좌표는 항상 (1, 1)이다. 우리...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","Implementation"],

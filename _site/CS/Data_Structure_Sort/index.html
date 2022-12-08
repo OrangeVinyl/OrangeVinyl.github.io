@@ -1,0 +1,1221 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Data Structure] 정렬 | Hwan’s Devlog</title>
+<meta name="description" content="Data Structure Sort">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Data Structure] 정렬">
+<meta property="og:url" content="http://localhost:4000/CS/Data_Structure_Sort/">
+
+
+  <meta property="og:description" content="Data Structure Sort">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-07T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-07T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/CS/Data_Structure_Sort/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 17</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Data Structure] 정렬">
+    <meta itemprop="description" content="Data Structure Sort">
+    <meta itemprop="datePublished" content="2022-12-07T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-07T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Data Structure] 정렬
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-07T00:00:00+09:00">December 7, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#정렬">정렬</a></li><li><a href="#선택정렬-selection-sort">선택정렬 (selection sort)</a></li><li><a href="#삽입정렬insertion-sort">삽입정렬(insertion sort)</a></li><li><a href="#버블-정렬">버블 정렬</a></li><li><a href="#셸-정렬shell-sort">셸 정렬(Shell sort)</a></li><li><a href="#합병-정렬-merge-sort">합병 정렬 (Merge Sort)</a></li><li><a href="#퀵-정렬quick--sort">퀵 정렬(Quick  Sort)</a></li><li><a href="#기수-정렬radix-sort">기수 정렬(Radix Sort)</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h3 id="정렬">정렬</h3>
+
+<ul>
+  <li>물건을 크기 순으로 오름차순이나 내림차순으로 나열하는 것</li>
+  <li>단순하지만 비효율적인 방법
+    <ul>
+      <li>삽입정렬, 선택정렬, 버블정렬</li>
+    </ul>
+  </li>
+  <li>복잡하지만 효율적인 방법
+    <ul>
+      <li>퀵정렬, 히프정렬, 합병정렬, 기수정렬</li>
+    </ul>
+  </li>
+  <li>내부 정렬(internal sorting)
+    <ul>
+      <li>모든 데이터가 주기억장치에 저장되어진 상태에서 정렬</li>
+    </ul>
+  </li>
+  <li>외부 정렬(external sorting)
+    <ul>
+      <li>외부기억장치에 대부분의 데이터가 있고 일부만 주기억장치에 저장된 상태에서 정렬</li>
+    </ul>
+  </li>
+</ul>
+
+<p>정렬 알고리즘의 안정성(stability)</p>
+
+<ul>
+  <li>동일한 키 값을 갖는 레코드들의 상대적인 위치가 정렬 후에도 바뀌지 않음</li>
+</ul>
+
+<h3 id="선택정렬-selection-sort">선택정렬 (selection sort)</h3>
+
+<ul>
+  <li>정렬된 왼쪽 리스트와 정렬 안된 오른쪽 리스트 가정</li>
+  <li>초기에는 왼쪽 리스트는 비어 있고, 정렬할 숫자들은 모두 오른쪽 리스트에 존재</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_1.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_2.png" alt="Sort_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define SWAP(x, y, t) ( (t)=(x), (x)=(y), (y)=(t) )
+</span>
+<span class="kt">void</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span><span class="err">    </span> 
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">least</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+<span class="err">  </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">    </span><span class="n">least</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+		<span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="err"> </span> <span class="c1">// 최솟값 탐색</span>
+<span class="err">      </span><span class="k">if</span><span class="err"> </span> <span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">list</span><span class="p">[</span><span class="n">least</span><span class="p">])</span> <span class="n">least</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+	<span class="err"> </span> <span class="n">SWAP</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">list</span><span class="p">[</span><span class="n">least</span><span class="p">],</span> <span class="n">temp</span><span class="p">);</span>
+<span class="err">  </span><span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="c1">// 출력 구문</span>
+	<span class="err"> </span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d  "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+<span class="err"> </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err"> </span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err"> </span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">n</span> <span class="o">=</span> <span class="n">MAX_SIZE</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+<span class="err"> </span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="err">     </span> <span class="err"> </span> <span class="c1">// 난수 생성 및 출력 </span>
+<span class="err"> </span> <span class="err">     </span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">100</span><span class="p">;</span><span class="err">         </span> <span class="c1">// 난수 발생 범위 0~99</span>
+
+<span class="err"> </span> <span class="n">selection_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span> <span class="c1">// 선택정렬 호출 </span>
+<span class="err"> </span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="err"> </span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="err"> </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err"> </span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>선택정렬 복잡도 분석</strong></p>
+
+<ul>
+  <li>비교 횟수
+    <ul>
+      <li>(n-1) + (n-2) + … + 1 = n(n-1)/2 = <strong>0($n^2$)</strong></li>
+    </ul>
+  </li>
+  <li>이동 횟수
+    <ul>
+      <li>3(n-1)</li>
+    </ul>
+  </li>
+  <li>전체 시간적 복잡도 : <strong>O($n^2$)</strong></li>
+  <li>안정성을 만족하지 않음</li>
+</ul>
+
+<h3 id="삽입정렬insertion-sort">삽입정렬(insertion sort)</h3>
+
+<ul>
+  <li>정렬되어 있는 부분에 새로운 레코드를 올바른 위치에 삽입하는 과정 반복</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_3.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_4.png" alt="Sort_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 삽입정렬</span>
+<span class="kt">void</span> <span class="n">insertion_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span><span class="err">      </span> <span class="err"> </span> 
+<span class="p">{</span><span class="err">  </span> 
+<span class="err">  </span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+<span class="err">  </span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="err">        </span> <span class="n">key</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="err">        </span> <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="n">key</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> 
+					<span class="err"> </span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">];</span><span class="err"> </span> <span class="c1">// 오른쪽 이동</span>
+<span class="err">        </span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span><span class="p">;</span>
+<span class="err">        </span> <span class="n">printf</span><span class="p">(</span><span class="err">“</span> <span class="n">i</span> <span class="o">=</span> <span class="o">%</span><span class="n">d</span> <span class="err">“</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// 여기서부턴 그냥 출력</span>
+<span class="err">        </span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
+<span class="err">              </span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d  "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+<span class="err">        </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err">  </span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>삽입정렬 복잡도 분석</strong></p>
+
+<ul>
+  <li>최선의 경우 O(n): 이미 정렬되어 있는 경우
+    <ul>
+      <li>비교 : n-1번</li>
+    </ul>
+  </li>
+  <li>최악의 경우 O($n^2$): 역순으로 정렬되어 있는 경우
+    <ul>
+      <li>모든 단계에서 앞에 놓인 자료 전부 이동</li>
+      <li>비교</li>
+    </ul>
+
+    <p><img src="/assets/images/posts_img/DataStructure_Sort/sort_5.png" alt="Sort_" /></p>
+
+    <ul>
+      <li>이동</li>
+    </ul>
+
+    <p><img src="/assets/images/posts_img/DataStructure_Sort/sort_6.png" alt="Sort_" /></p>
+  </li>
+  <li>평균의 경우  O($n^2$)</li>
+  <li>많은 이동 필요 → 레코드가 클 경우 불리</li>
+  <li>안정된 정렬 방법</li>
+  <li>대부분 정렬되어 있으면 매우 효율적인 방법이다.</li>
+</ul>
+
+<h3 id="버블-정렬">버블 정렬</h3>
+
+<ul>
+  <li>인전한 2개의 레코드를 비교하여 순서대로 되어 있지 않으면 서로 교환</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_7.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_8.png" alt="Sort_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define SWAP(x, y, t) ( (t)=(x), (x)=(y), (y)=(t) )
+</span>
+<span class="kt">void</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span><span class="err"> </span> 
+<span class="err">  </span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+
+<span class="err">  </span> <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">){</span>
+	<span class="err"> </span> <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="err"> </span> 
+<span class="err"> </span> <span class="err">     </span><span class="k">if</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="err">  </span> 
+<span class="err">    </span> <span class="err"> </span> <span class="err">   </span><span class="n">SWAP</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">temp</span><span class="p">);</span>
+<span class="err">   </span><span class="n">printf</span><span class="p">(</span><span class="err">“</span> <span class="n">i</span> <span class="o">=</span> <span class="o">%</span><span class="n">d</span> <span class="err">“</span> <span class="n">i</span><span class="p">);</span><span class="err"> </span> 
+<span class="err">   </span><span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
+<span class="err"> </span> <span class="err">  </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d  "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+	<span class="err"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err"> </span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>버블 정렬 복잡도 분석</strong></p>
+
+<ul>
+  <li>비교 횟수 (최상, 평균, 최악의 경우 모두 일정)</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_9.png" alt="Sort_" /></p>
+
+<ul>
+  <li>이동 횟수
+    <ul>
+      <li>역순으로 정렬된 경우(최악) : 3*비교횟수</li>
+      <li>이미 정렬된 경우(최선의 경우) : 0</li>
+      <li>평균의 경우 : O($n^2$)</li>
+    </ul>
+  </li>
+  <li>레코드의 이동 과다
+    <ul>
+      <li>이동 연산은 비교연산보다 더 많은 시간이 소요됨</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="셸-정렬shell-sort">셸 정렬(Shell sort)</h3>
+
+<ul>
+  <li>삽입정렬이 어느 정도 정렬된 리스트에서 대단히 빠른 것에 착안
+    <ul>
+      <li>삽입 정렬은 요소들이 이웃한 위치로만 이동하므로, 많은 이동에 의해서만 요소가 제자리를 찾아감</li>
+      <li><strong>요소들이 멀리 떨어진 위치로 이동</strong>할 수 있게 하면, 보다 적게 이동하여 제자리 찾을 수 있음</li>
+    </ul>
+  </li>
+  <li>전체 리스트를 <strong>일정 간격(GAP)의 부분 리스트</strong>로 나눔</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_10.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_11.png" alt="Sort_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// gap 만큼 떨어진 요소들을 삽입 정렬</span>
+<span class="c1">// 정렬의 범위는 first에서 last</span>
+<span class="n">inc_insertion_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">first</span><span class="p">,</span> <span class="kt">int</span> <span class="n">last</span><span class="p">,</span> <span class="kt">int</span> <span class="n">gap</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">     </span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">key</span><span class="p">;</span>
+<span class="err">     </span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">first</span><span class="o">+</span><span class="n">gap</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">last</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="n">gap</span><span class="p">){</span>
+<span class="err">           </span> <span class="n">key</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="err">           </span> <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="n">gap</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">key</span><span class="o">&lt;</span><span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">];</span><span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">-</span><span class="n">gap</span><span class="p">)</span>
+						<span class="err"> </span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">gap</span><span class="p">]</span><span class="o">=</span><span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+						<span class="err"> </span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">gap</span><span class="p">]</span><span class="o">=</span><span class="n">key</span><span class="p">;</span>
+<span class="err">      </span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">shell_sort</span><span class="p">(</span> <span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span> <span class="p">)</span><span class="err">  </span> <span class="c1">// n = size</span>
+<span class="p">{</span>
+<span class="err">   </span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">gap</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+<span class="err">   </span><span class="k">for</span><span class="p">(</span> <span class="n">gap</span><span class="o">=</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span> <span class="n">gap</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span> <span class="n">gap</span> <span class="o">=</span> <span class="n">gap</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span> <span class="p">{</span>
+		<span class="err"> </span><span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">gap</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="n">gap</span><span class="o">++</span><span class="p">;</span>
+		<span class="err"> </span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">gap</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="err"> </span> <span class="c1">// 부분 리스트의 개수 gap</span>
+<span class="err">        </span><span class="n">inc_insertion_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">gap</span><span class="p">);</span>
+<span class="err">   </span><span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
+<span class="err"> </span> <span class="err">   </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d  "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+<span class="err">   </span><span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="err">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>셸 정렬 복잡도 분석</strong></p>
+
+<ul>
+  <li>셸 정렬의 장점
+    <ul>
+      <li>불연속적인 부분 리스트에서 원거리 자료 이동으로 보다 적은 위치교환으로 제자리 찾을 가능성 증대</li>
+      <li>부분 리스트가 점진적으로 정렬된 상태가 되므로 삽입정렬 속도 증가</li>
+    </ul>
+  </li>
+  <li>시간적 복잡도
+    <ul>
+      <li>최악의 경우 : O($n^2$)</li>
+      <li>평균적인 경우: O(n^(1.5))</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="합병-정렬-merge-sort">합병 정렬 (Merge Sort)</h3>
+
+<ul>
+  <li>리스트를 두개의 균등한 크기로 분할하고 분할된 부분 리스트를 정렬</li>
+  <li>정렬된 두 개의 부분 리스트를 합하여 전체 리스트를 정렬함</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_12.png" alt="Sort_" /></p>
+
+<p><img src="" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_13.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_14.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_15.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_16.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_17.png" alt="Sort_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">sorted</span><span class="p">[</span><span class="n">MAX_SIZE</span><span class="p">];</span> <span class="c1">// 추가 공간이 필요</span>
+<span class="c1">// i는 정렬된 왼쪽리스트에 대한 인덱스</span>
+<span class="c1">// j는 정렬된 오른쪽리스트에 대한 인덱스</span>
+<span class="c1">// k는 정렬될 리스트에 대한 인덱스</span>
+
+<span class="kt">void</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mid</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err"> </span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="p">;</span> <span class="n">j</span><span class="o">=</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">=</span><span class="n">left</span><span class="p">;</span>
+<span class="err"> </span> <span class="c1">// 분할 정렬된 list의 합병</span>
+<span class="err"> </span> <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">mid</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">right</span><span class="p">){</span>
+<span class="err"> </span> <span class="err">    </span> <span class="k">if</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> 
+					<span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+<span class="err"> </span> <span class="err">    </span> <span class="k">else</span> 
+					<span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+<span class="err"> </span> <span class="p">}</span>
+<span class="err">   </span> <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="n">mid</span><span class="p">)</span> <span class="err"> </span> <span class="c1">// 남아 있는 레코드의 일괄 복사</span>
+<span class="err">        </span> <span class="k">for</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="n">j</span><span class="p">;</span> <span class="n">l</span><span class="o">&lt;=</span><span class="n">right</span><span class="p">;</span> <span class="n">l</span><span class="o">++</span><span class="p">)</span>
+<span class="err">              </span> <span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
+<span class="err">   </span> <span class="k">else</span> <span class="err"> </span> <span class="c1">// 남아 있는 레코드의 일괄 복사</span>
+<span class="err">        </span> <span class="k">for</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="n">i</span><span class="p">;</span> <span class="n">l</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">;</span> <span class="n">l</span><span class="o">++</span><span class="p">)</span>
+<span class="err">               </span> <span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
+<span class="err">   </span> <span class="c1">// 배열 sorted[]의 리스트를 배열 list[]로 복사</span>
+<span class="err">   </span> <span class="k">for</span><span class="err"> </span> <span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="n">left</span><span class="p">;</span> <span class="n">l</span><span class="o">&lt;=</span><span class="n">right</span><span class="p">;</span> <span class="n">l</span><span class="o">++</span><span class="p">)</span>
+<span class="err">          </span> <span class="n">list</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">sorted</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
+<span class="err">   </span> <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">m</span><span class="o">++</span><span class="p">)</span>
+<span class="err">         </span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d  "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">m</span><span class="p">]);</span>
+<span class="err">   </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span><span class="err"> </span> 
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="kt">int</span> <span class="n">mid</span><span class="p">;</span>
+
+<span class="c1">// 터미널에 과정 표시</span>
+<span class="kt">int</span> <span class="n">k</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"(list[], %d, %d) 호출</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="o">=</span> <span class="n">left</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
+<span class="err">       </span> <span class="n">printf</span><span class="p">(</span><span class="s">"[%d] %d  "</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> 
+
+<span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">&lt;</span><span class="n">right</span><span class="p">)</span>
+<span class="err"> </span><span class="p">{</span>
+<span class="err">   </span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span><span class="o">+</span><span class="n">right</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="err">             </span> <span class="c1">// 리스트의 균등분할</span>
+<span class="err">   </span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">mid</span><span class="p">);</span><span class="err">    </span> <span class="c1">// 부분리스트 정렬</span>
+<span class="err">   </span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span><span class="c1">//부분리스트 정렬</span>
+<span class="err">   </span> <span class="n">merge</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span><span class="err">   </span> <span class="c1">// 합병</span>
+<span class="err"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>합병정렬 복잡도 분석</p>
+
+<ul>
+  <li>비교 횟수
+    <ul>
+      <li>크기 n인 리스트를 정확히 균등 분배하므로 $log(n)$개의 패스</li>
+      <li>각 패스에서 리스트의 모든 레코드 n개를 비교하므로 n번의 비교 연산</li>
+    </ul>
+  </li>
+  <li>이동 횟수
+    <ul>
+      <li>레코드의 이동이 각 패스에서 2n번 발생하므로 전체 레코드의 이동은 $2n * log(n)$번 발생</li>
+      <li>레코드의 크기가 큰 경우에는 매우 큰 시간적 낭비 초래</li>
+      <li>레코드를 연결 리스트로 구성하여 합병 정렬할 경우, 매우 효율적</li>
+    </ul>
+  </li>
+  <li>최적, 평균, 최악의 경우 큰 차이 없이 $<strong>O(n*log(n))</strong>$의 복잡도</li>
+  <li>안정적이며 데이터의 초기 분산 순서에 영향을 덜 받음</li>
+</ul>
+
+<h3 id="퀵-정렬quick--sort">퀵 정렬(Quick  Sort)</h3>
+
+<ul>
+  <li>평균적으로 가장 빠른 정렬 방법</li>
+  <li><strong>분할정복법</strong> 사용</li>
+  <li>리스트를 2개의 부분 리스트로 <strong>비균등 분할</strong>하고, 각각의 부분리스트를 다시 <strong>퀵정렬함(재귀)</strong></li>
+  <li>먼저 리스트 안에 있는 한 요소를 <strong>피벗(pivot)</strong>으로 선택한다. 그것을 기준삼아 위 문장 진행</li>
+  <li>예시의 경우 2개의 인덱스 변수 low와 high를 이용. low는 왼쪽 부분 리스트를 만드는데 사용되고, high는 오른쪽 부분 리스트를 만드는데 사용된다. 인덱스 변수  low는 왼쪽에서 오른쪽으로 탐색하다가 피벗보다 높으면 멈추고 high는 마찬가지로 하는데 반대로 한다. 그래서 low와 high가 가리키는 두 데이터를 서로 교환한다. low와 high가 서로 엇갈려 지나가면 멈추게 된다. 이때 high가 가리키는 데이터와 피벗을 서로 교환하면 왼쪽은 낮은 값 오른쪽은 높은 값으로 정렬이 되어 있다.</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_18.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_19.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_20.png" alt="Sort_" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span>
+ <span class="p">{</span><span class="err"> </span> 
+<span class="err">  </span> <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">&lt;</span><span class="n">right</span><span class="p">){</span><span class="err">    </span> 
+<span class="err">     </span> <span class="kt">int</span> <span class="n">q</span><span class="o">=</span><span class="n">partition</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+<span class="err">     </span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="err">  </span> 
+<span class="err">     </span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span><span class="err"> </span> 
+<span class="err">  </span> <span class="p">}</span>
+<span class="err"> </span><span class="p">}</span> 
+
+<span class="err"> </span><span class="kt">int</span> <span class="n">partition</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span>
+<span class="err"> </span><span class="p">{</span>
+<span class="err">  </span> <span class="kt">int</span> <span class="n">pivot</span><span class="p">,</span> <span class="n">temp</span><span class="p">;</span>
+<span class="err">  </span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">;</span>
+<span class="err"> </span>
+<span class="err">  </span> <span class="n">low</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span><span class="err">                </span> 
+<span class="err">  </span> <span class="n">high</span> <span class="o">=</span> <span class="n">right</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="err">  </span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">left</span><span class="p">];</span> <span class="err"> </span> 
+	<span class="err"> </span><span class="k">do</span> <span class="p">{</span><span class="err"> </span> <span class="k">do</span>
+			<span class="err"> </span> <span class="err"> </span> <span class="n">low</span><span class="o">++</span><span class="p">;</span>
+			<span class="err"> </span>  <span class="k">while</span><span class="p">(</span><span class="n">low</span><span class="o">&lt;=</span><span class="n">right</span> <span class="o">&amp;&amp;</span><span class="n">list</span><span class="p">[</span><span class="n">low</span><span class="p">]</span><span class="o">&lt;</span><span class="n">pivot</span><span class="p">);</span> 
+				<span class="err"> </span><span class="k">do</span>
+			<span class="err"> </span> <span class="err"> </span> <span class="n">high</span><span class="o">--</span><span class="p">;</span>
+				<span class="err"> </span><span class="k">while</span><span class="p">(</span><span class="n">high</span><span class="o">&gt;=</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">list</span><span class="p">[</span><span class="n">high</span><span class="p">]</span><span class="o">&gt;</span><span class="n">pivot</span><span class="p">);</span>
+				<span class="err"> </span><span class="k">if</span><span class="p">(</span><span class="n">low</span><span class="o">&lt;</span><span class="n">high</span><span class="p">)</span> <span class="n">SWAP</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">low</span><span class="p">],</span> <span class="n">list</span><span class="p">[</span><span class="n">high</span><span class="p">],</span> <span class="n">temp</span><span class="p">);</span> 
+<span class="err"> </span> <span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="n">low</span><span class="o">&lt;</span><span class="n">high</span><span class="p">);</span><span class="err"> </span> 
+<span class="err">               </span> 
+<span class="err"> </span> <span class="n">SWAP</span><span class="p">(</span><span class="n">list</span><span class="p">[</span><span class="n">left</span><span class="p">],</span> <span class="n">list</span><span class="p">[</span><span class="n">high</span><span class="p">],</span> <span class="n">temp</span><span class="p">);</span> 
+<span class="err"> </span> <span class="k">return</span> <span class="n">high</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err"> </span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">n</span> <span class="o">=</span> <span class="n">MAX_SIZE</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+<span class="err"> </span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="err">     </span> <span class="c1">// 난수 생성 및 출력 </span>
+<span class="err"> </span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">100</span><span class="p">;</span> 
+
+<span class="err"> </span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 퀵정렬 호출 </span>
+<span class="err"> </span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="err"> </span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="err"> </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err"> </span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_21.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_22.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_23.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_24.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_25.png" alt="Sort_" /></p>
+
+<h3 id="기수-정렬radix-sort">기수 정렬(Radix Sort)</h3>
+
+<ul>
+  <li>대부분의 정렬 방법들은 레코드들을 비교함으로써 정렬 수행</li>
+  <li>레코드를 비교하지 않고 정렬 수행</li>
+  <li>비교에 의한 정렬의 이론적 하한인 $O(n*log(n))$보다 좋을 수 있음(유일하게 깰 수 있다)</li>
+  <li>기수 정렬은 $O(dn)$의 시간적 복잡도를 가짐(대부분 d ≤ 10)</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_26.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_27.png" alt="Sort_" /></p>
+
+<ul>
+  <li>버켓은 큐로 구현</li>
+  <li>버켓의 개수는 키의 표현 방법과 밀접한 관계</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define  SIZE 10
+#define MAX_QUEUE_SIZE 100
+</span>
+<span class="k">typedef</span> <span class="kt">int</span> <span class="n">element</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="c1">// 큐 타입</span>
+<span class="err"> </span> <span class="n">element</span><span class="err"> </span> <span class="n">data</span><span class="p">[</span><span class="n">MAX_QUEUE_SIZE</span><span class="p">];</span>
+<span class="err"> </span> <span class="kt">int</span><span class="err"> </span> <span class="n">front</span><span class="p">,</span> <span class="n">rear</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">QueueType</span><span class="p">;</span>
+<span class="c1">// 큐 초기화 함수</span>
+<span class="kt">void</span> <span class="nf">init_queue</span><span class="p">(</span><span class="n">QueueType</span> <span class="o">*</span><span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+<span class="err"> </span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">front</span> <span class="o">=</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">rear</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 삽입 함수</span>
+<span class="kt">void</span> <span class="nf">enqueue</span><span class="p">(</span><span class="n">QueueType</span> <span class="o">*</span><span class="n">q</span><span class="p">,</span> <span class="n">element</span> <span class="n">item</span><span class="p">)</span> <span class="p">{</span>
+<span class="err"> </span> <span class="k">if</span> <span class="p">(</span><span class="n">is_full</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<span class="err"> </span> <span class="n">error</span><span class="p">(</span><span class="s">"큐가 포화상태입니다"</span><span class="p">);</span>
+<span class="err"> </span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">rear</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">rear</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">MAX_QUEUE_SIZE</span><span class="p">;</span>
+<span class="err"> </span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">rear</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 삭제 함수</span>
+<span class="n">element</span> <span class="nf">dequeue</span><span class="p">(</span><span class="n">QueueType</span> <span class="o">*</span><span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+<span class="err"> </span> <span class="k">if</span> <span class="p">(</span><span class="n">is_empty</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<span class="err"> </span> <span class="n">error</span><span class="p">(</span><span class="s">"큐가 공백상태입니다"</span><span class="p">);</span>
+<span class="err"> </span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">front</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">front</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">MAX_QUEUE_SIZE</span><span class="p">;</span>
+<span class="err"> </span> <span class="k">return</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cp">#define BUCKETS 10
+#define DIGITS 4
+</span><span class="kt">void</span> <span class="nf">radix_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">QueueType</span> <span class="n">queues</span><span class="p">[</span><span class="n">BUCKETS</span><span class="p">];</span>
+
+<span class="err">  </span> <span class="k">for</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">b</span><span class="o">&lt;</span><span class="n">BUCKETS</span><span class="p">;</span><span class="n">b</span><span class="o">++</span><span class="p">)</span> <span class="n">init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">queues</span><span class="p">[</span><span class="n">b</span><span class="p">]);</span><span class="err"> </span> 
+
+<span class="err">  </span> <span class="k">for</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">d</span><span class="o">&lt;</span><span class="n">DIGITS</span><span class="p">;</span> <span class="n">d</span><span class="o">++</span><span class="p">){</span>
+<span class="err">     </span> <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="err"> </span> <span class="c1">// 데이터들을 자리수에 따라 큐에 입력</span>
+<span class="err">         </span> <span class="n">enqueue</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">queues</span><span class="p">[(</span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">factor</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span><span class="p">],</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+<span class="err">     </span> <span class="k">for</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">b</span><span class="o">&lt;</span><span class="n">BUCKETS</span><span class="p">;</span><span class="n">b</span><span class="o">++</span><span class="p">)</span> <span class="c1">// 큐에서 꺼내어 list로 합친다.</span>
+<span class="err">         </span> <span class="k">while</span><span class="p">(</span> <span class="o">!</span><span class="n">is_empty</span><span class="p">(</span><span class="o">&amp;</span><span class="n">queues</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">)</span>
+<span class="err">             </span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">dequeue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">queues</span><span class="p">[</span><span class="n">b</span><span class="p">]);</span>
+<span class="err">     </span> <span class="n">factor</span> <span class="o">*=</span> <span class="mi">10</span><span class="p">;</span><span class="err"> </span> <span class="c1">// 그 다음 자리수로 간다.</span>
+<span class="err">     </span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="err">          </span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d  "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="err">     </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> 
+<span class="err">  </span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cp">#define  SIZE 10
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err">    </span> <span class="kt">int</span> <span class="n">list</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+<span class="err">    </span> <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+<span class="err">    </span> <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="err">   </span> <span class="c1">// 난수 생성 및 출력 </span>
+<span class="err">          </span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">1000</span><span class="p">;</span>
+
+<span class="err">    </span> <span class="n">radix_sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">SIZE</span><span class="p">);</span> <span class="c1">// 기수정렬 호출    </span>
+<span class="err">    </span> <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+<span class="err">          </span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="err">    </span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="err">    </span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>기수정렬 복잡도 분석</strong></p>
+
+<ul>
+  <li>n개의 레코드, d개의 자릿수로 이루어진 키를 기수정렬할 경우
+    <ul>
+      <li>메인 루프는 자릿수 d번 반복</li>
+      <li>큐에 n개 레코드 입력 수행</li>
+    </ul>
+  </li>
+  <li>O(dn)의 시간적 복잡도
+    <ul>
+      <li>키의 자릿수 d ≤ 10 의 작은 수 이므로 빠른 정렬이다.</li>
+    </ul>
+  </li>
+  <li>실수, 한글, 한자로 이루어진 키는 정렬 못함</li>
+</ul>
+
+<h2 id="정렬-알고리즘의-비교매우-중요">정렬 알고리즘의 비교(매우 중요)</h2>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_29.png" alt="Sort_" /></p>
+
+<p><img src="/assets/images/posts_img/DataStructure_Sort/sort_30.png" alt="Sort_" /></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#data-structure" class="page__taxonomy-item" rel="tag">Data Structure</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-07">December 7, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Data_Structure_Tree/" class="pagination--pager" title="[Data Structure] 트리
+">Prev</a>
+    
+    
+      <a href="/Algorithm/Python_Implementation/" class="pagination--pager" title="[Python_Implementation] 상하좌우
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/" rel="permalink">[Python_Greedy] 전구와 스위치
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-11T00:00:00+09:00">January 11, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_2138
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" rel="permalink">[Python_Greedy] 행렬
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1080
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Database/" rel="permalink">[DataBase] 데이터베이스 프로그래밍
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-07T00:00:00+09:00">January 7, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">DataBase Programming(C#)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Implementation/" rel="permalink">[Python_Implementation] 상하좌우
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-06T00:00:00+09:00">January 6, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이것이 코딩테스트다 with Python Implementation
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
