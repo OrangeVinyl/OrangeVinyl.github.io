@@ -77,6 +77,12 @@ var store = [{
         "url": "/CS/Data_Structure_Sort/",
         "teaser": null
       },{
+        "title": "[Data Structure] 탐색",
+        "excerpt":"탐색 탐색키(search key) 항목과 항목을 구별해주는 키 탐색을 위하여 사용되는 자료구조 배열, 연결리스트, 트리, 그래프 등 순차 탐색(sequential search) 탐색 방법 중에서 가장 간단하고 직접적인 탐색 방법 정렬되지 않은 배열을 처음부터 마지막까지 하나씩 검사하는 방법 평균 비교 횟수 탐색 성공 : (n+1)/2 번 비교 탐색 실패 : n 번 비교...","categories": ["Data Structure"],
+        "tags": ["Data Structure","Search","C"],
+        "url": "/CS/Data_Structure_Search/",
+        "teaser": null
+      },{
         "title": "[Python_Implementation] 상하좌우",
         "excerpt":"✅ 문제 여행가 A는 N × N 크기의 정사각형 공간 위에 서 있다. 이 공간은 1 × 1 크기의 정사각형으로 나누어져 있다. 가장 왼쪽 위 좌표는 (1, 1)이며, 가장 오른쪽 아래 좌표는 (N, N)에 해당한다. 여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며, 시작 좌표는 항상 (1, 1)이다. 우리...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","Implementation"],
