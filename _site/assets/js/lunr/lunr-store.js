@@ -83,6 +83,12 @@ var store = [{
         "url": "/CS/Data_Structure_Search/",
         "teaser": null
       },{
+        "title": "[Software Engineering] 설계",
+        "excerpt":"설계 좋은 설계가 되기 위한 조건 설계서는 요구분석명세서의 내용을 모두 포함해야 한다 유지보수가 용이하도록 추적이 가능해야 한다 변화에 쉽게 적응할 수 있어야 한다 시스템 변경으로 인한 영향이 최소화되도록 국지적이어야 한다 설계서는 읽기 쉽고 이해하기 쉽게 작성해야 한다 설계의 원리 분할과 정복 분할 : 큰 소프트웨어 하나를 개발할 때 여러개의 서브시스템으로...","categories": ["Software Engineering"],
+        "tags": ["Software Engineering","Design"],
+        "url": "/Software_Enginnering/Design/",
+        "teaser": null
+      },{
         "title": "[Python] 비트 마스킹",
         "excerpt":"비트 마스크란? 컴퓨터는 내부적으로 모든 자료를 이진수로 표현한다. 이와 같은 특성을 이용해 정수의 이진수 표현을 자료구조로 쓰는 기법을 비트 마스크라고 한다. 비트 마스크의 개념 컴퓨터의 최소 연산 단위는 bit다. bit는 이진수를 나타내기 위해 0과 1로만 이루어져있는데, 우리는 비트 연산을 통해 약간 ‘꼼수(?)’를 써서 문제를 해결할 수 있다.. 예를 들어, 많은...","categories": ["Python"],
         "tags": ["Python","BitMasking","Bit"],

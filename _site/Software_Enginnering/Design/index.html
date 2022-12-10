@@ -1,0 +1,1101 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Software Engineering] 설계 | Hwan’s Devlog</title>
+<meta name="description" content="소프트웨어 공학 - 설계">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog 📝">
+<meta property="og:title" content="[Software Engineering] 설계">
+<meta property="og:url" content="http://localhost:4000/Software_Enginnering/Design/">
+
+
+  <meta property="og:description" content="소프트웨어 공학 - 설계">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-10T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-10T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Software_Enginnering/Design/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog 📝 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://orangevinyl.github.io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://orangevinyl.github.io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://orangevinyl.github.io/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://orangevinyl.github.io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://orangevinyl.github.io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://orangevinyl.github.io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://orangevinyl.github.io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://orangevinyl.github.io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://orangevinyl.github.io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://orangevinyl.github.io/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://orangevinyl.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orangevinyl.github.io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://orangevinyl.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://orangevinyl.github.io/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog 📝
+          <span class="site-subtitle">일상과 이상</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/blog_icon2.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 28</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Python/"><span class="nav__sub-title">Python</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Software Engineering] 설계">
+    <meta itemprop="description" content="소프트웨어 공학 - 설계">
+    <meta itemprop="datePublished" content="2022-12-10T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-10T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Software Engineering] 설계
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-10T00:00:00+09:00">December 10, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#설계">설계</a></li><li><a href="#좋은-설계가-되기-위한-조건">좋은 설계가 되기 위한 조건</a></li><li><a href="#분할과-정복">분할과 정복</a></li><li><a href="#추상화">추상화</a></li><li><a href="#pesudo-code">Pesudo Code</a></li><li><a href="#캡슐화">캡슐화</a></li><li><a href="#정보은닉">정보은닉</a></li><li><a href="#상속">상속</a></li><li><a href="#다형성">다형성</a></li><li><a href="#모듈">모듈</a></li><li><a href="#모듈화의-형태">모듈화의 형태</a></li><li><a href="#모듈의-특징">모듈의 특징</a></li><li><a href="#모듈의-원칙">모듈의 원칙</a></li><li><a href="#모듈화의-장점">모듈화의 장점</a></li><li><a href="#모듈화의-적정-수준">모듈화의 적정 수준</a></li><li><a href="#모듈-간-관계">모듈 간 관계</a></li><li><a href="#모듈-평가-기준--응집도">모듈 평가 기준 : 응집도</a></li><li><a href="#모듈-평가-기준--결합도">모듈 평가 기준 : 결합도</a></li><li><a href="#메타포metaphor">메타포(metaphor)</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h3 id="설계">설계</h3>
+
+<p><img src="/assets/images/posts_img/%EC%84%A4%EA%B3%84/%EC%84%A4%EA%B3%841.png" alt="설계_" /></p>
+
+<h3 id="좋은-설계가-되기-위한-조건">좋은 설계가 되기 위한 조건</h3>
+
+<ul>
+  <li>설계서는 요구분석명세서의 내용을 모두 포함해야 한다</li>
+  <li>유지보수가 용이하도록 추적이 가능해야 한다</li>
+  <li>변화에 쉽게 적응할 수 있어야 한다</li>
+  <li>시스템 변경으로 인한 영향이 최소화되도록 국지적이어야 한다</li>
+  <li>설계서는 읽기 쉽고 이해하기 쉽게 작성해야 한다</li>
+</ul>
+
+<h2 id="설계의-원리">설계의 원리</h2>
+
+<h3 id="분할과-정복">분할과 정복</h3>
+
+<ul>
+  <li>분할 : 큰 소프트웨어 하나를 개발할 때 여러개의 서브시스템으로 세분화해 나누는 작업</li>
+  <li>정복 : 어느 정도 수준까지 분할했다면 말단에 있는 것부터 하나씩 개발하는 작업</li>
+</ul>
+
+<p><strong>분할과 정복의 원리</strong></p>
+
+<ul>
+  <li>프로젝트를 수행할 때 먼저 작은 단위로 분할한 뒤 말단에 있는 작은 시스템부터 개발하면서 하나씩 위로 올라가며 완성</li>
+  <li>우선 <strong>모듈로 분할하는 작업</strong>을 해야 한다.</li>
+</ul>
+
+<p>분할의 기준</p>
+
+<ul>
+  <li>분산시스템은 클라이언트와 서버로 분할</li>
+  <li>시스템은 여러 서브시스템으로 분할</li>
+  <li>서브시스템은 하나 이상의 패키지로 분할</li>
+  <li>패키지는 유스케이스나 여러 클래스로 분할</li>
+</ul>
+
+<p>분할의 주의사항</p>
+
+<ul>
+  <li>여러 개의 모듈로 분할하면 모듈끼리 통신 횟수가 많아지면서 모듈로 분할하는 장점보다 복잡도가 오히려 증가할 수 있음</li>
+  <li>설계자는 어느 수준까지 모듈을 분할할지 결정할 때 <strong>복잡도 증가로 인한 부작용</strong>과 <strong>모듈 분할로 얻는 이득을 함께 고려</strong></li>
+</ul>
+
+<h3 id="추상화">추상화</h3>
+
+<ul>
+  <li>자신에게 필요한 특징만 표현한 것</li>
+  <li>특정한 목적과 관련된 필수 정보만 추출해 강조</li>
+  <li>
+    <p>관련 없는 세부 사항은 생략해 본질적인 문제에 집중할  수 있도록 하는 작업</p>
+  </li>
+  <li>객체지향 설계에서 추상화의 의미
+    <ul>
+      <li>유사한 특성을 가진 것끼리 그룹화한 뒤 공통점을 뽑아 이름을 붙이는 것</li>
+    </ul>
+  </li>
+  <li><strong>과정 추상화</strong>
+    <ul>
+      <li>주어진 문제에 대해 프로그래밍하기 전에 상세부분은 생략하고 전체 흐름만 파악할 수 있는 알고리즘 형태로 작성하는 것</li>
+    </ul>
+  </li>
+  <li><strong>데이터 추상화</strong>
+    <ul>
+      <li>데이터와 데이터 구조를 감추는 것으로 대표적인 예가 C++의 클래스</li>
+      <li>데이터와 메서드를 클래스 형태로 캡슐화해 숨겨 놓고 사용자에게 꼭 필요한 기능만 사용할 수 있게 개방한 구조</li>
+    </ul>
+  </li>
+  <li><strong>제어 추상화</strong>
+    <ul>
+      <li>프로그래밍 언어에서 쓰는 제어 구조를 추상화</li>
+      <li>제어 추상화는 단계가 올라갈 수록 표현이 더욱 간결해지고 특징만 나타낸다는 장점</li>
+      <li>if, for 문 같은 것도 예시가 될 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="pesudo-code">Pesudo Code</h3>
+
+<ul>
+  <li>의사 코드 , 유사 언어, PDL(Program Description Language) 프로그램 기술 언어</li>
+  <li>모듈의 기능이나 순서 또는 알고리즘의 수행 내용을, 문법적인 제약 없이 정확하게 표현할 수 있는 비형식적인 언어</li>
+  <li>수행 논리를 표현하기 위해 어느 정도의 형식은 갖추고 있음</li>
+</ul>
+
+<p>[장점]</p>
+
+<ol>
+  <li>오류 수정 작업을 설계 단계에서 의사코드로 미리하는 것이, 나중에 실제 코드입력, 테스트, 디버그 단계에서 하는 것보다 훨씬 경제적</li>
+  <li>유지보수시 및 다른 개발자와 의사소통시 원활</li>
+</ol>
+
+<h3 id="캡슐화">캡슐화</h3>
+
+<ul>
+  <li>사용자에게 해당 객체의 기능과 사용법만 제공해 사용하기 쉽게 하고 내부는 함부로 변경할 수 없게 감추는 개념</li>
+  <li>블랙 박스와 같은 것으로 클래스를 사용해 서로 관련된 정보와 처리 방식을 같이 묶고 외부에는 감춰두는 것</li>
+</ul>
+
+<p>[장점]</p>
+
+<ol>
+  <li>추상화를 통해 문제를 쉽게 개념화 할 수 있음</li>
+  <li>객체 제공자와 객체 이용자(외부 객체)를 명확하게 분리 가능</li>
+  <li>메서드의 구현 방법이 바뀌어도 사용자에게는 영향을 미치지 않아 사용하기 쉬움</li>
+  <li>메서드의 기능만 알면 객체를 쉽게 사용할 수 있음</li>
+  <li>객체 내 자료구조나 알고리즘이 바뀌어도 다른 객체에 미치는 영향이 적음</li>
+  <li>캡슐화로 객체 사이의 독립성이 구조적으로 보장</li>
+  <li>그 객체와 인터페이스로 통신하는 사용자에게는 영향을 주지 않으므로 부담 없이 자료구조를 변경할 수 있음</li>
+  <li>프로그램을 개발할 때 제공하는 기능만 알면 되므로 사용자(프로그래머)가 모듈을 이해하기 쉬움</li>
+  <li>모듈 내의 데이터와 알고리즘을 변경하기 쉬우므로 기능을 추가하기도 쉬움</li>
+</ol>
+
+<h3 id="정보은닉">정보은닉</h3>
+
+<ul>
+  <li>캡슐화는 캡슐의 내부와 외부를 구분하지만 그 자체로 내부 정보가 외부에 숨겨지지는 않음 이때 정보은닉이 필요함</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/%EC%84%A4%EA%B3%84/%EC%84%A4%EA%B3%842.png" alt="설계_" /></p>
+
+<p><img src="/assets/images/posts_img/%EC%84%A4%EA%B3%84/%EC%84%A4%EA%B3%843.png" alt="설계_" /></p>
+
+<h3 id="상속">상속</h3>
+
+<ul>
+  <li>상위 클래스의 모든 것을 하위 클래스가 물려받아 내 것처럼 사용</li>
+  <li><strong>클래스 간의 상속 관계는 속이 빈 삼각형 모양의 화살표를 사용</strong></li>
+</ul>
+
+<p>[장점]</p>
+
+<ol>
+  <li>상속 관계를 이용하면 개별 클래스를 상속 관계로 묶어서 구조를 파악하기 쉬움</li>
+  <li>상속 관계에 속한 클래스, 데이터, 메서드를 추가하기도 쉬움</li>
+  <li>데이터와 메서드를 변경할 때 상위에 있는 것만 수정할 수 있음</li>
+</ol>
+
+<h3 id="다형성">다형성</h3>
+
+<p><strong>오버로딩(중복정의)</strong></p>
+
+<ul>
+  <li>매개변수의 개수, 매개변수의 자료형으로 같은 메서드 구분</li>
+  <li>시그니처 : 동일한 메서드가 호출되었을 때 구별할 수 있는 매개변수의 개수나 자료형 같은 요소</li>
+</ul>
+
+<p><strong>오버라이딩(재정의)</strong></p>
+
+<ul>
+  <li>상위 클래스에서 정의한 메서드는 무시하고 하위 클래스에서 다시 정의해 사용하는 것</li>
+  <li>메서드 재정의를 잘못 사용하면 설계 원칙 위배</li>
+  <li><strong>리스코프 교체 원칙 : 상위 클래스의 객체는 언제나 자신의 하위 클래스의 객체로 교체할 수 있어야 함</strong></li>
+</ul>
+
+<h2 id="모듈화">모듈화</h2>
+
+<h3 id="모듈">모듈</h3>
+
+<ul>
+  <li>규모가 큰 것을 여러 개로 나눈 조각, 소프트웨어 구조를 이루는 기본 단위</li>
+  <li><strong>하나 또는 몇 개의 논리적 기능을 수행하기 위한 명령어의 집단</strong></li>
+  <li>독립 프로그램도 하나의 모듈이 될 수 있고 함수(메서드)도 하나의 모듈이 될 수 있음</li>
+  <li><strong>소프트웨어 개발에서 큰 문제를 작은 단위로 나누는 것</strong></li>
+</ul>
+
+<h3 id="모듈화의-형태">모듈화의 형태</h3>
+
+<ul>
+  <li>용도가 비슷한 것끼리 묶어놓은 라이브러리 함수, 그래픽 함수</li>
+  <li>추상화된 자료
+    <ul>
+      <li>요구분석 단계</li>
+      <li>상위 설계(아키텍처 설계)
+        <ul>
+          <li>전체 구조를 파악하여 표현</li>
+        </ul>
+      </li>
+      <li>하위 설계(모듈 설계)
+        <ul>
+          <li>상세한 내용을 다루는 모듈 설계</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="모듈의-특징">모듈의 특징</h3>
+
+<ul>
+  <li>다른 것과 구별되는 독립적인 기능을 갖는 단위</li>
+  <li>유일한 이름을 가짐</li>
+  <li>모듈에서 또 다른 모듈을 호출할 수 있음</li>
+  <li>다른 프로그램에서도 모듈을 호출할 수 잇음</li>
+</ul>
+
+<h3 id="모듈의-원칙">모듈의 원칙</h3>
+
+<ul>
+  <li>모듈화를 하기 전에 먼저 어느 정도의 크기로 나눌 것인지를 생각함</li>
+  <li>문제의 유형이나 특성을 고려해 결정</li>
+  <li>모듈 간의 결합은 느슨하게</li>
+  <li>모듈 내 구성 요소 간의 응집은 강하게</li>
+</ul>
+
+<h3 id="모듈화의-장점">모듈화의 장점</h3>
+
+<ul>
+  <li>분할과 정복의 원리가 적용되어 복잡도가 감소</li>
+  <li>변경하기 쉽고 변경으로 인한 영향도 적음</li>
+  <li>프로그램을 효율적으로 관리할 수 있음</li>
+  <li>설계 및 코드를 재사용할 수 있음</li>
+  <li>문제를 이해하기 쉽게 만듬</li>
+  <li>유지보수가 용이</li>
+  <li>오류로 인한 파급효과를 최소화할 수 있음</li>
+</ul>
+
+<h3 id="모듈화의-적정-수준">모듈화의 적정 수준</h3>
+
+<p><img src="/assets/images/posts_img/%EC%84%A4%EA%B3%84/%EC%84%A4%EA%B3%844.png" alt="설계_" /></p>
+
+<h3 id="모듈-간-관계">모듈 간 관계</h3>
+
+<ul>
+  <li>호출 관계 : 모듈 A가 모듈 B를 호출하는 관계</li>
+  <li>데이터 전달 : 매개변수 등을 이용한 데이터 전달로 이루어지는 관계</li>
+  <li>제어 : 모듈 A가 모듈 B에게 제어 플래그를 전달하는 것과 같은 제어를 통해 이루어지는 관계</li>
+</ul>
+
+<h3 id="모듈-평가-기준--응집도">모듈 평가 기준 : 응집도</h3>
+
+<ul>
+  <li>모듈 내부에 존재하는 구성 요소 사이의 밀접한 정도</li>
+  <li><strong>응집도가 높을수록</strong> 꼭 필요한 구성 요소만 모여 있고, <strong>응집도가 낮을수록</strong> 서로 관련성이 적은 구성 요소들이 모임</li>
+  <li><strong>응집도가 가장 높은 것은 모듈 하나가 단일 기능으로 구성된 경</strong></li>
+  <li>응집도가 가장 낮은 것은 구성 요소가 필요에 의해 모듈에 존재하는 것이 아니라 우연히 함께 묶인 경우</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/%EC%84%A4%EA%B3%84/%EC%84%A4%EA%B3%845.png" alt="설계_" /></p>
+
+<p><strong>기능적 응집</strong></p>
+
+<ul>
+  <li>응집도가 가장 높은 경우로 단일 기능의 요소가 하나의 모듈을 구성</li>
+  <li>단일 기능을 갖는 함수가 해당</li>
+</ul>
+
+<p><strong>순차적 응집</strong></p>
+
+<ul>
+  <li>두 요소가 하나의 모듈로 구성된 경우</li>
+  <li>두 요소가 아주 밀접하므로 하나의 모듈로 묶을 만한 충분한 이유가 됨</li>
+</ul>
+
+<p><strong>교환적 응집</strong></p>
+
+<ul>
+  <li>정보적 응집이라고도 함. 입력을 사용하는 구성 요소가 하나의 모듈로 구성</li>
+  <li>구성 요소가 동일한 출력을 만들어낼 때도 교환적 응집이 됨</li>
+  <li>요소간의 순서는 중요하지 않음</li>
+</ul>
+
+<p><strong>절차적 응집</strong></p>
+
+<ul>
+  <li>순서가 정해진 몇 개의 구성요소가 하나의 모듈로 구성된 경우</li>
+  <li>순차적 응집과는 어떤 구성 요소의 출력이 다음 구성 요소의 입력으로 사용되지 않고 순서에 따라 수행된다는 점이 다름</li>
+  <li>한 요소의 출력이 다음 요소의 입력으로 사용되지 않으므로 순차적 응집보다는 묶인 이유가 조금 약한 편</li>
+</ul>
+
+<p><strong>시간적 응집</strong></p>
+
+<ul>
+  <li>요소의 기능이 각기 다르고 요소의 출력을 입력으로 사용하는 것도, 요소 간에 순서가 정해진 것도 아님</li>
+  <li>구성 요소들이 같은 시간대에 함께 실행된다는 이유로 하나의 모듈로 구성</li>
+  <li>초깃값 설정 모듈이 시간적 응집의 예</li>
+</ul>
+
+<p><strong>논리적 응집</strong></p>
+
+<ul>
+  <li>구성 요소 간에 공통점이 있거나 <strong>관련된 임무가 존재하거나 기능이 비슷해서</strong> 하나의 모듈로 구성된 경우</li>
+</ul>
+
+<p><strong>우연적 응집</strong></p>
+
+<ul>
+  <li>특별한 이유 없이 몇 개의 모듈로 나누는 과정에서 우연히 같이 묶인 것</li>
+  <li>응집도가 가장 낮음</li>
+</ul>
+
+<h3 id="모듈-평가-기준--결합도">모듈 평가 기준 : 결합도</h3>
+
+<ul>
+  <li><strong>모듈과 모듈 사이의 관계에서 관련 정도를 나타냄</strong></li>
+  <li><strong>간섭하는 관계</strong>와 <strong>좋은 관계(간섭이 적음)</strong>가 있다</li>
+  <li>관련이 적을수록 <strong>상호 의존성이 줄어</strong> 모듈의 <strong>독립성이 높아지고</strong> 독립성이 높으면 <strong>모듈간에 영향 적음</strong></li>
+  <li>결합에서 좋은 관계는 <strong>데이터만 주고 받는 관계</strong>, 나쁜 관계는 <strong>필요한 데이터만 주지 않고 직접 관여(간섭)</strong></li>
+</ul>
+
+<p><img src="/assets/images/posts_img/%EC%84%A4%EA%B3%84/%EC%84%A4%EA%B3%846.png" alt="설계_" /></p>
+
+<p><strong>데이터 결합</strong></p>
+
+<ul>
+  <li>가장 좋은 모듈 간 결합</li>
+  <li>모듈이 매개변수를 통해 데이터만 주고 받음 → 간섭 최소화</li>
+  <li>독립성 보장, 관계 단순해서 하나의 모듈을 변경해도 다른 모듈에 미치는 영향이 아주 적음</li>
+  <li>유지보수도 쉽다</li>
+</ul>
+
+<p><strong>스탬프 결합</strong></p>
+
+<ul>
+  <li>필요한 데이터만 주고 받을 수 없고 필요 없는 데이터까지 전체를 주고받아야 하는 경우</li>
+  <li>레코드 전체가 넘어온다.  C언어의 구조체도 스탬프 결합의 예시</li>
+</ul>
+
+<p><strong>제어 결합</strong></p>
+
+<ul>
+  <li>호출하는 모듈이 호출되는 모듈의 내부 구조를 잘 알고 논리적 흐름을 변경하는 관계로 묶이는 관계</li>
+  <li><strong>데이터 결합이 데이터를 매개변수</strong>로 정보를 교환했다면 <strong>제어 결합은 제어플래그를 매개변수</strong>로 사용</li>
+  <li>정보은닉을 크게 위배하여 다른 모듈의 내부에 관여해 관계가 복잡해지고 그로 인해 유지보수도 매우 어려워짐</li>
+  <li><strong>스탬프 결합보다 모듈 간의 결합도가 더 높고 모듈의 독립성은 더 낮음</strong></li>
+</ul>
+
+<p><strong>공통 결합</strong></p>
+
+<ul>
+  <li>모듈이 공통 변수를 함게 사용 → 전역 변수를 사용할 때 공통 결합이 성립한다</li>
+  <li>데이터를 개별 모듈 내부에서 지역 변수로 선언하여 보완</li>
+</ul>
+
+<p><strong>내용 결합</strong></p>
+
+<ul>
+  <li>모듈 간에 인터페이스를 사요하지 않고 직접 왔다 갔다 하는 것</li>
+  <li>상대 모듈의 데이터를 직접 변경할 수 있어 서로 간섭을 가장 많이 함</li>
+  <li>모듈이 서로 종속되어 독립적으로 설계하거나 변경할 수 없음</li>
+</ul>
+
+<p><strong>모듈 간의 좋은 관계</strong></p>
+
+<ul>
+  <li>모듈 간에는 꼭 필요한 데이터만 주고받는 것이 좋음</li>
+  <li>약한 결합을 유지하는 것이 바람직하므로 인터페이스의 수가 적고 복잡하지 않아야함</li>
+  <li>그러려면 <strong>매개변수로 제어 플래그를 사용하는 것</strong>보다 <strong>데이터를 사용하는 것</strong>이 <strong>유지보수의 용이성</strong>을 높일 수 있어 좋음</li>
+  <li>결론적으로, 설계를 할 때 가장 좋은 형태는 <strong>모듈 간의 결합도는 낮게, 응집도는 높게 하는 것</strong></li>
+</ul>
+
+<h2 id="사용자-인터페이스의-설계">사용자 인터페이스의 설계</h2>
+
+<p><strong>사용자 인터페이스 설계지침</strong></p>
+
+<ul>
+  <li>사용법을 배우기 쉬워야 함</li>
+  <li>사용하기 편리해야 함</li>
+  <li>사용자가 데이터 입력을 제어할 수 있어야 함</li>
+  <li>사용자의 입력에 반응해야 함</li>
+  <li>도움말을 제공해야 함</li>
+  <li>일관성을 유지해야 함</li>
+  <li>입력 작업은 최소로 해야 함</li>
+  <li>효율성을 고려해야 함</li>
+  <li>사용자 오류에 대한 되돌리기 기능을 제공해야 함</li>
+  <li>삭제 또는 취소 버튼 클릭 시 재확인을 요구해야 함</li>
+  <li>사용하게 쉽게 직관적이어야 함 → 메타포</li>
+</ul>
+
+<h3 id="메타포metaphor">메타포(metaphor)</h3>
+
+<p>GUI는 데스크탑 메타포를 이용한 <strong>WIMP(Windows, Icons, Menus, Pointing devices)</strong>인터페이스다.</p>
+
+<p>문서를 표현하는 3가지 메타포</p>
+
+<ul>
+  <li>스크롤 메타포</li>
+  <li>책 메타포</li>
+  <li>종이 메타포 - 스프레드시트</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#software-engineering" class="page__taxonomy-item" rel="tag">Software Engineering</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-10">December 10, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Data_Structure_Search/" class="pagination--pager" title="[Data Structure] 탐색
+">Prev</a>
+    
+    
+      <a href="/Python/Bit%20Masking/" class="pagination--pager" title="[Python] 비트 마스킹
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/Sort/" rel="permalink">[Python] Sort
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-31T00:00:00+09:00">January 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">파이썬으로 정렬 알고리즘 재정리
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%88%9C%ED%9A%8C%20%EA%B0%95%EC%97%B0/" rel="permalink">[Python_Greedy] 순회 강연
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-21T00:00:00+09:00">January 21, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_2109
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%B3%B4%EC%84%9D%EB%8F%84%EB%91%91/" rel="permalink">[Python_Greedy] 보석 도둑
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-19T00:00:00+09:00">January 19, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1202
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%8F%99%EC%A0%84%20%EB%92%A4%EC%A7%91%EA%B8%B0/" rel="permalink">[Python_Greedy] 동전 뒤집기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-18T00:00:00+09:00">January 18, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1285
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/OrangeVinyl/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
