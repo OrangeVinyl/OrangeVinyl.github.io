@@ -89,6 +89,24 @@ var store = [{
         "url": "/Software_Enginnering/Design/",
         "teaser": null
       },{
+        "title": "[Software Engineering] 요구분석",
+        "excerpt":"01) 요구사항 요구사항의 정의 이용자가 어떤 문제를 풀거나 목표를 달성하는 데 필요한 조건이나 능력 시스템이 제공하는 기능요구와 품질과 같은 비기능 요구로 나뉨 02) 요구분석의 이해 요구분석의 정의 시스템이나 소프트웨어의 요구사항을 정의하기 위해 사용자 요구사항을 조사하고 확인하는 과정 요구분석은 소프트웨어 개발 성패의 열쇠 요구분석의 목적 사용자에게서 필요한 요구사항을 추출해 목표하는 시스템의...","categories": ["Software Engineering"],
+        "tags": ["Software Engineering","Requirement Analysis"],
+        "url": "/Software_Enginnering/RequirementAnalysis/",
+        "teaser": null
+      },{
+        "title": "[Software Engineering] 구현",
+        "excerpt":"프로그래밍 언어의 역사 포트란(FORTRAN , FORmula TRANslation) 사람이 이해하기 쉬운 형태로 만들어진 초창기 고급언어 IBM이 우주항공 분야 베이직(BASIC, Beginner’s All-purpose Symbolic Instruction Code) 쉬운 문법을 사용하여 교육용으로 만든 언어 개발 환경이 시각적이고 베이직 언어 계열이라 초보자가 익히기 쉬움 코볼(COBOL, COmmon Business Oriented Language) 사무처리용 프로그램 언어 자바 - 선 마이크로시스템즈...","categories": ["Software Engineering"],
+        "tags": ["Software Engineering","Implementation"],
+        "url": "/Software_Enginnering/Implementation/",
+        "teaser": null
+      },{
+        "title": "[Software Engineering] 테스트",
+        "excerpt":"테스트의 이해 소프트웨어 테스트의 정의 소프트웨어 내에 존재하지만 드러나지 않고 숨어 있는 오류를 발견할 목적 작은 의미 원시 코드 속에 남아 있는 오류를 발견하는 것 결함이 생기지 않도록 예방하는 것 큰 의미 개발된 소프트웨어가 고객의 요구를 만족시키는지 확인시켜주는 것 개발자와 고객에게 사용하기에 충분한 소프트웨어임을 보여주는 것 결과적으로 테스트의 목표는 ‘개발된...","categories": ["Software Engineering"],
+        "tags": ["Software Engineering","TEST"],
+        "url": "/Software_Enginnering/Test/",
+        "teaser": null
+      },{
         "title": "[Python] 비트 마스킹",
         "excerpt":"비트 마스크란? 컴퓨터는 내부적으로 모든 자료를 이진수로 표현한다. 이와 같은 특성을 이용해 정수의 이진수 표현을 자료구조로 쓰는 기법을 비트 마스크라고 한다. 비트 마스크의 개념 컴퓨터의 최소 연산 단위는 bit다. bit는 이진수를 나타내기 위해 0과 1로만 이루어져있는데, 우리는 비트 연산을 통해 약간 ‘꼼수(?)’를 써서 문제를 해결할 수 있다.. 예를 들어, 많은...","categories": ["Python"],
         "tags": ["Python","BitMasking","Bit"],

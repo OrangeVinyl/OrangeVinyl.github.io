@@ -1,0 +1,855 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Software Engineering] 구현 | Hwan’s Devlog</title>
+<meta name="description" content="소프트웨어 공학 - 구현">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog 📝">
+<meta property="og:title" content="[Software Engineering] 구현">
+<meta property="og:url" content="http://localhost:4000/Software_Enginnering/Implementation/">
+
+
+  <meta property="og:description" content="소프트웨어 공학 - 구현">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-26T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-26T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Software_Enginnering/Implementation/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog 📝 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://orangevinyl.github.io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://orangevinyl.github.io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://orangevinyl.github.io/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://orangevinyl.github.io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://orangevinyl.github.io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://orangevinyl.github.io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://orangevinyl.github.io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://orangevinyl.github.io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://orangevinyl.github.io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://orangevinyl.github.io/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://orangevinyl.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orangevinyl.github.io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://orangevinyl.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://orangevinyl.github.io/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog 📝
+          <span class="site-subtitle">일상과 이상</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/blog_icon2.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 31</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Python/"><span class="nav__sub-title">Python</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Software Engineering] 구현">
+    <meta itemprop="description" content="소프트웨어 공학 - 구현">
+    <meta itemprop="datePublished" content="2022-12-26T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-26T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Software Engineering] 구현
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-26T00:00:00+09:00">December 26, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#프로그래밍-언어의-역사">프로그래밍 언어의 역사</a></li><li><a href="#표준-코딩-규칙의-필요성">표준 코딩 규칙의 필요성</a></li><li><a href="#주요-표준-코딩-규칙">주요 표준 코딩 규칙</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="프로그래밍-언어의-역사">프로그래밍 언어의 역사</h2>
+
+<p><strong>포트란(FORTRAN , FORmula TRANslation)</strong></p>
+
+<ul>
+  <li>사람이 이해하기 쉬운 형태로 만들어진 초창기 고급언어</li>
+  <li>IBM이 우주항공 분야</li>
+</ul>
+
+<p><strong>베이직(BASIC, Beginner’s All-purpose Symbolic Instruction Code)</strong></p>
+
+<ul>
+  <li>쉬운 문법을 사용하여 교육용으로 만든 언어</li>
+  <li>개발 환경이 시각적이고 베이직 언어 계열이라 초보자가 익히기 쉬움</li>
+</ul>
+
+<p><strong>코볼(COBOL, COmmon Business Oriented Language)</strong></p>
+
+<ul>
+  <li>사무처리용 프로그램 언어</li>
+</ul>
+
+<p>자바 - 선 마이크로시스템즈 제임스 고슬리 JVM(자바 가상 머신)</p>
+
+<h2 id="표준-코딩-규칙의-필요성">표준 코딩 규칙의 필요성</h2>
+
+<ul>
+  <li>코딩 : 프로그램을 작성하는 것</li>
+  <li>요구분석 후, 이어 설계 작업 후에 생성된 <strong>설계서를 바탕으로</strong></li>
+  <li>표준 코딩 규칙의 장점
+    <ul>
+      <li>높은 가독성</li>
+      <li>간결하고 명확한 코딩 → 유지보수 향상</li>
+      <li>개발 시간의 단축 → 개발 시간 단축</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="주요-표준-코딩-규칙">주요 표준 코딩 규칙</h2>
+
+<ul>
+  <li>명령에 관한 규칙
+    <ul>
+      <li>명칭은 31자 이내로 정한다</li>
+      <li>변수명과 함수명은 다르게 사용한다</li>
+      <li>명칭의 규칙을 따른다
+        <ul>
+          <li>다른 언어와 명칭이 호환되도록 특수 문자는 _ 만 사용
+            <ul>
+              <li>매크로 : _ 및 대문자</li>
+              <li>상수 : _ 및 대문자</li>
+              <li>변수 : 소문자로 시작</li>
+              <li>함수 : 소문자로 시작, 첫 번째 단어는 동사로 작성</li>
+              <li>포인터 : 참조하는 변수명의 첫 글자는 대문자 사용</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>포인터 변수명은 앞에 p를 붙인다</li>
+    </ul>
+  </li>
+  <li>소스 형식에 관한 규칙
+    <ul>
+      <li>소스 파일 하나는 200줄 이내로 작성</li>
+      <li>한 줄의 길이는 80자 이내로 작성</li>
+      <li>함수의 내용은 70줄 이내로 작성</li>
+      <li>여는 중괄호는 문장의 끝에, 닫는 중괄호는 문장의 시작에 둔다</li>
+      <li>하나의 문장을 2줄로 작성하는 경우
+        <ul>
+          <li>80자가 넘어 쉼표가 오면 다음 문자는 새 줄로 시작</li>
+        </ul>
+      </li>
+      <li>수준이 동일한 문장은 시작 위치를 맞춘다</li>
+    </ul>
+  </li>
+  <li>주석에 관한 규칙
+    <ul>
+      <li>코드의 첫 주석에는 다음 내용을 담는다
+        <ul>
+          <li>최초작성자/ 최초작성일 / 최초변경일 / 목적 / 개정이력 / 저작권</li>
+        </ul>
+      </li>
+      <li>메서드 정의 앞에 다음 내용을 주석으로 추가하고 시작한다
+        <ul>
+          <li>목적 / 매개변수 /  반환 값 /  변경 이력</li>
+        </ul>
+      </li>
+      <li>원시 코드와 주석을 명확히 구분한다</li>
+      <li>원시 코드와 주석이 일치하게 한다
+        <ul>
+          <li>함수 인자에 대한 설명</li>
+          <li>복잡한 논리식</li>
+          <li>간단하지 않은 자료구조</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>변수 선언 및 자료형에 관한 규칙
+    <ul>
+      <li>용도가 같은 변수는 한 줄에 작성한다</li>
+      <li>필요한 변수만 선언한다</li>
+      <li>배열 선언 시 요소 수를 명시하거나 초기화한다</li>
+      <li>지역변수는 선언 시 초기화 한다</li>
+      <li>부호 없는 자료형은 끝에 u를 붙인다</li>
+      <li>포인터 변수에 주소나 정수 값을 저장할 때는 자료형이 일치해야 한다</li>
+      <li>비트필드는 unsigned/signed int 형으로만 선언한다</li>
+    </ul>
+  </li>
+  <li>상수에 관한 규칙
+    <ul>
+      <li>8진수는 사용하지 않는다</li>
+      <li>숫자 리터럴은 const 변수를 사용한다</li>
+      <li>상수는 부호 있는 자료형을 사용하고 부호 없는 자료형은 사용할 때는 u를 붙인다</li>
+    </ul>
+  </li>
+  <li>수식에 관한 규칙
+    <ul>
+      <li>단항 연산자의 바른 표기</li>
+      <li>이항 연산자의 바른 표기</li>
+      <li>삼항 연산자의 바른 표기 → 알아보기 쉽게 맨 앞으 수식을 괄호로 묶어줌</li>
+      <li>증강 연산자의 바른 표기 → 증강 연산자는 다른 줄에 써야 혼란을 초래하지 않고, 가독성을 높일 수 있음</li>
+      <li>연산자가 3개 이상 인 경우의 바른 표기 → 우선순위를 쉽게 알 수 있도록 관호로 묶어주는 것이 좋음</li>
+      <li>sizeof 인자의 바른 표기 → 수식을 sizeof 함수의 인자에 사용하지 않음</li>
+    </ul>
+  </li>
+  <li>문장에 관한 규칙
+    <ul>
+      <li>switch 문에서 case문을 빠져나오기 위해 break 문을 사용한다</li>
+      <li>switch문에서 case문이 다 끝나면 default 문을 넣어주어야 한다</li>
+      <li>goto 문을 사용하지 않는다</li>
+      <li>for문을 제어하는 수식에 실수 값을 사용하지 않는다</li>
+      <li>for문을 제어하는 수치 변수의 바른 사용</li>
+      <li>break 문은 가능하면 한 번만 사용한다</li>
+      <li>if ~ else 문의 끝은 else문으로 종료한다</li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#software-engineering" class="page__taxonomy-item" rel="tag">Software Engineering</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-26">December 26, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Software_Enginnering/RequirementAnalysis/" class="pagination--pager" title="[Software Engineering] 요구분석
+">Prev</a>
+    
+    
+      <a href="/Software_Enginnering/Test/" class="pagination--pager" title="[Software Engineering] 테스트
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/Sort/" rel="permalink">[Python] Sort
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-31T00:00:00+09:00">January 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">파이썬으로 정렬 알고리즘 재정리
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%88%9C%ED%9A%8C%20%EA%B0%95%EC%97%B0/" rel="permalink">[Python_Greedy] 순회 강연
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-21T00:00:00+09:00">January 21, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_2109
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%B3%B4%EC%84%9D%EB%8F%84%EB%91%91/" rel="permalink">[Python_Greedy] 보석 도둑
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-19T00:00:00+09:00">January 19, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1202
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%8F%99%EC%A0%84%20%EB%92%A4%EC%A7%91%EA%B8%B0/" rel="permalink">[Python_Greedy] 동전 뒤집기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-18T00:00:00+09:00">January 18, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1285
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/OrangeVinyl/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

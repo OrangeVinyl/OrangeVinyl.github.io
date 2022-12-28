@@ -1,0 +1,1154 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Software Engineering] 요구분석 | Hwan’s Devlog</title>
+<meta name="description" content="소프트웨어 공학 - 요구분석">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog 📝">
+<meta property="og:title" content="[Software Engineering] 요구분석">
+<meta property="og:url" content="http://localhost:4000/Software_Enginnering/RequirementAnalysis/">
+
+
+  <meta property="og:description" content="소프트웨어 공학 - 요구분석">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-25T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-25T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Software_Enginnering/RequirementAnalysis/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog 📝 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://orangevinyl.github.io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://orangevinyl.github.io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://orangevinyl.github.io/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://orangevinyl.github.io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://orangevinyl.github.io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://orangevinyl.github.io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://orangevinyl.github.io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://orangevinyl.github.io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://orangevinyl.github.io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://orangevinyl.github.io/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://orangevinyl.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orangevinyl.github.io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://orangevinyl.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://orangevinyl.github.io/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog 📝
+          <span class="site-subtitle">일상과 이상</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/blog_icon2.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 31</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Python/"><span class="nav__sub-title">Python</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Software Engineering] 요구분석">
+    <meta itemprop="description" content="소프트웨어 공학 - 요구분석">
+    <meta itemprop="datePublished" content="2022-12-25T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-25T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Software Engineering] 요구분석
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-25T00:00:00+09:00">December 25, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#01-요구사항">01) 요구사항</a></li><li><a href="#02-요구분석의-이해">02) 요구분석의 이해</a></li><li><a href="#03-요구분석-절차와-요구사항-종류">03) 요구분석 절차와 요구사항 종류</a></li><li><a href="#04-요구사항의-표현">04) 요구사항의 표현</a></li><li><a href="#05-요구사항의-문서화">05) 요구사항의 문서화</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="01-요구사항">01) 요구사항</h2>
+
+<p>요구사항의 정의</p>
+
+<ul>
+  <li>이용자가 어떤 문제를 풀거나 목표를 달성하는 데 필요한 조건이나 능력</li>
+  <li>시스템이 제공하는 <strong>기능요구</strong>와 품질과 같은 <strong>비기능</strong> 요구로 나뉨</li>
+</ul>
+
+<h2 id="02-요구분석의-이해">02) 요구분석의 이해</h2>
+
+<p>요구분석의 정의</p>
+
+<ul>
+  <li>시스템이나 소프트웨어의 요구사항을 정의하기 위해 사용자 요구사항을 조사하고 확인하는 과정</li>
+  <li>요구분석은 소프트웨어 개발 성패의 열쇠</li>
+</ul>
+
+<p>요구분석의 목적</p>
+
+<ul>
+  <li>사용자에게서 필요한 요구사항을 추출해 목표하는 <strong>시스템의 모델을 만들고, ‘요구분석명세서’</strong></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>논리모델(계획, 분석)</th>
+      <th>물리모델(설계, 구현)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>구현 방법, 기술 관계없이 목표를 달성하기 위한 본질적 요구사항만을 표현한 모델</td>
+      <td>목표를 달성하기 위한 요구사항을 특정 방법과 기술로 구현하기 위해 표현한 모델</td>
+    </tr>
+    <tr>
+      <td>무엇(what) / 목표(objective) / 방침(policy) / 본질(essence)</td>
+      <td>어떻게(how) / 수단(means) / 방법(method) / 구현(implementation)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>요구분석 관련자</p>
+
+<ul>
+  <li>발주사 / 경영자 / 발주 담당자 / 사용자 / 수주사 / 분석가 / 설계자 / 개발자</li>
+</ul>
+
+<p>요구분석의 어려움</p>
+
+<p>1) 문제 영역에 대한 분석가의 이해력 부족</p>
+
+<p>2) 사용자와 분석가의 의사소통 문제</p>
+
+<p>3) 사용자의 계속되는 요구사항의 추가</p>
+
+<p>4) 사용자의 모호한 요구사항</p>
+
+<p>5) 다양한 사용자의 다양한 요구</p>
+
+<p>분석가에게 필요한 능력</p>
+
+<ul>
+  <li>분석가의 성공 요건: 의사소통 능력 / 조율 능력</li>
+  <li>의사 소통과 협상능력 → 우선순위 결정</li>
+  <li>개발 업무 영역에 대한 지식 → 해당 영역에 대한 지식 필요</li>
+  <li>개발 관련 기술에 대한 지식</li>
+  <li>이해 관계자들의 상반된 요구에 대한 중재 능력</li>
+</ul>
+
+<p>요구사항 수집</p>
+
+<p>1) 자료수집</p>
+
+<p>2) 인터뷰</p>
+
+<p>3) 설문조사(=질문지법)</p>
+
+<p><strong>4) 현장조사</strong></p>
+
+<h2 id="03-요구분석-절차와-요구사항-종류">03) 요구분석 절차와 요구사항 종류</h2>
+
+<p>요구분석 절차</p>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D1.png" alt="요구분석" /></p>
+
+<p>요구사항 분류</p>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D2.png" alt="요구분석" /></p>
+
+<p>기능 요구사항</p>
+
+<ul>
+  <li>완전성 : 사용자가 원하는 모든 기능이 포함 / 일관성 : 요구사항 간에 모순이 있어서는 안됨</li>
+</ul>
+
+<p>비기능 요구사항</p>
+
+<p><strong>- 제약 사항</strong></p>
+
+<p><strong>- 품질</strong></p>
+
+<ul>
+  <li><strong>신뢰성(reliability)</strong> - 신뢰도 측정은 가용성(이용 가능성)을 척도로 사용한다.
+    <ul>
+      <li>시스템에 오류가 있더라도 고장을 일으키지 않고 회피할 수 있는 능력이 높아야 함</li>
+      <li>고장 발생 시, 이전 수준으로 성능이 회복되어야 함</li>
+      <li>고장으로 영향을 받은 데이터들이 정상적으로 잘 복구되어야 함</li>
+    </ul>
+  </li>
+  <li><strong>가용성(availability)</strong> - 소프트웨어가 총 운용시간동안 얼마나 정상적으로 가동되었는지를 비율로
+    <ul>
+      <li><strong>MTBF(Mean Time Between Failures) - 평균 정상 작동 시간 or 고장간 평균시간</strong></li>
+      <li><strong>MTTR(Mean Time To Repair) - 평균 수리 시간 → 수리시간의 합 / 횟수</strong></li>
+      <li><strong>MTTF(Mean Time to Failures) - MTBF 와 비교되는 개념. 고장까지의 평균시간 → 이때의 고장은 수리가 불가능한 상황에 해당.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D3.png" alt="요구분석" /></p>
+
+<h2 id="04-요구사항의-표현">04) 요구사항의 표현</h2>
+
+<p>표현과 모델</p>
+
+<ul>
+  <li>모델의 정의 : 복잡한 대상의 핵심 특징만 선별해 일정한 관점으로 단순화한 뒤 기호나 그림 등을 사용해 체계적으로 표현한 것</li>
+  <li>모델이 필요한 가장 큰 이유는 <strong>‘실제 모습을 미리 확인하기 위해’</strong></li>
+  <li>하나의 사물도 여러 모델이 필요하다 → 여러 관점에서 살펴보기 위해</li>
+</ul>
+
+<p>소프트웨어 개발 모델</p>
+
+<p><strong>장점  - 이해도 향상 / 유지보수 용이</strong></p>
+
+<p><strong>단점 - 과도한 문서 작업으로 일정 지연 / 형식적인 산출물로 전락할 가능성</strong></p>
+
+<p>모델링 -(page 25/77)</p>
+
+<ul>
+  <li><strong>자연어를 사용한 표현</strong></li>
+  <li><strong>형식 언어를 사용한 표현</strong></li>
+  <li><strong>UML 다이어그램을 사용한 표현</strong></li>
+</ul>
+
+<p>모델링 언어</p>
+
+<ul>
+  <li>구조적 방법론
+    <ul>
+      <li><strong>DFD, DD, 소단위명세서</strong>를 사용해 요구분석 결과를 표현</li>
+      <li>1970년대부터 소프트웨어 개발에 사용된 방법론</li>
+      <li>소프트웨어 개발 : <strong>분석 → 설계 → 구현</strong> 순서로 작업 진행</li>
+      <li><strong>사용자 요구사항 분석을 경시하는 소프트웨어 개발의 문제점 발견</strong></li>
+      <li><strong>특징 : 명세화 대상</strong>
+        <ul>
+          <li>분석 : 처리 프로세스의 입출력 데이터 흐름</li>
+          <li>설계 : 처리 프로세스의 계층구조</li>
+          <li>구현: 처리 프로세스 내부의 실행순서</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>정보공학 방법론
+    <ul>
+      <li><strong>E-R 다이어그램</strong>을 데이터베이스 설계 표현으로 사용한다.</li>
+      <li>1980년대 중반부터 소프트웨어 시스템 개발에 사용된 방법론</li>
+      <li><strong>‘데이터’</strong>와 ‘<strong>프로세스’</strong>로 볼 때, 데이터는 안정적이며 프로세스보다 변동이 적다. 즉, 프로세스는 조직의 변화와 함께 변경되지만, 데이터 개체는 비즈니스 생명 주기 전체에서 거의 변동이 일어나지 않는다는 점</li>
+      <li>
+        <p>장점 : 비즈니스 차원의 대규모 정보처리 시스템 구축에 유리</p>
+
+        <p>단점 : 특정 규모 시스템에만 제한적으로 적용</p>
+      </li>
+    </ul>
+  </li>
+  <li>객체지향 방법론
+    <ul>
+      <li>UML 표기법 사용. 10여 개의 다이어그램으로 구성 → 요구사항은 유스케이스 다이어그램 사용</li>
+      <li>소프트웨어 생산 기술에 대한 관심이 프로그래밍에서 분석 및 설꼐로 옮겨지면서 더욱 주목받게 됨</li>
+      <li><strong>소프트웨어 위기 현상</strong>을 해결할 수 있는 강력한 대안</li>
+      <li><strong>사용자 중심 및 대화형 프로그램 개발</strong>에 적합한 방법론</li>
+      <li>프로그램을 뚜렷하게 구별되는 <strong>객체 단위</strong>로 분할 가능</li>
+      <li><strong>Component 개념</strong>으로 재사용 가능 → 프로그램 생산성 향상</li>
+      <li>문제를 정의하는 단계의 모델과 프로그래밍으로 문제를 해결하는 모델이 같으므로 단계의 전환이 빠르고 생산성이 높다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>구조적 방법의 표현 도구 : DFD</p>
+
+<ul>
+  <li>들어온 자료를 처리한 후 결과를 내보내는 과정을 나타낸 것
+    <ul>
+      <li>[1단계] 처리표현</li>
+      <li>[2단계] 입력과 출력 자료 표현</li>
+      <li>[3단계] 자료 저장소 표현</li>
+      <li>[4단계] 자료 출원지와 목적지 표현</li>
+    </ul>
+  </li>
+  <li><strong>Data flow / Process / Data Store / terminator</strong></li>
+  <li><strong>DFD Leveling</strong>
+    <ul>
+      <li>계층화의 필요성 - 규모가 큰 DFD의 모든 처리기를 한 장에 작성하면 데이터 흐름도가 복잡하여 이해하기 어려움. 이해, 평가, 관리에 많은 문제 발생</li>
+      <li>장점
+        <ul>
+          <li>시스템분석을 하향식으로 수행, 시스템을 상위부터 조망</li>
+          <li>분할된 페이지 간을 연결하는 연결점이 불필요</li>
+          <li>모든 DFD가 이해 및 관리 용이하게 작성됨</li>
+        </ul>
+      </li>
+      <li>계층화란? → 기능적으로 가까운 처리기들을 한 개의 처리기로 병합하여 한 장의 종이에 표현해야 하는 처리기의 개수를 줄여주는 과정</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D4.png" alt="요구분석" /></p>
+
+<ul>
+  <li>LDFD의 구성요소
+    <ul>
+      <li><strong>상위 계층은 추상화, 하위 계층은 구체화</strong></li>
+      <li>같은 계층에서 좌우로 가면서 그 계층의 처리 분담내역을 표현</li>
+      <li><strong>최상위 계층도(배경도)</strong> - 분석 대상 범위를 설정, 무엇을 하는 것인가를 알아볼 수 있도록 해주는 계층</li>
+      <li>중간 계층도</li>
+      <li><strong>최하위 계층도</strong> - 더 이상 하위의 DFD로 분할할 수 없는 처리기들로만 구성
+        <ul>
+          <li>기능 단위
+            <ul>
+              <li>더이상 분할할 수 없는 처리기</li>
+              <li>업무 처리 방법이 한 페이지에 충분하게 설명될 수 있는 처리기</li>
+              <li>처리방법은 <strong>미니명세서</strong>로 상세하게 기술</li>
+            </ul>
+          </li>
+          <li>최하위 계층 DFD를 결정하는 기준
+            <ul>
+              <li>한 장 정도의 <strong>미니명세서</strong>로 기술할 수 있을 때까지 분할</li>
+              <li>처리기에 대한 입력과 출력 데이터 흐름이 <strong>각각 하나씩 남을 때</strong>까지 분할</li>
+              <li>입출력 데이터 흐름 사이의 관계가 <strong>1:1, M:1</strong>이면 충분한 분할</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>LDFD 관련 고려사항
+    <ul>
+      <li>데이터 흐름의 출발점과 도착점은 상위, 하위 계층의 DFD를 참조</li>
+      <li>최하위 계층까지 DFD의 출발점과 도착점은 중복 표시하면 데이터 흐름의 변경이 있을 때 유지보수가 어려움</li>
+      <li>분할의 정도 한 장의 처리기를 7 +- 2 정도로 분할</li>
+      <li>처리기의 수에 있어서 상위 계층의 분할은 하위 계층보다 많아도 됨</li>
+      <li>분할은 이해를 저하시키지 않는 한 많이 하는 것이 편하다</li>
+    </ul>
+  </li>
+  <li>LDFD의 부모도와 자녀도 (Parent-Chlid Relationship)
+    <ul>
+      <li>처리 기능화 데이터 변환 과정을 상세하게 표현</li>
+    </ul>
+  </li>
+  <li>DFD 작성 지침
+    <ul>
+      <li>처리기에 연결된 데이터 흐름과 데이터 저장소의 개수가 많다고 생각되면 5개 이내로 조정</li>
+      <li>같은 그림 내늬 처리기들은 같은 정토의 하위 계층 그림을 가질 수 있도록 구성</li>
+      <li>작성은 최상위 계층부터 취하위 계층으로 진행, 하향식이 어려울 경우는 상향식 또는 혼합형을 적용</li>
+      <li>그 외 나머지 사항은 (42 / 77)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>구조적 방법의 표현 도구 : DD</p>
+
+<ul>
+  <li>자료 흐름도에 존재하는 데이터에 대한 자세한 설명을 <strong>약속된 기호를 사용하여 알아보기 쉽게 정의한 집합체</strong></li>
+  <li>시스템에 입력되는 거래, 출력되는 보고서, 온라인 입출력, 데이터 저장소에 저장되는 데이터의 내용을 데이터 항목 단위로 설명</li>
+  <li>좀 더 자세한 설명(45~51 / 77)</li>
+</ul>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D5.png" alt="요구분석" /></p>
+
+<ul>
+  <li>데이터 요소
+    <ul>
+      <li>하위 게층의 데이터 흐름으로 더 이상 분할되지 않는 데이터 항목</li>
+      <li><strong>이산적 데이터 요소 / 연속적 데이터 요소</strong></li>
+      <li>데이터 요소는 더 이상 분해될 수 없으므로 데이터 구성요소를 정의할 수 없음</li>
+    </ul>
+  </li>
+  <li>데이터 저장소
+    <ul>
+      <li>데이터 저장소에 보관되는 데이터 항목들과 레코드를 호출할 수 있는 <strong>키(Key)를 반드시 정의</strong></li>
+      <li>키에 해당하는 데이터 항목 이름에 밑줄 표시</li>
+    </ul>
+  </li>
+</ul>
+
+<p>구조적 방법의 표현 도구 : 소단위명세서</p>
+
+<ul>
+  <li>mini-spec(mini - specification)</li>
+  <li>DFD에서 원으로 표시한 프로세스인 처리를 실제 알고리즘 형태로 작성한 것</li>
+  <li>소단위명세서를 작성하는 도구에는 구조적 언어, 선호 조건문, 의사 결정표 등이 있음</li>
+</ul>
+
+<p>정보공학 방법의 표현 도구 : E-R 다이어그램</p>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D6.png" alt="요구분석" /></p>
+
+<p>객체지향 방법의 표현 도구 : 유스케이스 다이어그램</p>
+
+<p>1) 후보 유스케이스 도출</p>
+
+<p>2) 후보 유스케이스 검토 / (하나씩 검토)액터가 사용하는 유스케이스 → 유스케이스 특성 확인 및 통합</p>
+
+<ul>
+  <li>실행 후 사용자가 원하는 결과 제공 → 결과물을 제공하는지 다시 검토</li>
+  <li>많이 사용하는 기능은 하나의 유스케이스로 도출</li>
+  <li>주 기능은 유스케이스 , 보조 기능은 이벤트 흐름</li>
+</ul>
+
+<p>3) 유스케이스 정련</p>
+
+<ul>
+  <li>
+    <p>유스케이스 명세서 작성하기</p>
+
+    <ul>
+      <li>
+        <p>유스케이스 다이어그램을 작성하면 각각의 유스케이스에 대한 명세서를 작성해야 함</p>
+      </li>
+      <li>
+        <p>유스케이스 명세서는 7개 항목으로 구성되며 각 유스케이스의 자세한 내용을 기술하는 문서</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D7.png" alt="요구분석" /></p>
+
+<p>1) 개요</p>
+
+<ul>
+  <li>유스케이스가 제공하는 기능을 나타내는 것으로, <strong>그 기능을 사용하는 사용자 액터까지</strong> 표현해야 함</li>
+  <li>개요는 <strong>유스케이스에 포함된 모든 기능을 액터까지 포함해서 표현</strong>해야 함</li>
+</ul>
+
+<p>2) 관련 액터</p>
+
+<p>3) 우선 순위</p>
+
+<ul>
+  <li>개발할 때의 순서를 나타낸 것</li>
+  <li>우선순위는 사용자 관점에서 정할 수도 있고, 개발자 관점에서 정할 수도 있음</li>
+</ul>
+
+<p>4) 선행 조건</p>
+
+<p>5) 후행 조건</p>
+
+<p>6) 이벤트 흐름</p>
+
+<ul>
+  <li>유스케이스 기능에 대한 액터와 시스템 간의 <strong>대화로 문장이나 순차 다이어그램</strong>을 사용해 표현</li>
+  <li><strong>사용자가 이해할 수 있는 쉬운 용어로 명확하게 작성해야 하며 당연히 개발자가 사용하는 기술적 용어는 사용해선 안됨</strong></li>
+  <li>정상적인 흐름은 <strong>기본 흐름</strong>, 나머지는 <strong>대안 흐름</strong></li>
+</ul>
+
+<p>7) 비기능 요구사항 요구</p>
+
+<ul>
+  <li>여러 요구 품질 요소를 나타냄</li>
+  <li>요구분석명세서의 비기능 요구사항은 <strong>유스케이스와 직접 관련이 있는 비기능 요구사항</strong>을 기술하는 것</li>
+</ul>
+
+<h2 id="05-요구사항의-문서화">05) 요구사항의 문서화</h2>
+
+<p>요구분석명세서의 정의</p>
+
+<p>요구분석 과정의 최종 산출물로 사용자와 개발자를 연결하는 중요한 문서</p>
+
+<p>설계와 구현에서 참조할 사항, 전반적으로 알아야 할 사항을 포함하는 문서</p>
+
+<p>사용자와 개발자의 계약서</p>
+
+<p>요구분석명세서 작성 시 주의사항</p>
+
+<p>1) 사용자가 쉽게 읽고 이해할 수 있도록 작성</p>
+
+<p>2) 개발자가 설계와 코딩에 효과적으로 사용할 수 있도록 작성</p>
+
+<p>3) 비기능 요구를 명확히 작성</p>
+
+<p>4) 테스트 기준으로 사용할 수 있도록 정량적으로 작성</p>
+
+<p>5) 품질에 대한 우선순위 명시</p>
+
+<ul>
+  <li>품질 특성이 <strong>서로 상충하는 경우</strong>에 어떤 특성을 우선순위에 둘 것인지를 명시해야 함</li>
+</ul>
+
+<p>잘 만든 요구분석 명세서의 특성</p>
+
+<p>완전성 - ‘빠지지 않고 모두 서술’</p>
+
+<p>일관성</p>
+
+<p>명확성</p>
+
+<p>추적 가능성</p>
+
+<p>변경 용이성</p>
+
+<p>검증 가능성</p>
+
+<p>요구 명세 기법 (ppt 75/77)</p>
+
+<ul>
+  <li>비정형 명세 기법
+    <ul>
+      <li><strong>자연어를 기반</strong>으로 서술 OR <strong>작업 흐름도와 같은 다이어그램</strong> 사용</li>
+      <li>자연어로 작성하면 표현이 모호할 수 있고, 해석을 다르게 할 수도 있다.</li>
+      <li>일관성이 떨어질 수도 있고, 명세가 불충분할 수 있음</li>
+      <li>완전성을 검증하기가 어려움</li>
+    </ul>
+  </li>
+  <li>정형 명세  기법
+    <ul>
+      <li><strong>수학적 원리와 표기법</strong>을 이용해 표현하는 것(Z 정형 명세 언어)</li>
+      <li>수학 지식 필요 및 표기법 충분히 이해해야 한다</li>
+      <li>사용자 요구를 정확히 표현 할 수 있어야 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>요구사항 검증</p>
+
+<p><img src="/assets/images/posts_img/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D/%EC%9A%94%EA%B5%AC%EB%B6%84%EC%84%9D8.png" alt="요구분석" /></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#software-engineering" class="page__taxonomy-item" rel="tag">Software Engineering</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-25">December 25, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Software_Enginnering/Design/" class="pagination--pager" title="[Software Engineering] 설계
+">Prev</a>
+    
+    
+      <a href="/Software_Enginnering/Implementation/" class="pagination--pager" title="[Software Engineering] 구현
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/Sort/" rel="permalink">[Python] Sort
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-31T00:00:00+09:00">January 31, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">파이썬으로 정렬 알고리즘 재정리
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%88%9C%ED%9A%8C%20%EA%B0%95%EC%97%B0/" rel="permalink">[Python_Greedy] 순회 강연
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-21T00:00:00+09:00">January 21, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_2109
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%B3%B4%EC%84%9D%EB%8F%84%EB%91%91/" rel="permalink">[Python_Greedy] 보석 도둑
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-19T00:00:00+09:00">January 19, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1202
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%8F%99%EC%A0%84%20%EB%92%A4%EC%A7%91%EA%B8%B0/" rel="permalink">[Python_Greedy] 동전 뒤집기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-18T00:00:00+09:00">January 18, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1285
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/OrangeVinyl/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
