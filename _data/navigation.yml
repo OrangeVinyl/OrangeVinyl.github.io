@@ -1,0 +1,28 @@
+# main links
+main:
+  - title: "Home"
+    url: https://OrangeVinyl.github.io/
+
+  - title: "About"
+    url: /about/
+
+  - title: "GitHub"
+    url: https://github.com/OrangeVinyl
+
+  # - title: "Projects"
+  #   url: /projects/
+
+  # - title: "Categories"
+  #   url: /categories/
+
+# sidebar navigation (categories)
+# 2022.02.15 sidebar update : simple ver.
+categories:
+  - title: "Algorithm"
+    url: /categories/Algorithm/
+  - title: "CS"
+    url: /categories/CS/
+  - title: "Categories3"
+    url: /categories/categories3/
+  - title: "Categories4"
+    url: /categories/categories4/

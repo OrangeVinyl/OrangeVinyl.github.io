@@ -1,0 +1,697 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python_Greedy] 1이 될 때까지 | Hwan’s Devlog</title>
+<meta name="description" content="이것이 코딩테스트다 with 파이썬 Greedy">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Python_Greedy] 1이 될 때까지">
+<meta property="og:url" content="http://localhost:4000/Algorithm/Python_Greedy_1%EC%9D%B4%EB%90%A0%EB%95%8C%EA%B9%8C%EC%A7%80/">
+
+
+  <meta property="og:description" content="이것이 코딩테스트다 with 파이썬 Greedy">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-11-25T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-11-25T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Algorithm/Python_Greedy_1%EC%9D%B4%EB%90%A0%EB%95%8C%EA%B9%8C%EC%A7%80/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 4</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/categories3/"><span class="nav__sub-title">Categories3</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/categories4/"><span class="nav__sub-title">Categories4</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python_Greedy] 1이 될 때까지">
+    <meta itemprop="description" content="이것이 코딩테스트다 with 파이썬 Greedy">
+    <meta itemprop="datePublished" content="2022-11-25T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-11-25T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python_Greedy] 1이 될 때까지
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-11-25T00:00:00+09:00">November 25, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#내가-쓴-풀이">내가 쓴 풀이</a></li><li><a href="#다른-풀이n을-k가-한번에-나누는-경우">다른 풀이(N을 K가 한번에 나누는 경우)</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h3 id="내가-쓴-풀이">내가 쓴 풀이</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">n</span> <span class="o">//=</span> <span class="n">k</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">while</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<aside>
+💡 ‘최대한 많이 나누기’가 KEY POINT
+
+</aside>
+
+<p><strong>N이 100억 이상의 큰 수</strong>가 되는 경우를 가정했을 때에도 빠르게 동작하려면, N이 K의 배수가 되도록 효율적으로 한 번에 빼는 방식으로 소스코드를 작성하는 것이 유리하다.</p>
+
+<h3 id="다른-풀이n을-k가-한번에-나누는-경우">다른 풀이(N을 K가 한번에 나누는 경우)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1"># (N == K로 나누어 떨어지는 수)가 될 때까지 1씩 빼기
+</span>    <span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="p">(</span> <span class="n">n</span> <span class="o">-</span> <span class="n">target</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">target</span>
+    <span class="c1"># N이 K보다 작을 때(더 이상 나눌 수 없을 때) 반복문 탈출
+</span>    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">n</span> <span class="o">//=</span> <span class="n">k</span>
+
+<span class="n">result</span> <span class="o">+=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#algorithm" class="page__taxonomy-item" rel="tag">Algorithm</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-11-25">November 25, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Algorithm/Python_Greedy_%EC%88%AB%EC%9E%90%EC%B9%B4%EB%93%9C%EA%B2%8C%EC%9E%84/" class="pagination--pager" title="[Python_Greedy] 숫자 카드 게임
+">Prev</a>
+    
+    
+      <a href="/CS/Synchronous_Asynchronous/" class="pagination--pager" title="[Synchronous, Asynchronous] 동기와 비동기
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Synchronous_Asynchronous/" rel="permalink">[Synchronous, Asynchronous] 동기와 비동기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-11-29T00:00:00+09:00">November 29, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">동기와 비동기의 정의 및 장단점
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%88%AB%EC%9E%90%EC%B9%B4%EB%93%9C%EA%B2%8C%EC%9E%84/" rel="permalink">[Python_Greedy] 숫자 카드 게임
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-11-24T00:00:00+09:00">November 24, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이것이 코딩테스트다 with 파이썬 Greedy
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%ED%81%B0%EC%88%98%EA%B5%AC%ED%95%98%EA%B8%B0/" rel="permalink">[Python_Greedy] 큰 수 구하기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-11-18T00:00:00+09:00">November 18, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">이것이 코딩테스트다 with 파이썬 Greedy
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
