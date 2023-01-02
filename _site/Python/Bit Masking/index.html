@@ -52,8 +52,8 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[Python_Greedy] 숫자 카드 게임 | Hwan’s Devlog</title>
-<meta name="description" content="이것이 코딩테스트다 with 파이썬 Greedy">
+<!-- begin _includes/seo.html --><title>[Python] 비트 마스킹 | Hwan’s Devlog</title>
+<meta name="description" content="컴퓨터는 내부적으로 모든 자료를 이진수로 표현한다. 이와 같은 특성을 이용해 정수의 이진수 표현을 자료구조로 쓰는 기법을 비트 마스크라고 한다.">
 
 
   <meta name="author" content="Hwan's Devlog">
@@ -65,32 +65,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Hwan's Devlog">
-<meta property="og:title" content="[Python_Greedy] 숫자 카드 게임">
-<meta property="og:url" content="http://localhost:4000/Algorithm/Python_Greedy_%EC%88%AB%EC%9E%90%EC%B9%B4%EB%93%9C%EA%B2%8C%EC%9E%84/">
+<meta property="og:title" content="[Python] 비트 마스킹">
+<meta property="og:url" content="http://localhost:4000/Python/Bit%20Masking/">
 
 
-  <meta property="og:description" content="이것이 코딩테스트다 with 파이썬 Greedy">
-
-
-
+  <meta property="og:description" content="컴퓨터는 내부적으로 모든 자료를 이진수로 표현한다. 이와 같은 특성을 이용해 정수의 이진수 표현을 자료구조로 쓰는 기법을 비트 마스크라고 한다.">
 
 
 
 
-  <meta property="article:published_time" content="2022-11-24T00:00:00+09:00">
 
 
 
-  <meta property="article:modified_time" content="2022-11-24T00:00:00+09:00">
+  <meta property="article:published_time" content="2023-01-02T00:00:00+09:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2023-01-02T00:00:00+09:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/Algorithm/Python_Greedy_%EC%88%AB%EC%9E%90%EC%B9%B4%EB%93%9C%EA%B2%8C%EC%9E%84/">
+
+<link rel="canonical" href="http://localhost:4000/Python/Bit%20Masking/">
 
 
 
@@ -370,15 +370,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Python_Greedy] 숫자 카드 게임">
-    <meta itemprop="description" content="이것이 코딩테스트다 with 파이썬 Greedy">
-    <meta itemprop="datePublished" content="2022-11-24T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2022-11-24T00:00:00+09:00">
+    <meta itemprop="headline" content="[Python] 비트 마스킹">
+    <meta itemprop="description" content="컴퓨터는 내부적으로 모든 자료를 이진수로 표현한다. 이와 같은 특성을 이용해 정수의 이진수 표현을 자료구조로 쓰는 기법을 비트 마스크라고 한다.">
+    <meta itemprop="datePublished" content="2023-01-02T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-01-02T00:00:00+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[Python_Greedy] 숫자 카드 게임
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] 비트 마스킹
 </h1>
           
 
@@ -387,7 +387,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2022-11-24T00:00:00+09:00">November 24, 2022</time>
+        <time datetime="2023-01-02T00:00:00+09:00">January 2, 2023</time>
       </span>
     
 
@@ -405,43 +405,103 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#내가-쓴-풀이">내가 쓴 풀이</a></li><li><a href="#2중-반복문-구조를-이용하는-답안-예시">2중 반복문 구조를 이용하는 답안 예시</a></li></ul>
+              <ul class="toc__menu"><li><a href="#비트-마스크란">비트 마스크란?</a></li><li><a href="#비트-마스크의-개념">비트 마스크의 개념</a></li><li><a href="#비트-연산">비트 연산</a></li><li><a href="#삽입">삽입</a></li><li><a href="#삭제">삭제</a></li><li><a href="#조회">조회</a></li></ul>
 
             </nav>
           </aside>
         
-        <h3 id="내가-쓴-풀이">내가 쓴 풀이</h3>
+        <h3 id="비트-마스크란">비트 마스크란?</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span><span class="p">,</span><span class="n">m</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<blockquote>
+  <p>컴퓨터는 내부적으로 모든 자료를 이진수로 표현한다. 이와 같은 특성을 이용해 정수의 이진수 표현을 자료구조로 쓰는 기법을 <strong>비트 마스크</strong>라고 한다.</p>
 
-<span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</blockquote>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()))</span>
-    <span class="n">min_value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">min_value</span><span class="p">)</span>
+<h3 id="비트-마스크의-개념">비트 마스크의 개념</h3>
 
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<p>컴퓨터의 최소 연산 단위는 bit다. bit는 이진수를 나타내기 위해 0과 1로만 이루어져있는데, 우리는 비트 연산을 통해 약간 ‘꼼수(?)’를 써서 문제를 해결할 수 있다..</p>
+
+<p>예를 들어, 많은 알고리즘 문제에서 방문을 체크하는 리스트가 존재할 수 있는데, 가령 10곳을 우리가 방문 체크해야 한다면 기존에는 아마 아래처럼 리스트를 이용했을 것이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>visited = [False] * 10
 </code></pre></div></div>
 
-<p><strong>KeyPoint</strong> - ‘각 행마다 가장 작은 수를 찾은 뒤에 그 수 중에서 가장 큰 수’</p>
+<p>하지만 비트마스킹으로 똑같은 표현을 할 수 있다.</p>
 
-<h3 id="2중-반복문-구조를-이용하는-답안-예시">2중 반복문 구조를 이용하는 답안 예시</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span><span class="p">,</span><span class="n">m</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">.</span><span class="n">split</span><span class="p">())</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">.</span><span class="n">split</span><span class="p">()))</span>
-    <span class="c1">#각 숫자는 1~10000 이하의 수만 입력 가능
-</span>    <span class="n">min_value</span> <span class="o">=</span> <span class="mi">10001</span> 
-    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="n">min_value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">min_value</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>visited = 0b0000000000
 </code></pre></div></div>
+
+<p>비트마스크에서 각 비트는 하위 주소(오른쪽)부터 인덱스를 세면 된다. 예를 들어 4번째 도시를 우리가 방문했다고 하면 현재 비트는 visited = 0b0000001000으로 표현되는 것이다.</p>
+
+<blockquote>
+  <p>✅ 비트 연산은 삽입, 삭제, 조회가 빠르다.</p>
+
+</blockquote>
+
+<blockquote>
+  <p>✅ 코드가 간결해진다.</p>
+
+</blockquote>
+
+<blockquote>
+  <p>✅ 정수 표현으로 Dynamic Programming 문제를 해결할 수 있다.</p>
+
+</blockquote>
+
+<h3 id="비트-연산"><strong>비트 연산</strong></h3>
+
+<blockquote>
+  <p>AND, OR, XOR, NOT, SHIFT</p>
+
+  <ul>
+    <li>AND(&amp;) : 대응하는 두 비트가 모두 1일 때, 1 반환</li>
+    <li>OR(ㅣ) : 대응하는 두 비트 중 모두 1이거나 하나라도 1일때, 1 반환</li>
+    <li>XOR(^) : 대응하는 두 비트가 서로 다를 때, 1 반환</li>
+    <li>NOT(~) : 비트 값 반전하여 반환</li>
+    <li>SHIFT(», «) : 왼쪽 혹은 오른쪽으로 비트 옮겨 반환
+      <ul>
+        <li>왼쪽 시프트 : <code class="language-plaintext highlighter-rouge">A * 2^B</code></li>
+        <li>오른쪽 시프트 : <code class="language-plaintext highlighter-rouge">A / 2^B</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[왼  쪽] 0001 → 0010 → 0100 → 1000 : 1 → 2 → 4 → 8
+[오른쪽] 1000 → 0100 → 0010 → 0001 : 8 → 4 → 2 → 1
+</code></pre></div></div>
+
+<h3 id="삽입"><strong>삽입</strong></h3>
+
+<p>현재 이진수로 <code class="language-plaintext highlighter-rouge">10101</code>로 표현되고 있을 때, i번째 비트 값을 1로 변경하려고 한다.</p>
+
+<p>i = 3일 때 변경 후에는 <code class="language-plaintext highlighter-rouge">11101</code>이 나와야 한다. 이때는 <strong>OR연산을 활용</strong>한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">10101</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">1 &lt;&lt; 3</code>은 <code class="language-plaintext highlighter-rouge">1000</code>이므로 <code class="language-plaintext highlighter-rouge">10101 | 01000</code>이 되어 <code class="language-plaintext highlighter-rouge">11101</code>을 만들 수 있다.</p>
+
+<h3 id="삭제"><strong>삭제</strong></h3>
+
+<p>반대로 0으로 변경하려면, <strong>AND연산과 NOT 연산을 활용</strong>한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">11101</span> <span class="o">&amp;</span> <span class="o">~</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">~1 &lt;&lt; 3</code>은 <code class="language-plaintext highlighter-rouge">10111</code>이므로, <code class="language-plaintext highlighter-rouge">11101 &amp; 10111</code>이 되어 <code class="language-plaintext highlighter-rouge">10101</code>을 만들 수 있다.</p>
+
+<h3 id="조회"><strong>조회</strong></h3>
+
+<p>i번째 비트가 무슨 값인지 알려면, <strong>AND연산을 활용</strong>한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">10101</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">3번째 비트 값 : 10101 &amp; (1 &lt;&lt; 3) = 10101 &amp; 01000 → 0
+4번째 비트 값 : 10101 &amp; (1 &lt;&lt; 4) = 10101 &amp; 10000 → 10000</code></p>
+
+<p>이처럼 결과값이 0이 나왔을 때는 i번째 비트 값이 0인 것을 파악할 수 있다. (반대로 0이 아니면 무조건 1인 것)</p>
 
         
       </section>
@@ -460,14 +520,14 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#algorithm" class="page__taxonomy-item" rel="tag">Algorithm</a>
+      <a href="/categories/#python" class="page__taxonomy-item" rel="tag">Python</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-11-24">November 24, 2022</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-01-02">January 2, 2023</time></p>
 
 
       </footer>
@@ -477,11 +537,11 @@
       
   <nav class="pagination">
     
-      <a href="/Algorithm/Python_Greedy_%ED%81%B0%EC%88%98%EA%B5%AC%ED%95%98%EA%B8%B0/" class="pagination--pager" title="[Python_Greedy] 큰 수 구하기
+      <a href="/CS/Data_Structure_Search/" class="pagination--pager" title="[Data Structure] 탐색
 ">Prev</a>
     
     
-      <a href="/Algorithm/Python_Greedy_1%EC%9D%B4%EB%90%A0%EB%95%8C%EA%B9%8C%EC%A7%80/" class="pagination--pager" title="[Python_Greedy] 1이 될 때까지
+      <a href="/Algorithm/Python_Implementation/" class="pagination--pager" title="[Python_Implementation] 상하좌우
 ">Next</a>
     
   </nav>
