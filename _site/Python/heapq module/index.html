@@ -1,0 +1,844 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python] heapq module | Hwan’s Devlog</title>
+<meta name="description" content="heapq 모듈은 이진 트리 기반의 최소 힙 자료구조를 제공한다.">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Python] heapq module">
+<meta property="og:url" content="http://localhost:4000/Python/heapq%20module/">
+
+
+  <meta property="og:description" content="heapq 모듈은 이진 트리 기반의 최소 힙 자료구조를 제공한다.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-01-03T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-01-03T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Python/heapq%20module/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 22</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Python/"><span class="nav__sub-title">Python</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python] heapq module">
+    <meta itemprop="description" content="heapq 모듈은 이진 트리 기반의 최소 힙 자료구조를 제공한다.">
+    <meta itemprop="datePublished" content="2023-01-03T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-01-03T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] heapq module
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-03T00:00:00+09:00">January 3, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#힙-자료구조">힙 자료구조</a></li><li><a href="#모듈-import">모듈 import</a></li><li><a href="#min-heap-생성-삽입-삭제">Min heap 생성, 삽입, 삭제</a></li><li><a href="#최소값-삭제하지-않고-읽기">최소값 삭제하지 않고 읽기</a></li><li><a href="#기존-리스트를-힙으로">기존 리스트를 힙으로</a></li><li><a href="#최대-힙">최대 힙</a></li><li><a href="#n번째-최소값최대값">n번째 최소값/최대값</a></li><li><a href="#nsmallest-nlargest">nsmallest(), nlargest()</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h3 id="힙-자료구조">힙 자료구조</h3>
+
+<blockquote>
+  <p>heapq 모듈은 이진 트리 기반의 <code class="language-plaintext highlighter-rouge">최소 힙</code> 자료구조를 제공한다. 최소 힙을 사용 시, 원소들은 항상 정렬된 상태에서 이용되며 최솟값은 언제나 인덱스가 0, 즉 이진트리의 루트에 위치한다. (위 개념은 DataStructure_PriorityQueue 에서 확인 가능하다.)</p>
+
+</blockquote>
+
+<p>내부적으로는 index[0]에서 시작해 index[k]번째 원소가 항상 자식 원소들(index[2k+1], index[2k+2])보다 작거나 같은 형태이다.</p>
+
+<h3 id="모듈-import">모듈 import</h3>
+
+<p><code class="language-plaintext highlighter-rouge">heapq</code> 모듈은 내장 모듈이기 때문에 파이썬만 설치되어 있으면 사용하기 쉽다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span> <span class="p">...</span><span class="o">//</span> <span class="n">등등</span>
+</code></pre></div></div>
+
+<h3 id="min-heap-생성-삽입-삭제">Min heap 생성, 삽입, 삭제</h3>
+
+<p><code class="language-plaintext highlighter-rouge">heapq 모듈</code>은 보통의 리스트를 <strong>최소 힙처럼</strong> 다룰 수 있도록 도와 준다. 그러므로 빈 리스트를 생성해 heapq 모듈의 함수를 호출해 인자를 삽입하거나 삭제하면 된다.</p>
+
+<blockquote>
+  <p>내부적으로 이진 트리에 원소를 추가하는 <code class="language-plaintext highlighter-rouge">heappush()</code> 함수는 <code class="language-plaintext highlighter-rouge">O(log(n))</code>의 시간복잡도를 가진다.</p>
+
+</blockquote>
+
+<blockquote>
+  <p>heapq모듈의 <code class="language-plaintext highlighter-rouge">heappop()</code> 함수를 이용하여 힙에서 원소를 삭제할 수 있다. <strong>원소를 삭제할 대상 리스트를 인자</strong>로 넘기면, 가장 작은 원소를 삭제 후에 <strong>그 값을 리턴</strong>.</p>
+
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+
+<span class="o">================</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">------&gt;</span> <span class="n">힙정렬에서</span> <span class="n">삽입</span> <span class="n">시</span><span class="p">,</span> <span class="n">마지막</span> <span class="n">노드에</span> <span class="n">추가하고</span> <span class="n">비교</span><span class="err">!</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+
+<span class="o">================</span>
+<span class="mi">1</span> <span class="o">------&gt;</span> <span class="n">가장</span> <span class="n">작은</span> <span class="n">값이었던</span> <span class="mi">1</span><span class="n">이</span> <span class="n">리턴</span> <span class="n">됨</span><span class="p">.</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">------&gt;</span> <span class="mi">1</span><span class="n">이</span> <span class="n">삭제됨</span><span class="p">.</span>
+</code></pre></div></div>
+
+<h3 id="최소값-삭제하지-않고-읽기">최소값 삭제하지 않고 읽기</h3>
+
+<p>삭제를 하지 않고 단순히 읽기만 하고 싶다면 인덱스를 통해 접근하면 된다.</p>
+
+<blockquote>
+  <p>여기서 주의사항은 인덱스 0에 가장 작은 원소가 있다고 해서, 인덱스 1에 두번째 작은 원소, 인덱스 2에 세번째 작은 원소가 있다는 보장은 없다. 왜냐하면 힙은 <code class="language-plaintext highlighter-rouge">heappop()</code> 함수를 호출하여 원소를 삭제할 때마다 이진 트리의 재배치를 통해 매번 새로운 최솟값을 선정.</p>
+
+  <p>따라서 두번째로 작은 원소를 얻으려면 바로 <code class="language-plaintext highlighter-rouge">heap[1]</code>으로 접근하면 안되고, 반드시 <code class="language-plaintext highlighter-rouge">heappop()</code>을 통해 가장 작은 원소를 삭제 후에 <code class="language-plaintext highlighter-rouge">heap[0]</code>를 통해 새로운 최소값에 접근해야 한다.</p>
+
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">heap</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="o">=================</span>
+<span class="mi">5</span>
+</code></pre></div></div>
+
+<h3 id="기존-리스트를-힙으로">기존 리스트를 힙으로</h3>
+
+<p>이미 원소가 들어있는 리스트 힙으로 만들려면 <code class="language-plaintext highlighter-rouge">heapq</code> 모듈의 <code class="language-plaintext highlighter-rouge">heapify()</code>라는 함수에 사용.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heapify</span>
+
+<span class="n">heap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">heapify</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">heapify()</code> 함수를 사용할 때 주의할 점은 새로운 리스트를 반환하는 것이 아니라 인자로 넘긴 리스트에 직접 변경한다는 것이다. 따라서 원본 리스트의 형태를 보존해야되는 경우에는 반드시 해당 리스트를 복제한 후에 인자로 넘겨야 한다.</p>
+
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="n">heap</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[:]</span>
+<span class="n">heapify</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span><span class="err">`</span>
+
+<span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="최대-힙">최대 힙</h3>
+
+<p>heapq에서는 최대 힙을 제공하지 않는다. 따라서 다음과 같이 <code class="language-plaintext highlighter-rouge">부호를 변경하는 방법</code>을 사용해서 최대 힙을 구현한다. 부호를 바꿔서 최소 힙에 넣어준 뒤에 최솟값부터 pop을 해줄 때 다시 부호를 바꿔주면 최대 힙과 동일하다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">heapq</span>
+
+<span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># 아래 for문을 실행시키고 나면 heap은 [-5,-4,-3,-1,-2]가 된다.
+</span><span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+	<span class="n">heapq</span><span class="p">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="o">-</span><span class="n">value</span><span class="p">)</span>
+
+<span class="c1"># 아래 for문을 실행시키면 5,4,3,2,1이 출력된다. 즉, 큰 숫자부터 출력이 된다.
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+	<span class="k">print</span><span class="p">(</span><span class="o">-</span><span class="n">heapq</span><span class="p">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="n번째-최소값최대값">n번째 최소값/최대값</h3>
+
+<p>최소 힙이나 최대 힙을 사용하면 <code class="language-plaintext highlighter-rouge">n</code> 번째로 작은 값이나 <code class="language-plaintext highlighter-rouge">n</code> 번째로 큰 값을 효과적으로 구할 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">n</code> 번째 최소값을 구하기 위해서는 주어진 배열로 힙을 만든 후, <code class="language-plaintext highlighter-rouge">heappop()</code> 함수를 <code class="language-plaintext highlighter-rouge">n</code> 번 호출하면 된다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heapify</span><span class="p">,</span> <span class="n">heappop</span>
+
+<span class="k">def</span> <span class="nf">nth_smallest</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">heapify</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+    <span class="n">nth_min</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">nth_min</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">nth_min</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nth_smallest</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="o">===========================</span>
+<span class="mi">4</span>
+</code></pre></div></div>
+
+<h3 id="nsmallest-nlargest">nsmallest(), nlargest()</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">nsmallest</span>
+
+<span class="n">nsmallest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">뒤에</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="n">은</span> <span class="n">값</span> <span class="n">하나만</span> <span class="n">구하려고</span>
+<span class="o">=========================</span>
+
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">nlargest</span>
+
+<span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">==========================</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#python" class="page__taxonomy-item" rel="tag">Python</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-01-03">January 3, 2023</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Python/Bit%20Masking/" class="pagination--pager" title="[Python] 비트 마스킹
+">Prev</a>
+    
+    
+      <a href="/Algorithm/Python_Implementation/" class="pagination--pager" title="[Python_Implementation] 상하좌우
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%8F%99%EC%A0%84%20%EB%92%A4%EC%A7%91%EA%B8%B0/" rel="permalink">[Python_Greedy] 동전 뒤집기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-18T00:00:00+09:00">January 18, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1285
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%9E%83%EC%96%B4%EB%B2%84%EB%A6%B0%EA%B4%84%ED%98%B8/" rel="permalink">[Python_Greedy] 잃어버린 괄호
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-14T00:00:00+09:00">January 14, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1541
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/" rel="permalink">[Python_Greedy] 전구와 스위치
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-11T00:00:00+09:00">January 11, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_2138
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" rel="permalink">[Python_Greedy] 행렬
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1080
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

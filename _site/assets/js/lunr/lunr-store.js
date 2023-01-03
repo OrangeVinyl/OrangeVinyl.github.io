@@ -89,6 +89,12 @@ var store = [{
         "url": "/Python/Bit%20Masking/",
         "teaser": null
       },{
+        "title": "[Python] heapq module",
+        "excerpt":"힙 자료구조 heapq 모듈은 이진 트리 기반의 최소 힙 자료구조를 제공한다. 최소 힙을 사용 시, 원소들은 항상 정렬된 상태에서 이용되며 최솟값은 언제나 인덱스가 0, 즉 이진트리의 루트에 위치한다. (위 개념은 DataStructure_PriorityQueue 에서 확인 가능하다.) 내부적으로는 index[0]에서 시작해 index[k]번째 원소가 항상 자식 원소들(index[2k+1], index[2k+2])보다 작거나 같은 형태이다. 모듈 import heapq 모듈은...","categories": ["Python"],
+        "tags": ["Python","heapq","module","PriorityQueue"],
+        "url": "/Python/heapq%20module/",
+        "teaser": null
+      },{
         "title": "[Python_Implementation] 상하좌우",
         "excerpt":"✅ 문제 여행가 A는 N × N 크기의 정사각형 공간 위에 서 있다. 이 공간은 1 × 1 크기의 정사각형으로 나누어져 있다. 가장 왼쪽 위 좌표는 (1, 1)이며, 가장 오른쪽 아래 좌표는 (N, N)에 해당한다. 여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며, 시작 좌표는 항상 (1, 1)이다. 우리...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","Implementation"],
