@@ -65,6 +65,12 @@ var store = [{
         "url": "/CS/Data_Structure_Tree/",
         "teaser": null
       },{
+        "title": "[Python_Implementation] 상하좌우",
+        "excerpt":"✅ 문제 여행가 A는 N × N 크기의 정사각형 공간 위에 서 있다. 이 공간은 1 × 1 크기의 정사각형으로 나누어져 있다. 가장 왼쪽 위 좌표는 (1, 1)이며, 가장 오른쪽 아래 좌표는 (N, N)에 해당한다. 여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며, 시작 좌표는 항상 (1, 1)이다. 우리...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Implementation"],
+        "url": "/Algorithm/Python_Implementation/",
+        "teaser": null
+      },{
         "title": "[DataBase] 데이터베이스 프로그래밍",
         "excerpt":"데이터베이스 구축 과정 DB 설계 DBMS 결정 사용자 계정 설정과 권한 부여 테이블 생성 레코드 추가 질의어로 업무에 필요한 정보 활용 conn 관리자/관리자 create user 관리자이름 idetified by 비밀번호; grant create session to 관리자이름; grant resource, create view, create to table to 관리자이름; SQL(Structed Query Language) : 구조화된 질의 언어...","categories": ["CS"],
         "tags": ["CS","Knowledge","Database","C#"],
