@@ -1,0 +1,931 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Scope] 스코프 | Hwan’s Devlog</title>
+<meta name="description" content="Scope">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Scope] 스코프">
+<meta property="og:url" content="http://localhost:4000/CS/Scope/">
+
+
+  <meta property="og:description" content="Scope">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-05T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-05T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/CS/Scope/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 9</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/categories3/"><span class="nav__sub-title">Categories3</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/categories4/"><span class="nav__sub-title">Categories4</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Scope] 스코프">
+    <meta itemprop="description" content="Scope">
+    <meta itemprop="datePublished" content="2022-12-05T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-05T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Scope] 스코프
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-05T00:00:00+09:00">December 5, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#스코프scope의-정의">스코프(Scope)의 정의</a></li><li><a href="#스코프scope의-종류">스코프(Scope)의 종류</a></li><li><a href="#동작">동작</a></li><li><a href="#레벨">레벨</a></li><li><a href="#추가로-알아야-할-사항">추가로 알아야 할 사항</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>스코프는 자바스크립트를 이용하는 데에 있어 <strong>필수적인 개념</strong>입니다.</p>
+
+<p>이 포스팅 뒤로 클로저에 대해 알아볼 건데,</p>
+
+<p>그전에 앞서 스코프의 정의가 먼저 필요하기 때문에 스코프 정의를 먼저 정리해보겠습니다.</p>
+
+<h3 id="스코프scope의-정의">스코프(Scope)의 정의</h3>
+
+<p>함수를 작성할 때 아래와 같이 <strong>중괄호 ‘{ }’를 이용하여 함수의 범위를 작성</strong>합니다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">hello</span><span class="p">(){</span>
+	<span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">함수 작성</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>즉, <strong>[변수가 영향을 미치는 범위], [변수의 유효 범위],  [코드가 유효한 범위]</strong>라고 할 수 있으며 규칙입니다.</p>
+
+<p>그리고 <strong>스코프의 종류에따라 변수, 함수, 코드 등의 유효 범위가 달라질 수 있습니다.</strong></p>
+
+<h3 id="스코프scope의-종류"><strong>스코프(Scope)의 종류</strong></h3>
+
+<p>스코프의 종류에 대해 알기 쉽게 알아봅시다.</p>
+
+<p><strong>1.동작</strong></p>
+
+<ul>
+  <li>정적 스코프</li>
+  <li>동적 스코프</li>
+</ul>
+
+<p><strong>2.레벨</strong></p>
+
+<ul>
+  <li>함수 레벨 스코프</li>
+  <li>블록 레벨 스코프</li>
+  <li>전역 스코프</li>
+  <li>지역 스코프</li>
+</ul>
+
+<p><strong>3.추가로 알아야할 사항</strong></p>
+
+<ul>
+  <li>스코프 체인</li>
+</ul>
+
+<p>스코프가 <strong>단순히 범위라고만 알고 있으면 안 되는 이유</strong>는 <strong>선언의 시점에 따라 값이 달라질 수 있기 때문</strong>입니다.</p>
+
+<p>그래서 동작에 따라 나뉘는 정적 스코프, 동적 스코프에 대해 알아봅시다.</p>
+
+<h3 id="동작"><strong>동작</strong></h3>
+
+<ul>
+  <li><strong>정적 스코프</strong></li>
+</ul>
+
+<p><strong>Javascript는 정적 스코프의 특성</strong>을 가지고 있습니다.</p>
+
+<p>정적 스코프의 규칙에 따라 호출 스택과 관계없이 <strong>선언 시점에 스코프를 결정</strong>합니다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">home</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">sister</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">여동생 숙제 중</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getSister</span><span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sister</span><span class="p">);</span><span class="c1">// sister is not defined</span>
+<span class="p">}</span>
+
+<span class="nx">getSister</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>sister is not defined이 되는 이유는 정적 스코프이기 때문입니다.</p>
+
+<p>함수를 호출할 때가 아니라 선언할 때 스코프가 정해지고 외부 변수는 내부 변수에 접근할 수 없기 때문에 not defined이 됩니다.</p>
+
+<ul>
+  <li><strong>동적 스코프</strong></li>
+</ul>
+
+<p><strong>정적 스코프와는 반대</strong>로 동적 스코프의 선언은 <strong>런타임 도중에 실행 콘텍스트나 호출 콘텍스트에 의해 결정</strong>됩니다.</p>
+
+<p>[정적 스코프일 때]</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">sister</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">여동생 숙제 중</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">home</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">sister</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">여동생 집에없다</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">getSister</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getSister</span><span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sister</span><span class="p">);</span><span class="c1">// 여동생 숙제 중</span>
+<span class="p">}</span>
+
+<span class="nx">home</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>[동적 스코프일 때]</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">sister</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">여동생</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">home</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">sister</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">여동생 집에없다</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">getSister</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">getSister</span><span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sister</span><span class="p">);</span><span class="c1">// 여동생 집에없다</span>
+<span class="p">}</span>
+
+<span class="nx">home</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>즉,</p>
+
+<p>정적 스코프는 소스코드가 작성된 콘텍스트에서 결정되며</p>
+
+<p>동적 스코프는 프로그램 런타임 도중에 실행 콘텍스트나 호출 콘텍스트에서 결정됩니다.</p>
+
+<h3 id="레벨"><strong>레벨</strong></h3>
+
+<ul>
+  <li><strong>함수 레벨 스코프</strong></li>
+</ul>
+
+<p><strong>var로 선언된 변수, 함수들은 함수 레벨 스코프</strong>가 됩니다.</p>
+
+<p><strong>함수가 유효 범위</strong>입니다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">hello</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+  	<span class="kd">var</span> <span class="nx">greet</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">님 안녕하세요</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greet</span><span class="p">);</span><span class="c1">// 이하나님 안녕하세요</span>
+<span class="p">}</span>
+
+<span class="nx">hello</span><span class="p">(</span><span class="dl">'</span><span class="s1">이하나</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>function이 유효 범위이므로 if 스코프 내에 선언된 greet는 hello 변수 내에서 접근 가능합니다.</p>
+
+<p>아래 블록 레벨과 비교해서 보면 더욱 확실히 개념을 잡을 수 있을 것입니다.</p>
+
+<ul>
+  <li><strong>블록 레벨 스코프</strong></li>
+</ul>
+
+<p>ES6부터 지원하기 시작한 <strong>let, const 키워드로 선언된 변수, 함수들은 블록 레벨 스코프</strong>가 됩니다.</p>
+
+<p><strong>블록이 유효 범위</strong>입니다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">hello</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+  	<span class="kd">let</span> <span class="nx">greet</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">님 안녕하세요</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greet</span><span class="p">);</span><span class="c1">// greet is not defined</span>
+<span class="p">}</span>
+
+<span class="nx">hello</span><span class="p">(</span><span class="dl">'</span><span class="s1">이하나</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>if의 스코프가 유효 범위이므로 greet에 접근하지 못하여 not defined이 나옵니다.</p>
+
+<p>함수 레벨 스코프가 사용하기에는 더 편리하지만 블록 레벨 스코프보다 스코프의 범위가 넓으므로 코드에 대한 복잡성을 증가하는 요인이 됩니다. 따라서 변수의 유효 범위는 좁을수록 좋고 선택이 가능하다면 <strong>블록 레벨 스코프를 사용해야 합니다.</strong></p>
+
+<ul>
+  <li><strong>전역 스코프</strong></li>
+</ul>
+
+<p><strong>전체가 범위</strong>며 전역 스코프에서 변수를 선언하게 되면 어디서든지 참조할 수 있는 전역 변수가 됩니다.</p>
+
+<p>하나의 html에서 두 개의 js파일을 로드해서 사용할 때에도 전역 변수는 사용이 가능합니다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.jsvar global = '난 글로벌해';</span>
+
+<span class="c1">// pages.jsconsole.log('global');// 난 글로벌해</span>
+</code></pre></div></div>
+
+<p>전역 변수를 남발하게 되면 변수이나 함수의 중복이 될 가능성이 커지며 코드를 예측할 수 없어집니다.</p>
+
+<p>그렇기 때문에 <strong>즉시 실행 함수를 사용</strong>해서 전역 변수를 해당 파일(모듈)에서만 <strong>범위를 억제하는 방법</strong>들이 많이 쓰입니다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">APP</span> <span class="o">=</span> <span class="nx">APP</span> <span class="o">||</span> <span class="p">{};</span>
+
+    <span class="nx">APP</span><span class="p">.</span><span class="nx">info</span> <span class="o">=</span> <span class="p">{</span>
+    	<span class="na">name</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">chat app</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">version</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">1.2.1</span><span class="dl">'</span>
+    <span class="p">};</span>
+
+    <span class="nx">APP</span><span class="p">.</span><span class="nx">Start</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="c1">// ....</span>
+    <span class="p">};</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">APP</span><span class="p">.</span><span class="nx">info</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span><span class="c1">// chat app</span>
+<span class="p">})();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">APP</span><span class="p">.</span><span class="nx">info</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span><span class="c1">// APP is not defined</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>지역 스코프</strong></li>
+</ul>
+
+<p>함수 <strong>코드 블록이 만든 스코프로 함수 내부와 하위 함수의 변수와 함수만 참조</strong>가 가능합니다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">local</span><span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">me</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">난 지역이야</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">callLocal</span><span class="p">(){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">me</span><span class="p">);</span><span class="c1">// me is not defined</span>
+<span class="p">}</span>
+
+<span class="nx">callLocal</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>지역에서 선언한 건 <strong>같은 지역에서만 참조</strong>가 됩니다.</p>
+
+<p>함수 스코프나 블록 스코프를 생각하면 쉬울 것 같습니다.</p>
+
+<h3 id="추가로-알아야-할-사항"><strong>추가로 알아야 할 사항</strong></h3>
+
+<ul>
+  <li><strong>스코프 체인(Scope Chain)</strong></li>
+</ul>
+
+<p>내부 함수에서 외부 함수의 변수에 접근은 가능하지만</p>
+
+<p>외부 함수에서 내부 함수의 변수에는 접근할 수 없습니다.</p>
+
+<p>스코프 체인은 내부 함수에서 변수를 찾기 위해 외부 함수로 접근할 때에 탐색을 하게 되는 관계를 말합니다.</p>
+
+<p>스코프의 탐색은 <strong>해당 스코프 내부를 먼저 탐색하고 선언된 것이 없다면 한 단계 위의 스코프를 탐색하며  반복적으로 이루어 집니다.</strong></p>
+
+<p>찾을 때까지 과정을 반복하면서 상위 환경을 참조하려고 합니다.</p>
+
+<p>이 과정은 해당 선언을 찾거나 null이 될 때(더 이상의 참조가 불가능할 때) 탐색을 멈춥니다.</p>
+
+<p><strong>이것을 스코프 체인</strong>이라고 합니다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cs" class="page__taxonomy-item" rel="tag">CS</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-05">December 5, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Module/" class="pagination--pager" title="[Module] 모듈
+">Prev</a>
+    
+    
+      <a href="/CS/Database/" class="pagination--pager" title="[DataBase] 데이터베이스 프로그래밍
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Database/" rel="permalink">[DataBase] 데이터베이스 프로그래밍
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-07T00:00:00+09:00">January 7, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">DataBase Programming(C#)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Module/" rel="permalink">[Module] 모듈
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-03T00:00:00+09:00">December 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">ES Modules / Common JS
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/" rel="permalink">[Python_Greedy] 백준 - 1931(회의실 배정)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-02T00:00:00+09:00">December 2, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1931
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_11047/" rel="permalink">[Python_Greedy] 백준 - 11047(동전 0)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-01T00:00:00+09:00">December 1, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_11047
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

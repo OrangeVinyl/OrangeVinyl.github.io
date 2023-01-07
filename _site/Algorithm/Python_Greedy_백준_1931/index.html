@@ -52,30 +52,36 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>CS | Hwan’s Devlog</title>
-<meta name="description" content="겸상하는 개발자입니다 ⌨️">
+<!-- begin _includes/seo.html --><title>[Python_Greedy] 백준 - 1931(회의실 배정) | Hwan’s Devlog</title>
+<meta name="description" content="백준_Greedy_1931">
 
 
   <meta name="author" content="Hwan's Devlog">
   
+  <meta property="article:author" content="Hwan's Devlog">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Hwan's Devlog">
-<meta property="og:title" content="CS">
-<meta property="og:url" content="http://localhost:4000/categories/CS/">
+<meta property="og:title" content="[Python_Greedy] 백준 - 1931(회의실 배정)">
+<meta property="og:url" content="http://localhost:4000/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/">
 
 
-  <meta property="og:description" content="겸상하는 개발자입니다 ⌨️">
-
-
-
+  <meta property="og:description" content="백준_Greedy_1931">
 
 
 
 
 
+
+
+  <meta property="article:published_time" content="2022-12-02T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-02T00:00:00+09:00">
 
 
 
@@ -84,7 +90,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/categories/CS/">
+<link rel="canonical" href="http://localhost:4000/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/">
 
 
 
@@ -155,7 +161,7 @@
     <meta name="theme-color" content="#ffffff">
   </head>
 
-  <body class="layout--category">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -355,20 +361,143 @@
 
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python_Greedy] 백준 - 1931(회의실 배정)">
+    <meta itemprop="description" content="백준_Greedy_1931">
+    <meta itemprop="datePublished" content="2022-12-02T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-02T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python_Greedy] 백준 - 1931(회의실 배정)
+</h1>
+          
+
+  <p class="page__meta">
     
-      <h1 id="page-title" class="page__title">CS</h1>
-    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-02T00:00:00+09:00">December 2, 2022</time>
+      </span>
     
 
+    
+
+    
+  </p>
 
 
-<div class="entries-list">
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              
+
+            </nav>
+          </aside>
+        
+        <p>가장 중요한 포인트는 어떻게 정렬할지 결정하는 것.</p>
+
+<p>회의의 종료시간과 시작시간이 겹쳐도 된다는 부분은 결국 <strong>‘종료시간과 시작시간의 대조’</strong>가 포인트다</p>
+
+<p>또한, 시작시간과 종료시간 중 중요한 것은 <strong>종료시간</strong>이므로 종료시간으로 나열하는 것이 중요.</p>
+
+<p>단, 종료시간이 동일할 경우, 시작시간이 빠른 것이 좋기에 시작시간으로 나열을 한 번 하는 것이 중요하다.</p>
+
+<p>ex) (9,10) 과 (10,10)의 대조 시, (9,10)(10,10)으로 두 번 선택이 가능</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">room</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">room</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">])</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">room</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">last</span> <span class="o">=</span> <span class="n">room</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#마지막 회의시간 
+</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#결과값
+</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">room</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">last</span><span class="p">:</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">room</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>처음에 cnt = 0 으로 초기화했지만, 그럼 첫 번째 회의가 카운팅이 안되므로, cnt = 1로 초기화.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
   
 
 
+  
 
-<div class="list__item">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#algorithm" class="page__taxonomy-item" rel="tag">Algorithm</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-02">December 2, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_11047/" class="pagination--pager" title="[Python_Greedy] 백준 - 11047(동전 0)
+">Prev</a>
+    
+    
+      <a href="/CS/Module/" class="pagination--pager" title="[Module] 모듈
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -399,10 +528,12 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -433,10 +564,12 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -467,15 +600,17 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/CS/Synchronous_Asynchronous/" rel="permalink">[Synchronous, Asynchronous] 동기와 비동기
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_11047/" rel="permalink">[Python_Greedy] 백준 - 11047(동전 0)
 </a>
       
     </h2>
@@ -486,7 +621,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2022-11-29T00:00:00+09:00">November 29, 2022</time>
+        <time datetime="2022-12-01T00:00:00+09:00">December 1, 2022</time>
       </span>
     
 
@@ -496,15 +631,18 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">동기와 비동기의 정의 및 장단점
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_11047
 </p>
   </article>
 </div>
 
+        
+      </div>
+    </div>
+  
+  
 </div>
 
-  </div>
-</div>
     </div>
 
     
@@ -554,6 +692,30 @@
 
 
 
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
 
 
 

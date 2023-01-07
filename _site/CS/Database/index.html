@@ -1,0 +1,989 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[DataBase] 데이터베이스 프로그래밍 | Hwan’s Devlog</title>
+<meta name="description" content="DataBase Programming(C#)">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[DataBase] 데이터베이스 프로그래밍">
+<meta property="og:url" content="http://localhost:4000/CS/Database/">
+
+
+  <meta property="og:description" content="DataBase Programming(C#)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-01-07T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-01-07T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/CS/Database/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 9</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/categories3/"><span class="nav__sub-title">Categories3</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/categories4/"><span class="nav__sub-title">Categories4</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[DataBase] 데이터베이스 프로그래밍">
+    <meta itemprop="description" content="DataBase Programming(C#)">
+    <meta itemprop="datePublished" content="2023-01-07T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-01-07T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[DataBase] 데이터베이스 프로그래밍
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-07T00:00:00+09:00">January 7, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#데이터베이스-구축-과정">데이터베이스 구축 과정</a><ul><li><a href="#sqlstructed-query-language--구조화된-질의-언어">SQL(Structed Query Language) : 구조화된 질의 언어</a></li></ul></li><li><a href="#cs와-oracle연동">CS와 Oracle연동</a><ul><li><a href="#닷넷-프레임워크의-구성요소">닷넷 프레임워크의 구성요소</a></li><li><a href="#adonet의-개요">ADO.NET의 개요</a></li><li><a href="#adonet의-기본구조">ADO.NET의 기본구조</a></li><li><a href="#net-data-provider의-구성요소">.NET Data Provider의 구성요소</a></li><li><a href="#adonet의-간략한-구조">ADO.NET의 간략한 구조</a></li><li><a href="#connection과-데이터-공급자">Connection과 데이터 공급자</a></li><li><a href="#oraclecommand-클래스">OracleCommand 클래스</a></li><li><a href="#oracommand의-주요-메서드">OraCommand의 주요 메서드</a></li><li><a href="#datatset과-dataadapter의-관계">DatatSet과 DataAdapter의 관계</a></li><li><a href="#dataset-구성-요소의-정리">DataSet 구성 요소의 정리</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="데이터베이스-구축-과정">데이터베이스 구축 과정</h2>
+
+<ol>
+  <li>DB 설계</li>
+  <li>DBMS 결정</li>
+  <li>사용자 계정 설정과 권한 부여</li>
+  <li>테이블 생성</li>
+  <li>레코드 추가</li>
+  <li>질의어로 업무에 필요한 정보 활용</li>
+</ol>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span> <span class="err">관리자</span><span class="o">/</span><span class="err">관리자</span>
+<span class="k">create</span> <span class="k">user</span> <span class="err">관리자이름</span> <span class="n">idetified</span> <span class="k">by</span> <span class="err">비밀번호</span><span class="p">;</span>
+<span class="k">grant</span> <span class="k">create</span> <span class="k">session</span> <span class="k">to</span> <span class="err">관리자이름</span><span class="p">;</span>
+<span class="k">grant</span> <span class="n">resource</span><span class="p">,</span> <span class="k">create</span> <span class="k">view</span><span class="p">,</span> <span class="k">create</span> <span class="k">to</span> <span class="k">table</span> <span class="k">to</span> <span class="err">관리자이름</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="sqlstructed-query-language--구조화된-질의-언어">SQL(Structed Query Language) : 구조화된 질의 언어</h3>
+
+<p>1) DQL(Data Query Language)</p>
+
+<p>SELECT</p>
+
+<p>2) DML(Data Mnipulation Language)</p>
+
+<p>단위 : Row 단위(가로줄, 행)</p>
+
+<p>DML만 COMMIT/ROLLBACK 가능</p>
+
+<p>INSERT</p>
+
+<p>UPDATE</p>
+
+<p>DELETE</p>
+
+<p>3) DDL(Data Definition Language)</p>
+
+<p>단위 : Column 단위(세로줄, 열)</p>
+
+<p>CREATE</p>
+
+<p>ALTER : 수정(MODIFY), 삭제(DROP), 추가(ADD), 수정(이름까지)(CHANGE), 테이블 이름 수정(RENAME)</p>
+
+<p>TRUNCATE : 테이블 구조는 남기고 데이터만 삭제</p>
+
+<p>4) DCL(Data Control Language)</p>
+
+<p>GRANT : 권한 부여</p>
+
+<p>REVOKE : 권한 해제</p>
+
+<p>5) TCL(Transaction Control Language)</p>
+
+<p>COMMIT : 저장</p>
+
+<p>ROLLBACK : 취소</p>
+
+<h2 id="cs와-oracle연동">CS와 Oracle연동</h2>
+
+<hr />
+
+<h3 id="닷넷-프레임워크의-구성요소">닷넷 프레임워크의 구성요소</h3>
+
+<ul>
+  <li>.NET Framework 클래스 라이브러리
+    <ul>
+      <li>BCL: 클래스 라이브러리 중 가장 핵심적인 기능을 하는 클래스의 모음</li>
+      <li><strong>ADO.NET: 데이터베이스를 사용할 때 지원하는 클래스</strong>
+        <ul>
+          <li>System.Data 네임스페이스와 하위 네임스페이스에서 제공하는 데이터 접근 기술로 이루어짐</li>
+          <li>System.Data 네임스페이스는 ADO.NET 객체 모델을 구성하는 클래스로 이루어져 있다.</li>
+        </ul>
+      </li>
+      <li>윈도우 UI : 닷넷 언어로 윈도우 프로그램을 만들 때 지원하는 클래스
+        <ul>
+          <li>표준윈도우, MDI 윈도우, 대화상자</li>
+        </ul>
+      </li>
+      <li>ASP.NET : 닷넷 언어로 웹 프로그래밍을 할 때 지원하는 클래스</li>
+    </ul>
+  </li>
+  <li>CLR → 닷넷 실행 엔진, 닷넷 플랫폼</li>
+</ul>
+
+<h3 id="adonet의-개요">ADO.NET의 개요</h3>
+
+<ul>
+  <li>ADO(Active Data Object) + .NET</li>
+  <li>다양한 방법으로 데이터베이스를 검색, 수정, 업데이트 등의 작업 가능</li>
+  <li>ADO.NET은 <strong>XML지원 / 단절된 데이터 구조를 표준으로 사용한다</strong>. ADO와 다르게</li>
+</ul>
+
+<h3 id="adonet의-기본구조">ADO.NET의 기본구조</h3>
+
+<ul>
+  <li>.NET Data Provider : 데이터베이스에 연결하고, SQL문을 실행시키는 역할</li>
+  <li>
+    <p>DataSet : 데이터베이스의 데이터를 DataSet으로 쉽게 이식 가능</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>               **데이터베이스와 분리되어 DataSet만으로도 대부분의 작업가능**
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="net-data-provider의-구성요소">.NET Data Provider의 구성요소</h3>
+
+<ul>
+  <li>연결 지향성
+    <ul>
+      <li>데이터베이스에 연결된 후 데이터베이스와 동적으로 작업을 수행</li>
+      <li>Command 클래스와 관련이 깊음</li>
+    </ul>
+  </li>
+  <li>비연결 지향성
+    <ul>
+      <li>메모리 데이터베이스와 관련이 있음</li>
+      <li>데이터베이스에 연결 설정 후 데이터베이스 형태로 보유하고 있으면서 메모리 데이터베이스만으로 작업을 수행</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="adonet의-간략한-구조">ADO.NET의 간략한 구조</h3>
+
+<ul>
+  <li><strong>DataSet</strong>
+    <ul>
+      <li><strong>데이터 원본과 단절</strong></li>
+      <li>데이터는 Memory in Cash 형태</li>
+      <li><strong>XML과의 데이터 교환</strong></li>
+    </ul>
+  </li>
+  <li><strong>.NET Data Provider</strong>
+    <ul>
+      <li>Connection : 데이터 원본에 연결</li>
+      <li>Command : 검색, 삽입, 수정, 삭제 등의 명령 수행</li>
+      <li>DataReader: 순방향 읽기전용으로 연결된 결과 집합</li>
+      <li>DataAdapter: 데이터베이스로부터 DataSet에 값을 채우거나 필요로 할 때 데이터베이스로 업데이트 가능</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="connection과-데이터-공급자">Connection과 데이터 공급자</h3>
+
+<p>SqlClient 공급자</p>
+
+<p>SQL Server 공급자(SqlClient)는 OLE와 ODBC와 같은 중간계층 없이 MS-SQL 전용으로 직접 연결
+되기 때문에 간단하며 효율적으로 동작한다.</p>
+
+<p>Microsoft SQL Server 버전 7.0 이상에 연결한다.</p>
+
+<p>OleDb 공급자</p>
+
+<p>OLE DB 공급자는 OLE DB를 사용해서 노출된 데이터 소스 및 Microsoft SQL Server 버전 6.x 또는
+그 이전 버전에 SQLOLEDB 즉 SQL Server용 OLE DB 공급자를 통해 연결한다.</p>
+
+<p>ODBC 공급자(.NET Framework 2.0에 추가된 공급자)
+ODBC를 사용해서 노출된 데이터 소스에서 사용한다.
+System.Data.Odbc</p>
+
+<p>Oracle 공급자(.NET Framework 2.0에 추가된 공급자)
+오라클 데이터 소스에서 사용한다.(오라클 클라이언트 소프트웨어 버전 8.1.7 이상에서 지원)
+System.Data.OracleClient</p>
+
+<p><strong>Oracle 공급자(.NET Framework 2.0에 추가된 공급자)=&gt; ODP.Net(Oracle Data Provider for .NET)
+오라클 데이터 소스에서 사용한다.(오라클 클라이언트 소프트웨어 버전 8.1.7 이상에서 지원)
+Oracle.DataAccess.Client → 이거는 꼭 외우자 그냥</strong></p>
+
+<h3 id="oraclecommand-클래스">OracleCommand 클래스</h3>
+
+<ul>
+  <li>Connection 객체를 이용해 데이터베이스와 연결한 후, DB에 필요한 명령을 전달하거나 결과를 받아올 때 사용</li>
+  <li>OracleCommand 클래스를 이용하여 수행할 수 있는 명령들  DML, DDL, DCL 전부</li>
+  <li>명령에 관련된 여러 가지 정보를 관리 가능</li>
+</ul>
+
+<p><strong>OracleCommand의 주요 속성들</strong></p>
+
+<ul>
+  <li>CommandText
+    <ul>
+      <li>데이터 소스에서 실행할 SQL문이나 저장 프로시저를 가져오거나 설정</li>
+    </ul>
+  </li>
+  <li>CommandType
+    <ul>
+      <li>CommandText 속성이 해석될 방법을 나타내는값을 가져오거나 설정</li>
+    </ul>
+  </li>
+  <li>Connection
+    <ul>
+      <li>OracleCommand의 인스턴스에서 사용하는 Connection을 가져오거나 설정</li>
+    </ul>
+  </li>
+  <li>Parameters
+    <ul>
+      <li>OracleParameterCollection 을 가져옴</li>
+    </ul>
+  </li>
+  <li>Transaction
+    <ul>
+      <li>OracleCommand가 실행하는 트랜잭션을 가져오거나 설정</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="oracommand의-주요-메서드">OraCommand의 주요 메서드</h3>
+
+<ul>
+  <li><strong>ExecuteNonQuery()</strong>
+    <ul>
+      <li><strong>Connection에 대한 SQL 문을 실행하고 영향을 받은 행의 갯수를 반환</strong></li>
+      <li>OracleCommand를 이용하여 데이터베이스에 명령을 전달하고 이를 수행</li>
+      <li><strong>Select 명령을 제외한 대부분의 명령(DML)을 ExecuteNonQuery()를 이용하여 처리 가능</strong></li>
+    </ul>
+  </li>
+  <li><strong>ExecuteReader()</strong>
+    <ul>
+      <li><strong>CommandText를 Connection에 보내고, OracleDataReader를 생성</strong></li>
+      <li><strong>Select문장을 사용할 때 이용되는 메서드</strong></li>
+    </ul>
+  </li>
+  <li>ExecuteScalar()
+    <ul>
+      <li>쿼리를 실행하고 쿼리에서 반환된 결과 집합의 첫 번째 행의 첫 번째 열 반환</li>
+    </ul>
+  </li>
+  <li>ExecuteXmlReader()
+    <ul>
+      <li>CommandText를 Connection에 보내고, XmlReader 객체를 생성</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="datatset과-dataadapter의-관계">DatatSet과 DataAdapter의 관계</h3>
+
+<ul>
+  <li>웹 프로그래밍의 작업에 가장 큰 문제가 되는 데이터베이스의 과부하 문제의 해결책으로 제시되는 .NET의 새로운 architectur</li>
+</ul>
+
+<h3 id="dataset-구성-요소의-정리">DataSet 구성 요소의 정리</h3>
+
+<p>DataSet</p>
+
+<ul>
+  <li>전체 DataSet을 담을 수 있으며, 하나 이상의 테이블 또는 전체 데이터베이스를 담을 수 있음</li>
+</ul>
+
+<p>DataTable</p>
+
+<ul>
+  <li>하나의 테이블 정보를 담을 수 있음</li>
+</ul>
+
+<p>DataRow</p>
+
+<ul>
+  <li>테이블에서 하나의 행에 해당하는 값을 담고 있음</li>
+</ul>
+
+<p>DataColumn</p>
+
+<ul>
+  <li>테이블에서 하나의 열에 대한 정보를 담고 있음</li>
+</ul>
+
+<p>DataRelation</p>
+
+<ul>
+  <li>두 테이블 사이에 관계 설정을 담고 있음</li>
+</ul>
+
+<p>Constraint</p>
+
+<ul>
+  <li>테이블에서 값을 제어하는 규약을 담고 있음</li>
+</ul>
+
+<p>DataSet으로 작업하기 방법1(Adapter에 SelectCommad 할당)</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">string</span> <span class="n">query</span> <span class="p">=</span> <span class="s">"select * from emp"</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"1. Connenction 생성과 Open"</span><span class="p">);</span>
+<span class="n">OracleConnection</span> <span class="n">conn</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OracleConnection</span><span class="p">(</span><span class="n">conStr</span><span class="p">);</span> 
+<span class="n">conn</span><span class="p">.</span><span class="nf">Open</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"2. OracleDataAdapter 생성"</span><span class="p">);</span>
+
+<span class="n">OracleDataAdapter</span> <span class="n">adapter</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OracleDataAdapter</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"3. Adapter에 SelectCommand 할당"</span><span class="p">);</span>
+
+<span class="n">adapter</span><span class="p">.</span><span class="n">SelectCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">OracleCommand</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">conn</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"4. DataSet 생성"</span><span class="p">);</span>
+<span class="n">DataSet</span> <span class="n">ds</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">DataSet</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"5. Adapter를 통해서 DataSet 채우기"</span><span class="p">);</span>
+<span class="n">adapter</span><span class="p">.</span><span class="nf">Fill</span><span class="p">(</span><span class="n">ds</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"6. Connection 닫기"</span><span class="p">);</span>
+<span class="n">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">();</span>
+
+</code></pre></div></div>
+
+<p>DataSet으로 작업하기 방법2(CommandBuilder 생성)</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cs" class="page__taxonomy-item" rel="tag">CS</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-01-07">January 7, 2023</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Scope/" class="pagination--pager" title="[Scope] 스코프
+">Prev</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Scope/" rel="permalink">[Scope] 스코프
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-05T00:00:00+09:00">December 5, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Scope
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Module/" rel="permalink">[Module] 모듈
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-03T00:00:00+09:00">December 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">ES Modules / Common JS
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/" rel="permalink">[Python_Greedy] 백준 - 1931(회의실 배정)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-02T00:00:00+09:00">December 2, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1931
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_11047/" rel="permalink">[Python_Greedy] 백준 - 11047(동전 0)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-01T00:00:00+09:00">December 1, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_11047
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

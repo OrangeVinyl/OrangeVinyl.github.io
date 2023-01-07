@@ -52,30 +52,36 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>CS | Hwan’s Devlog</title>
-<meta name="description" content="겸상하는 개발자입니다 ⌨️">
+<!-- begin _includes/seo.html --><title>[Python_Greedy] 백준 - 11047(동전 0) | Hwan’s Devlog</title>
+<meta name="description" content="백준_Greedy_11047">
 
 
   <meta name="author" content="Hwan's Devlog">
   
+  <meta property="article:author" content="Hwan's Devlog">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Hwan's Devlog">
-<meta property="og:title" content="CS">
-<meta property="og:url" content="http://localhost:4000/categories/CS/">
+<meta property="og:title" content="[Python_Greedy] 백준 - 11047(동전 0)">
+<meta property="og:url" content="http://localhost:4000/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_11047/">
 
 
-  <meta property="og:description" content="겸상하는 개발자입니다 ⌨️">
-
-
-
+  <meta property="og:description" content="백준_Greedy_11047">
 
 
 
 
 
+
+
+  <meta property="article:published_time" content="2022-12-01T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-01T00:00:00+09:00">
 
 
 
@@ -84,7 +90,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/categories/CS/">
+<link rel="canonical" href="http://localhost:4000/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_11047/">
 
 
 
@@ -155,7 +161,7 @@
     <meta name="theme-color" content="#ffffff">
   </head>
 
-  <body class="layout--category">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -355,20 +361,134 @@
 
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python_Greedy] 백준 - 11047(동전 0)">
+    <meta itemprop="description" content="백준_Greedy_11047">
+    <meta itemprop="datePublished" content="2022-12-01T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-01T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python_Greedy] 백준 - 11047(동전 0)
+</h1>
+          
+
+  <p class="page__meta">
     
-      <h1 id="page-title" class="page__title">CS</h1>
-    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-01T00:00:00+09:00">December 1, 2022</time>
+      </span>
     
 
+    
+
+    
+  </p>
 
 
-<div class="entries-list">
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#큰-동전이-작은-동전의-배수가-된다">“큰 동전이, 작은 동전의 배수가 된다!”</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>동전 계산 시 그리디 알고리즘을 사용하는 큰 전제 조건 중 하나</p>
+
+<h3 id="큰-동전이-작은-동전의-배수가-된다">“큰 동전이, 작은 동전의 배수가 된다!”</h3>
+
+<p>ex) 800원을 500원,400원,100원 으로는 최솟값이 겹친다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="n">coin_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">coin_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()))</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> 
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="n">k</span> <span class="o">//</span> <span class="n">coin_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="n">coin_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>역방향으로 루프를 돌릴 때 <code class="language-plaintext highlighter-rouge">reversed()</code> 내장함수 사용</p>
+
+<p>파이썬의 기본 내장함수로 <strong>순서가 있는 자료구조</strong>(list, tuple 등)를 받을 수 있다.</p>
+
+<p>주어진 자료구조에 담긴 원소들을 역순으로 순회할 수 있도록 <strong>iterator</strong>를 리턴한다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
   
 
 
+  
 
-<div class="list__item">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#algorithm" class="page__taxonomy-item" rel="tag">Algorithm</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-01">December 1, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Synchronous_Asynchronous/" class="pagination--pager" title="[Synchronous, Asynchronous] 동기와 비동기
+">Prev</a>
+    
+    
+      <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/" class="pagination--pager" title="[Python_Greedy] 백준 - 1931(회의실 배정)
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -399,10 +519,12 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -433,10 +555,12 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -467,15 +591,17 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/CS/Synchronous_Asynchronous/" rel="permalink">[Synchronous, Asynchronous] 동기와 비동기
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/" rel="permalink">[Python_Greedy] 백준 - 1931(회의실 배정)
 </a>
       
     </h2>
@@ -486,7 +612,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2022-11-29T00:00:00+09:00">November 29, 2022</time>
+        <time datetime="2022-12-02T00:00:00+09:00">December 2, 2022</time>
       </span>
     
 
@@ -496,15 +622,18 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">동기와 비동기의 정의 및 장단점
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1931
 </p>
   </article>
 </div>
 
+        
+      </div>
+    </div>
+  
+  
 </div>
 
-  </div>
-</div>
     </div>
 
     
@@ -554,6 +683,30 @@
 
 
 
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
 
 
 

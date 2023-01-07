@@ -52,30 +52,36 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>CS | Hwan’s Devlog</title>
-<meta name="description" content="겸상하는 개발자입니다 ⌨️">
+<!-- begin _includes/seo.html --><title>[Module] 모듈 | Hwan’s Devlog</title>
+<meta name="description" content="ES Modules / Common JS">
 
 
   <meta name="author" content="Hwan's Devlog">
   
+  <meta property="article:author" content="Hwan's Devlog">
+  
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Hwan's Devlog">
-<meta property="og:title" content="CS">
-<meta property="og:url" content="http://localhost:4000/categories/CS/">
+<meta property="og:title" content="[Module] 모듈">
+<meta property="og:url" content="http://localhost:4000/CS/Module/">
 
 
-  <meta property="og:description" content="겸상하는 개발자입니다 ⌨️">
-
-
-
+  <meta property="og:description" content="ES Modules / Common JS">
 
 
 
 
 
+
+
+  <meta property="article:published_time" content="2022-12-03T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-03T00:00:00+09:00">
 
 
 
@@ -84,7 +90,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/categories/CS/">
+<link rel="canonical" href="http://localhost:4000/CS/Module/">
 
 
 
@@ -155,7 +161,7 @@
     <meta name="theme-color" content="#ffffff">
   </head>
 
-  <body class="layout--category">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -355,20 +361,187 @@
 
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Module] 모듈">
+    <meta itemprop="description" content="ES Modules / Common JS">
+    <meta itemprop="datePublished" content="2022-12-03T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-03T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Module] 모듈
+</h1>
+          
+
+  <p class="page__meta">
     
-      <h1 id="page-title" class="page__title">CS</h1>
-    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-03T00:00:00+09:00">December 3, 2022</time>
+      </span>
     
 
+    
+
+    
+  </p>
 
 
-<div class="entries-list">
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#module">Module</a><ul><li><a href="#비교">비교</a><ul><li><a href="#es-modules-mjs">ES Modules (MJS)</a></li><li><a href="#common-js-cjs">Common JS (CJS)</a></li></ul></li><li><a href="#동작-방식">동작 방식</a></li><li><a href="#모듈-내보내기-가져오기">모듈 내보내기, 가져오기</a><ul><li><a href="#common-js">Common JS</a></li><li><a href="#내보내기">내보내기</a></li><li><a href="#가져오기">가져오기</a></li></ul></li><li><a href="#사용하기">사용하기</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="module">Module</h1>
+<p>애플리케이션을 구성하는 개별적 요소로서 재사용 가능한 코드 조각을 말한다.이렇게 분리한 코드조각을 각각의 <strong>모듈</strong>(module)이라고 부른다.</p>
+
+<p>라이브러리도 모듈의 일부이며 내가 작성한 함수도 하나의 모듈이 될 수 있다.</p>
+
+<p><strong>자바스크립트는</strong> 파일마다 독립적인 파일 스코프를 가지고 있지 않고 <strong>하나의 전역객체를 공유하여 사용한다.</strong> 이렇게 되면 전역변수가 중복되는 등의 문제가 발생할 수 있다. 즉 여러개의 파일로 분리하여 여러개의 script 태그를 사용하여도 이는 모듈화라고 볼 수 없다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// script 1, 2, 3 은 모두 같은 전역 스코프를 공유한다.
+&lt;script src="script1.js /&gt;
+&lt;script src="script2.js /&gt;
+&lt;script src="script3.js /&gt;
+</code></pre></div></div>
+
+<p>이러한 문제점을 해결하기 위해서 Node.js에서는 사실상 표준이라고 할 수 있는 <strong>CommonJS</strong> 를 채택하였다. 이렇게 함으로써 각각의 모듈들은 각자의 스코프를 가지게 될 수 있었다.</p>
+
+<p>그러나 브라우저(클라이언트 사이드 자바스크립트)에서는 이를 지원하지 않았다. 그래서 ES6에서 이를 해결하기 위해 모듈 기능을 추가하게 된 것이다.</p>
+
+<h2 id="비교">비교</h2>
+
+<h3 id="es-modules-mjs">ES Modules (MJS)</h3>
+
+<ul>
+  <li>모듈로더를 비동기 환경에서 실행하고, <code class="language-plaintext highlighter-rouge">import</code> <code class="language-plaintext highlighter-rouge">export</code> 구문을 찾아서 파싱한다.</li>
+  <li>더 이상 <code class="language-plaintext highlighter-rouge">import</code> 할 겂이 없을 때까지 <code class="language-plaintext highlighter-rouge">import</code> 를 찾는다.</li>
+  <li>스크립트들이 실행이 된다.</li>
+  <li>package.config의 “type”: “module” 로 set 해주어야한다. (기본값이 아니다.)</li>
+</ul>
+
+<h3 id="common-js-cjs">Common JS (CJS)</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">default</code> 값이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">require()</code>는 동기로 이루어진다. <code class="language-plaintext highlighter-rouge">promise</code> 나 <code class="language-plaintext highlighter-rouge">callback</code>을 return 하지 않는다.</li>
+  <li>즉 require 내부의 script를 실행하고 <code class="language-plaintext highlighter-rouge">export</code> 되어 있는 값을 return 한다.</li>
+</ul>
+
+<h2 id="동작-방식">동작 방식</h2>
+
+<p>ES Module의 경우 개발자가 지정한 파일을 entry point로 하여 나머지 파일들은 import 문을 따라가며 찾는다.</p>
+
+<p>쉽게말해 index.html에서 <code class="language-plaintext highlighter-rouge">&lt;script src="script.js" type="module"&gt;</code> 로 작성한 경우 script.js를 entry point로 하여 script.js 파일 내부에서 import 문들을 찾아서 나머지 파일을 찾아내며 모두 찾아낸 후에는 <code class="language-plaintext highlighter-rouge">dependencies</code>의 모듈 그래프를 만들어낸다.</p>
+
+<p>그 후 만들어낸 모듈 그래프를 토대로 의존하고 있는 스크립트들을 실행한다.</p>
+
+<h2 id="모듈-내보내기-가져오기">모듈 내보내기, 가져오기</h2>
+
+<h3 id="common-js">Common JS</h3>
+
+<h3 id="내보내기">내보내기</h3>
+
+<p><code class="language-plaintext highlighter-rouge">export</code> 와 <code class="language-plaintext highlighter-rouge">export default</code> 를 함수명 또는 변수명 앞에 위치시킴으로써 외부로 내보낼 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// sayHello.js
+export function sayHello(name) {
+  console.log(`sayHello ${name}!`)
+}
+
+export default function sayHi(name) {
+  console.log(`sayHi ${name}!`)
+}
+</code></pre></div></div>
+
+<h3 id="가져오기">가져오기</h3>
+
+<p><code class="language-plaintext highlighter-rouge">import</code> 를 코드 최상단에 작성함으로써 외부에서 <code class="language-plaintext highlighter-rouge">module</code>을 가져와 사용할 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { sayHello } from "./sayHello.js"
+import sayHi from "./sayHello.js"
+
+sayHello('ahn') // Hello ahn!
+sayHi('ahn') // hi ahn!
+</code></pre></div></div>
+
+<h2 id="사용하기">사용하기</h2>
+
+<ol>
+  <li>확장자를 변경하기 <code class="language-plaintext highlighter-rouge">.js</code> =&gt; <code class="language-plaintext highlighter-rouge">.mjs</code></li>
+  <li>package.json에 옵션을 변경하기 <code class="language-plaintext highlighter-rouge">"type": "module"</code> 추가</li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
   
 
 
+  
 
-<div class="list__item">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cs" class="page__taxonomy-item" rel="tag">CS</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-03">December 3, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/" class="pagination--pager" title="[Python_Greedy] 백준 - 1931(회의실 배정)
+">Prev</a>
+    
+    
+      <a href="/CS/Scope/" class="pagination--pager" title="[Scope] 스코프
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -399,10 +572,12 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
@@ -433,15 +608,17 @@
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/CS/Module/" rel="permalink">[Module] 모듈
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/" rel="permalink">[Python_Greedy] 백준 - 1931(회의실 배정)
 </a>
       
     </h2>
@@ -452,7 +629,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2022-12-03T00:00:00+09:00">December 3, 2022</time>
+        <time datetime="2022-12-02T00:00:00+09:00">December 2, 2022</time>
       </span>
     
 
@@ -462,20 +639,22 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">ES Modules / Common JS
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1931
 </p>
   </article>
 </div>
 
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/CS/Synchronous_Asynchronous/" rel="permalink">[Synchronous, Asynchronous] 동기와 비동기
+        <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_11047/" rel="permalink">[Python_Greedy] 백준 - 11047(동전 0)
 </a>
       
     </h2>
@@ -486,7 +665,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2022-11-29T00:00:00+09:00">November 29, 2022</time>
+        <time datetime="2022-12-01T00:00:00+09:00">December 1, 2022</time>
       </span>
     
 
@@ -496,15 +675,18 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">동기와 비동기의 정의 및 장단점
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_11047
 </p>
   </article>
 </div>
 
+        
+      </div>
+    </div>
+  
+  
 </div>
 
-  </div>
-</div>
     </div>
 
     
@@ -554,6 +736,30 @@
 
 
 
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
 
 
 
