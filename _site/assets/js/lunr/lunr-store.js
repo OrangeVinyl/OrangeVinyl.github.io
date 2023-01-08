@@ -47,6 +47,12 @@ var store = [{
         "url": "/CS/Scope/",
         "teaser": null
       },{
+        "title": "[Data Structure] 리스트",
+        "excerpt":"✅ 원형 연결 리스트 하나의 노드에서 다른 모든 노드로의 접근이 가능하다는 장점이 존재한다. 삭제나 삽입 시에는 항상 선행 노드를 가리키는 **포인터**가 필요하다 원형 리스트의 헤드 포인터인 head가 마지막 노드를 가리키는 것을 명심 원형리스트의 처음에 삽입 ListNode* insert_first(ListNode* head, element data) { ListNode* node = (ListNode *)malloc(sizeof(ListNode)); node -&gt; data = data;...","categories": ["Data Structure"],
+        "tags": ["Data Structure","List","C"],
+        "url": "/CS/Data_Structure_List/",
+        "teaser": null
+      },{
         "title": "[DataBase] 데이터베이스 프로그래밍",
         "excerpt":"데이터베이스 구축 과정 DB 설계 DBMS 결정 사용자 계정 설정과 권한 부여 테이블 생성 레코드 추가 질의어로 업무에 필요한 정보 활용 conn 관리자/관리자 create user 관리자이름 idetified by 비밀번호; grant create session to 관리자이름; grant resource, create view, create to table to 관리자이름; SQL(Structed Query Language) : 구조화된 질의 언어...","categories": ["CS"],
         "tags": ["CS","Knowledge","Database","C#"],

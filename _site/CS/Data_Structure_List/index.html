@@ -1,0 +1,862 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Data Structure] 리스트 | Hwan’s Devlog</title>
+<meta name="description" content="Data Structure List">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Data Structure] 리스트">
+<meta property="og:url" content="http://localhost:4000/CS/Data_Structure_List/">
+
+
+  <meta property="og:description" content="Data Structure List">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-12-06T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-06T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/CS/Data_Structure_List/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 11</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Data Structure] 리스트">
+    <meta itemprop="description" content="Data Structure List">
+    <meta itemprop="datePublished" content="2022-12-06T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2022-12-06T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Data Structure] 리스트
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-06T00:00:00+09:00">December 6, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#원형-연결-리스트">✅ 원형 연결 리스트</a><ul><li><a href="#원형리스트의-처음에-삽입">원형리스트의 처음에 삽입</a></li><li><a href="#원형리스트의-마지막에-삽입">원형리스트의 마지막에 삽입</a></li></ul></li><li><a href="#이중-연결-리스트">이중 연결 리스트</a><ul><li><a href="#이중연결리스트에서의-삽입함수">이중연결리스트에서의 삽입함수</a></li><li><a href="#이중연결리스트에서의-삭제함수">이중연결리스트에서의 삭제함수</a></li></ul></li><li><a href="#연결리스트로-구현한-스택">✅ 연결리스트로 구현한 스택</a><ul><li><a href="#연결리스트로-구현한-스택의-삽입연산">연결리스트로 구현한 스택의 삽입연산</a></li><li><a href="#연결리스트로-구현한-스택의-삭제연산">연결리스트로 구현한 스택의 삭제연산</a></li></ul></li><li><a href="#연결-리스트로-구현한-큐">✅ 연결 리스트로 구현한 큐</a><ul><li><a href="#연결리스트로-구현한-큐의-삽입연산">연결리스트로 구현한 큐의 삽입연산</a></li><li><a href="#연결리스트로-구현한-큐의-삭제연산">연결리스트로 구현한 큐의 삭제연산</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="원형-연결-리스트">✅ 원형 연결 리스트</h2>
+
+<p>하나의 노드에서 다른 모든 노드로의 접근이 가능하다는 장점이 존재한다.</p>
+
+<p>삭제나 삽입 시에는 항상 선행 노드를 가리키는 <code class="language-plaintext highlighter-rouge">**포인터**</code>가 필요하다</p>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_1.png" alt="List_1" /></p>
+
+<p><strong>원형 리스트의 헤드 포인터인 head가 마지막 노드를 가리키는 것을 명심</strong></p>
+
+<h3 id="원형리스트의-처음에-삽입">원형리스트의 처음에 삽입</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ListNode</span><span class="o">*</span> <span class="nf">insert_first</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">,</span> <span class="n">element</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">ListNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ListNode</span><span class="p">));</span>
+	<span class="n">node</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">head</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+		<span class="n">node</span> <span class="o">-&gt;</span> <span class="n">link</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="k">else</span> <span class="p">{</span>
+		<span class="n">node</span> <span class="o">-&gt;</span> <span class="n">link</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-&gt;</span> <span class="n">link</span><span class="p">;</span>
+		<span class="n">head</span> <span class="o">-&gt;</span> <span class="n">link</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="원형리스트의-마지막에-삽입">원형리스트의 마지막에 삽입</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ListNode</span><span class="o">*</span> <span class="nf">insert_first</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">,</span> <span class="n">element</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">ListNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ListNode</span><span class="p">));</span>
+	<span class="n">node</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">head</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+		<span class="n">node</span> <span class="o">-&gt;</span> <span class="n">link</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="k">else</span> <span class="p">{</span>
+		<span class="n">node</span> <span class="o">-&gt;</span> <span class="n">link</span> <span class="o">=</span> <span class="n">head</span> <span class="o">-&gt;</span> <span class="n">link</span><span class="p">;</span>
+		<span class="n">head</span> <span class="o">-&gt;</span> <span class="n">link</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+		<span class="n">head</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span> <span class="c1">//여기만 추가하면 된다.</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="이중-연결-리스트">이중 연결 리스트</h2>
+
+<p>이중 연결 리스트는 특정 노드에서 양방향으로 자유롭게 움직일 필요가 있는 문제점을 해결하기 위해 만들어진 자료구조이다.</p>
+
+<p>공간을 많이 차지하고 코드가 복잡해진다는 단점이 존재한다.</p>
+
+<p>헤드노드라는 특별한 노드를 추가한다. (헤드 포인터와는 구별해야 한다)</p>
+
+<ul>
+  <li>헤드 노드는 데이터를 가지고 있지 않는 특별한 노드를 추가한다</li>
+  <li>헤드 노드의 데이터필드는 아무런 정보도 담고 있지 않다</li>
+</ul>
+
+<center><img src="/assets/images/posts_img/Data_Structure_List/List_2.png" /></center>
+<h3 id="이중연결리스트에서의-삽입함수">이중연결리스트에서의 삽입함수</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">dinsert</span><span class="p">(</span><span class="n">DListNode</span> <span class="o">*</span><span class="n">before</span><span class="p">,</span> <span class="n">element</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">DListNode</span> <span class="o">*</span><span class="n">newnode</span> <span class="o">=</span> <span class="p">(</span><span class="n">DListnode</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">DListnode</span><span class="p">));</span>
+	<span class="n">newnode</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+	<span class="n">newnode</span> <span class="o">-&gt;</span> <span class="n">llink</span> <span class="o">=</span> <span class="n">before</span><span class="p">;</span> <span class="c1">//before -&gt; llink가 아님을 유의하자</span>
+	<span class="n">newnode</span> <span class="o">-&gt;</span> <span class="n">rlink</span> <span class="o">=</span> <span class="n">before</span> <span class="o">-&gt;</span> <span class="n">rlink</span><span class="p">;</span> <span class="c1">// 여기까지는 순서를 지켜야 한다.</span>
+	<span class="n">before</span> <span class="o">-&gt;</span> <span class="n">rlink</span> <span class="o">-&gt;</span> <span class="n">llink</span> <span class="o">=</span> <span class="n">newnode</span><span class="p">;</span>
+	<span class="n">before</span> <span class="o">-&gt;</span> <span class="n">rlink</span> <span class="o">=</span> <span class="n">newnode</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_3.png" alt="List_3" /></p>
+
+<h3 id="이중연결리스트에서의-삭제함수">이중연결리스트에서의 삭제함수</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">ddelete</span><span class="p">(</span><span class="n">DListNode</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="n">DListNode</span> <span class="o">*</span><span class="n">removed</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">removed</span> <span class="o">==</span> <span class="n">head</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+	<span class="n">removed</span> <span class="o">-&gt;</span> <span class="n">llink</span> <span class="o">-&gt;</span> <span class="n">rlink</span> <span class="o">=</span> <span class="n">removed</span> <span class="o">-&gt;</span> <span class="n">rlink</span><span class="p">;</span>
+	<span class="n">removed</span> <span class="o">-&gt;</span> <span class="n">rlink</span> <span class="o">-&gt;</span> <span class="n">llink</span> <span class="o">=</span> <span class="n">removed</span> <span class="o">-&gt;</span> <span class="n">llink</span><span class="p">;</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">removed</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_4.png" />
+이중 연결 리스트를 <strong>초기화하는 함수 init()</strong>존재</p>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_5.png" /></p>
+
+<p>이중 연결 리스트에서는 보통 헤드 노드가 존재하므로 단순 연결리스트처럼 <strong>헤드 포인터가 필요 없다</strong>.</p>
+
+<p>헤드 노드는 main 함수 안에 변수로 head라는 이름으로 생성됨 → <strong>head은 포인터 변수가 아닌 구조체 변수</strong></p>
+
+<h2 id="연결리스트로-구현한-스택">✅ 연결리스트로 구현한 스택</h2>
+
+<p>외부에서 보기에는 배열을 이용한 스택이나 연결 리스트를 이용한 스택이나 전혀 차이가 없다.</p>
+
+<p>연결 리스트를 이용한 스택을 생성하면 <strong>크기가 제한되지 않는다.</strong></p>
+
+<p><strong>삽입이나 삭제시간은 좀 더 걸린다.</strong></p>
+
+<p><strong>스택의 top은 더 이상 정수가 아니고 노드를 가리키는 포인터로 선언된다.</strong></p>
+
+<p>스택의 포화상태는 동적 메모리 할당만 된다면 노드를 생성할 수 있기 때문에 없는거나 마찬가지인 상태</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">int</span> <span class="n">element</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">StackNode</span> <span class="p">{</span>
+	<span class="n">element</span> <span class="n">data</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">StackNode</span> <span class="o">*</span><span class="n">link</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">StackNode</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">StackNode</span> <span class="o">*</span><span class="n">top</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">LinkedStackType</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="연결리스트로-구현한-스택의-삽입연산">연결리스트로 구현한 스택의 삽입연산</h3>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_6.png" /></p>
+<h3 id="연결리스트로-구현한-스택의-삭제연산">연결리스트로 구현한 스택의 삭제연산</h3>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_7.png" alt="List_7" /></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="/assets/images/posts_img/Data_Structure_List/List_8.png" alt="List_8" /></td>
+      <td><img src="/assets/images/posts_img/Data_Structure_List/List_9.png" alt="List_9" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="/assets/images/posts_img/Data_Structure_List/List_10.png" alt="List_10" /></td>
+      <td><img src="/assets/images/posts_img/Data_Structure_List/List_11.png" alt="List_11" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="연결-리스트로-구현한-큐">✅ 연결 리스트로 구현한 큐</h2>
+
+<p>장점과 단점 같은 경우는 연결리스트로 구현한 스택과 동일하다.</p>
+
+<p>기본적인 구조는 단순 연결 리스트에다가 2개의 포인터를 추가한 것과 같다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">int</span> <span class="n">element</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">QueueNode</span> <span class="p">{</span>
+	<span class="n">element</span> <span class="n">data</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">QueueNode</span> <span class="o">*</span><span class="n">link</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">QueueNode</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">QueueNode</span> <span class="o">*</span><span class="n">front</span><span class="p">,</span> <span class="o">*</span><span class="n">rear</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">LinkedQueueType</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_12.png" alt="List_12" /></p>
+
+<h3 id="연결리스트로-구현한-큐의-삽입연산">연결리스트로 구현한 큐의 삽입연산</h3>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_13.png" alt="List_13" /></p>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_14.png" alt="List_14" /></p>
+
+<h3 id="연결리스트로-구현한-큐의-삭제연산">연결리스트로 구현한 큐의 삭제연산</h3>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_15.png" alt="List_15" /></p>
+
+<p><img src="/assets/images/posts_img/Data_Structure_List/List_16.png" alt="List_16" /></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#data-structure" class="page__taxonomy-item" rel="tag">Data Structure</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-06">December 6, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/CS/Scope/" class="pagination--pager" title="[Scope] 스코프
+">Prev</a>
+    
+    
+      <a href="/CS/Database/" class="pagination--pager" title="[DataBase] 데이터베이스 프로그래밍
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" rel="permalink">[Python_Greedy] 행렬
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1080
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Database/" rel="permalink">[DataBase] 데이터베이스 프로그래밍
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-07T00:00:00+09:00">January 7, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">DataBase Programming(C#)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Scope/" rel="permalink">[Scope] 스코프
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-05T00:00:00+09:00">December 5, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Scope
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Module/" rel="permalink">[Module] 모듈
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-03T00:00:00+09:00">December 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">ES Modules / Common JS
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
