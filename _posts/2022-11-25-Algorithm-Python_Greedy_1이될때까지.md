@@ -1,6 +1,6 @@
 ---
 title: "[Python_Greedy] 1이 될 때까지"
-excerpt: "이것이 코딩테스트다 with 파이썬 Greedy"
+excerpt: "백준"
 
 categories:
   - Algorithm

@@ -52,4 +52,10 @@ var store = [{
         "tags": ["CS","Knowledge","Database","C#"],
         "url": "/CS/Database/",
         "teaser": null
+      },{
+        "title": "[Python_Greedy] 행렬",
+        "excerpt":"문제의 핵심을 기억해야 한다. ‘행렬을 변환하는 연산은 어떤 3X3 크기의 부분 행렬에 있는 모든 원소를 뒤집는 것이다.(0 → 1, 1→0)’ 쉽게 말해 N,M이 둘 다 4로 지정 되어 있는경우 3X3의 박스가 움직일 수 있는 경우는 총 4가지의 방법 밖에 없다. 풀이에서 기억해야 하는 부분은 3X3 중 1열,1행에 해당하는 A,B의 값이...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Greedy"],
+        "url": "/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/",
+        "teaser": null
       }]

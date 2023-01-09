@@ -52,8 +52,8 @@
     
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[Module] 모듈 | Hwan’s Devlog</title>
-<meta name="description" content="ES Modules / Common JS">
+<!-- begin _includes/seo.html --><title>[Python_Greedy] 행렬 | Hwan’s Devlog</title>
+<meta name="description" content="백준_Greedy_1080">
 
 
   <meta name="author" content="Hwan's Devlog">
@@ -65,32 +65,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Hwan's Devlog">
-<meta property="og:title" content="[Module] 모듈">
-<meta property="og:url" content="http://localhost:4000/CS/Module/">
+<meta property="og:title" content="[Python_Greedy] 행렬">
+<meta property="og:url" content="http://localhost:4000/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/">
 
 
-  <meta property="og:description" content="ES Modules / Common JS">
-
-
-
+  <meta property="og:description" content="백준_Greedy_1080">
 
 
 
 
-  <meta property="article:published_time" content="2022-12-03T00:00:00+09:00">
 
 
 
-  <meta property="article:modified_time" content="2022-12-03T00:00:00+09:00">
+  <meta property="article:published_time" content="2023-01-08T00:00:00+09:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2023-01-08T00:00:00+09:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/CS/Module/">
+
+<link rel="canonical" href="http://localhost:4000/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/">
 
 
 
@@ -362,15 +362,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Module] 모듈">
-    <meta itemprop="description" content="ES Modules / Common JS">
-    <meta itemprop="datePublished" content="2022-12-03T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2022-12-03T00:00:00+09:00">
+    <meta itemprop="headline" content="[Python_Greedy] 행렬">
+    <meta itemprop="description" content="백준_Greedy_1080">
+    <meta itemprop="datePublished" content="2023-01-08T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-01-08T00:00:00+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[Module] 모듈
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python_Greedy] 행렬
 </h1>
           
 
@@ -379,7 +379,7 @@
       
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2022-12-03T00:00:00+09:00">December 3, 2022</time>
+        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
       </span>
     
 
@@ -397,90 +397,68 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#module">Module</a><ul><li><a href="#비교">비교</a><ul><li><a href="#es-modules-mjs">ES Modules (MJS)</a></li><li><a href="#common-js-cjs">Common JS (CJS)</a></li></ul></li><li><a href="#동작-방식">동작 방식</a></li><li><a href="#모듈-내보내기-가져오기">모듈 내보내기, 가져오기</a><ul><li><a href="#common-js">Common JS</a></li><li><a href="#내보내기">내보내기</a></li><li><a href="#가져오기">가져오기</a></li></ul></li><li><a href="#사용하기">사용하기</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#전체코드">💡 전체 코드</a></li><li><a href="#새로운-개념">새로운 개념</a></li></ul>
 
             </nav>
           </aside>
         
-        <h1 id="module">Module</h1>
-<p>애플리케이션을 구성하는 개별적 요소로서 재사용 가능한 코드 조각을 말한다.이렇게 분리한 코드조각을 각각의 <strong>모듈</strong>(module)이라고 부른다.</p>
+        <p><img src="/assets/images/posts_img/Python_Greedy_행렬/1080.png" alt="1080" />
+문제의 <strong>핵심</strong>을 기억해야 한다.</p>
 
-<p>라이브러리도 모듈의 일부이며 내가 작성한 함수도 하나의 모듈이 될 수 있다.</p>
+<blockquote>
+  <p><strong>‘행렬을 변환하는 연산은 어떤 3X3 크기의  부분 행렬에 있는 모든 원소를 뒤집는 것이다.(0 → 1, 1→0)’</strong></p>
 
-<p><strong>자바스크립트는</strong> 파일마다 독립적인 파일 스코프를 가지고 있지 않고 <strong>하나의 전역객체를 공유하여 사용한다.</strong> 이렇게 되면 전역변수가 중복되는 등의 문제가 발생할 수 있다. 즉 여러개의 파일로 분리하여 여러개의 script 태그를 사용하여도 이는 모듈화라고 볼 수 없다.</p>
+</blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// script 1, 2, 3 은 모두 같은 전역 스코프를 공유한다.
-&lt;script src="script1.js /&gt;
-&lt;script src="script2.js /&gt;
-&lt;script src="script3.js /&gt;
+<p>쉽게 말해 N,M이 둘 다 4로 지정 되어 있는경우 3X3의 박스가 움직일 수 있는 경우는 총 4가지의 방법 밖에 없다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">풀이에서 기억해야 하는 부분은 3X3 중 1열,1행에 해당하는 A,B의 값이 일치하지 않을 시 A의 값들을 뒤집어 주면 된다.</code></p>
+
+<h3 id="전체코드">💡 전체 코드</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span><span class="p">,</span><span class="n">m</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">strip</span><span class="p">()))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> 
+<span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">strip</span><span class="p">()))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+    
+<span class="k">def</span> <span class="nf">check</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+        
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">flip</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">if</span> <span class="n">check</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>이러한 문제점을 해결하기 위해서 Node.js에서는 사실상 표준이라고 할 수 있는 <strong>CommonJS</strong> 를 채택하였다. 이렇게 함으로써 각각의 모듈들은 각자의 스코프를 가지게 될 수 있었다.</p>
-
-<p>그러나 브라우저(클라이언트 사이드 자바스크립트)에서는 이를 지원하지 않았다. 그래서 ES6에서 이를 해결하기 위해 모듈 기능을 추가하게 된 것이다.</p>
-
-<h2 id="비교">비교</h2>
-
-<h3 id="es-modules-mjs">ES Modules (MJS)</h3>
+<h3 id="새로운-개념">새로운 개념</h3>
 
 <ul>
-  <li>모듈로더를 비동기 환경에서 실행하고, <code class="language-plaintext highlighter-rouge">import</code> <code class="language-plaintext highlighter-rouge">export</code> 구문을 찾아서 파싱한다.</li>
-  <li>더 이상 <code class="language-plaintext highlighter-rouge">import</code> 할 겂이 없을 때까지 <code class="language-plaintext highlighter-rouge">import</code> 를 찾는다.</li>
-  <li>스크립트들이 실행이 된다.</li>
-  <li>package.config의 “type”: “module” 로 set 해주어야한다. (기본값이 아니다.)</li>
+  <li>List Comprehension</li>
+  <li>strip()
+    <ul>
+      <li>문자열에서 특정 문자를 제거하는 기능</li>
+      <li><code class="language-plaintext highlighter-rouge">strip([chars])</code> : 인자로 전달된 문자를 String의 왼쪽과 오른쪽에서 제거합니다.</li>
+      <li><code class="language-plaintext highlighter-rouge">lstrip([chars])</code> : 인자로 전달된 문자를 String의 왼쪽에서 제거합니다.</li>
+      <li><code class="language-plaintext highlighter-rouge">rstrip([chars])</code> : 인자로 전달된 문자를 String의 오른쪽에서 제거합니다.</li>
+    </ul>
+  </li>
 </ul>
-
-<h3 id="common-js-cjs">Common JS (CJS)</h3>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">default</code> 값이다.</li>
-  <li><code class="language-plaintext highlighter-rouge">require()</code>는 동기로 이루어진다. <code class="language-plaintext highlighter-rouge">promise</code> 나 <code class="language-plaintext highlighter-rouge">callback</code>을 return 하지 않는다.</li>
-  <li>즉 require 내부의 script를 실행하고 <code class="language-plaintext highlighter-rouge">export</code> 되어 있는 값을 return 한다.</li>
-</ul>
-
-<h2 id="동작-방식">동작 방식</h2>
-
-<p>ES Module의 경우 개발자가 지정한 파일을 entry point로 하여 나머지 파일들은 import 문을 따라가며 찾는다.</p>
-
-<p>쉽게말해 index.html에서 <code class="language-plaintext highlighter-rouge">&lt;script src="script.js" type="module"&gt;</code> 로 작성한 경우 script.js를 entry point로 하여 script.js 파일 내부에서 import 문들을 찾아서 나머지 파일을 찾아내며 모두 찾아낸 후에는 <code class="language-plaintext highlighter-rouge">dependencies</code>의 모듈 그래프를 만들어낸다.</p>
-
-<p>그 후 만들어낸 모듈 그래프를 토대로 의존하고 있는 스크립트들을 실행한다.</p>
-
-<h2 id="모듈-내보내기-가져오기">모듈 내보내기, 가져오기</h2>
-
-<h3 id="common-js">Common JS</h3>
-
-<h3 id="내보내기">내보내기</h3>
-
-<p><code class="language-plaintext highlighter-rouge">export</code> 와 <code class="language-plaintext highlighter-rouge">export default</code> 를 함수명 또는 변수명 앞에 위치시킴으로써 외부로 내보낼 수 있다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// sayHello.js
-export function sayHello(name) {
-  console.log(`sayHello ${name}!`)
-}
-
-export default function sayHi(name) {
-  console.log(`sayHi ${name}!`)
-}
-</code></pre></div></div>
-
-<h3 id="가져오기">가져오기</h3>
-
-<p><code class="language-plaintext highlighter-rouge">import</code> 를 코드 최상단에 작성함으로써 외부에서 <code class="language-plaintext highlighter-rouge">module</code>을 가져와 사용할 수 있다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { sayHello } from "./sayHello.js"
-import sayHi from "./sayHello.js"
-
-sayHello('ahn') // Hello ahn!
-sayHi('ahn') // hi ahn!
-</code></pre></div></div>
-
-<h2 id="사용하기">사용하기</h2>
-
-<ol>
-  <li>확장자를 변경하기 <code class="language-plaintext highlighter-rouge">.js</code> =&gt; <code class="language-plaintext highlighter-rouge">.mjs</code></li>
-  <li>package.json에 옵션을 변경하기 <code class="language-plaintext highlighter-rouge">"type": "module"</code> 추가</li>
-</ol>
 
         
       </section>
@@ -499,14 +477,14 @@ sayHi('ahn') // hi ahn!
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#cs" class="page__taxonomy-item" rel="tag">CS</a>
+      <a href="/categories/#algorithm" class="page__taxonomy-item" rel="tag">Algorithm</a>
     
     </span>
   </p>
 
 
         
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-03">December 3, 2022</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-01-08">January 8, 2023</time></p>
 
 
       </footer>
@@ -516,12 +494,11 @@ sayHi('ahn') // hi ahn!
       
   <nav class="pagination">
     
-      <a href="/Algorithm/Python_Greedy_%EB%B0%B1%EC%A4%80_1931/" class="pagination--pager" title="[Python_Greedy] 백준 - 1931(회의실 배정)
+      <a href="/CS/Database/" class="pagination--pager" title="[DataBase] 데이터베이스 프로그래밍
 ">Prev</a>
     
     
-      <a href="/CS/Scope/" class="pagination--pager" title="[Scope] 스코프
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -536,42 +513,6 @@ sayHi('ahn') // hi ahn!
     <div class="page__related">
       <h4 class="page__related-title">You may also enjoy</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" rel="permalink">[Python_Greedy] 행렬
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1080
-</p>
-  </article>
-</div>
-
         
           
 
@@ -640,6 +581,42 @@ sayHi('ahn') // hi ahn!
 
 
     <p class="archive__item-excerpt" itemprop="description">Scope
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Module/" rel="permalink">[Module] 모듈
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-03T00:00:00+09:00">December 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">ES Modules / Common JS
 </p>
   </article>
 </div>
