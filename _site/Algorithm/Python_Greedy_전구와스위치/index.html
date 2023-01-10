@@ -1,0 +1,986 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python_Greedy] 전구와 스위치 | Hwan’s Devlog</title>
+<meta name="description" content="백준_Greedy_2138">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog">
+<meta property="og:title" content="[Python_Greedy] 전구와 스위치">
+<meta property="og:url" content="http://localhost:4000/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/">
+
+
+  <meta property="og:description" content="백준_Greedy_2138">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-01-11T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-01-11T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github-account.github.io/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github-account.github.io/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github-account.github.io/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://github-account.github.io/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://github-account.github.io/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/meee.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 12</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python_Greedy] 전구와 스위치">
+    <meta itemprop="description" content="백준_Greedy_2138">
+    <meta itemprop="datePublished" content="2023-01-11T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-01-11T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python_Greedy] 전구와 스위치
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-11T00:00:00+09:00">January 11, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#문제-풀이-키워드">💡 문제 풀이 키워드</a></li><li><a href="#-사용-문법-개념정리">📝 사용 문법 개념정리</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p><img src="/assets/images/posts_img/Python_Greedy_2138/2138.png" alt="2138.png" /></p>
+
+<h3 id="문제-풀이-키워드">💡 문제 풀이 키워드</h3>
+
+<ul>
+  <li>
+    <p>1번 스위치를 눌렀을 경우, 1,2번의 전구의 상태가 바뀌고, N번 스위치를 눌렀을 경우, N-1, N번의 전구의 상태가 바뀐다</p>
+
+    <p>→ 결국, <strong>첫 번째 스위치는 기존의 법칙과 다르게 [i(1 &lt; i &lt; N)의 범위를 보면 1이 될 수가 없다] 예외적인 상황으로 봐야한다.</strong> 그러므로 첫 번째 스위치의 누름 유무에 따라 구분해야 한다는 것을 도출한다.</p>
+  </li>
+  <li>
+    <p>두 번째 전구부터는 <strong>기준점이 되는 스위치의 왼쪽 전구</strong>를 통해 스위치를 누를 지 결정한다.</p>
+
+    <p>→ 한 번 지나간 전구는 다시 조정이 불가능하기 때문에 왼쪽 기준으로 하는 것이 맞다.</p>
+
+    <p>→ <strong>최적의 조건</strong>을 찾는, 혹은 <strong>최소의 조건</strong>을 찾는 방법을 사용하기에 그리디 알고리즘이다.</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#틀린 풀이
+</span><span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+
+<span class="n">before</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()))</span>
+<span class="n">target</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()))</span>
+<span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">temp_before</span> <span class="o">=</span> <span class="n">before</span><span class="p">[:]</span> <span class="c1">#리스트 슬라이싱을 이용한 깊은 복사
+</span>
+<span class="c1">#첫 번째를 안 누른 경우
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">before</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">before</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">before</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">before</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">before</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># i의 범위는 (1&lt;i&lt;N)
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">before</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">before</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">before</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">()</span>
+
+<span class="c1">#첫 번째를 누른 경우
+</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">temp_before</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">temp_before</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">temp_before</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">temp_before</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1">#마찬가지다
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>           
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">temp_before</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">()</span>
+
+<span class="c1">#불가능한 경우            
+</span><span class="k">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#정답 풀이
+</span><span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+
+<span class="n">before</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()))</span>
+<span class="n">target</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">()))</span>
+
+<span class="k">def</span> <span class="nf">change</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">temp_before</span> <span class="o">=</span> <span class="n">before</span><span class="p">[:]</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">temp_before</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+                <span class="n">temp_before</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">temp_before</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">cnt</span> <span class="k">if</span> <span class="n">temp_before</span> <span class="o">==</span> <span class="n">target</span> <span class="k">else</span> <span class="mf">1e9</span>
+    
+<span class="c1">#첫 번째를 누르지 않은 경우
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">change</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<span class="c1">#첫 번째를 누른 경우
+</span><span class="n">before</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">before</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">before</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">before</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">change</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#두 가지의 결과값을 비교하여 최솟값 저장
+</span><span class="k">print</span><span class="p">(</span><span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mf">1e9</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#두 가지 경우 모두 충족 못하는 경우를 고려한 삼항연산자
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="-사용-문법-개념정리">📝 사용 문법 개념정리</h3>
+
+<p><strong>1) Mutable, Immutable</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>class</th>
+      <th>설명</th>
+      <th>구분</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>list</td>
+      <td>mutable 한 순서가 있는 객체 집합</td>
+      <td>mutable</td>
+    </tr>
+    <tr>
+      <td>set</td>
+      <td>mutable 한 순서가 없는 고유한 객체 집합</td>
+      <td>mutable</td>
+    </tr>
+    <tr>
+      <td>dict</td>
+      <td>key와 value가 맵핑된 객체, 순서 없음</td>
+      <td>mutable</td>
+    </tr>
+    <tr>
+      <td>bool</td>
+      <td>참,거짓</td>
+      <td>immutable</td>
+    </tr>
+    <tr>
+      <td>int</td>
+      <td>정수</td>
+      <td>immutable</td>
+    </tr>
+    <tr>
+      <td>float</td>
+      <td>실수</td>
+      <td>immutable</td>
+    </tr>
+    <tr>
+      <td>tuple</td>
+      <td>immutable 한 순서가 있는 객체 집합</td>
+      <td>immutable</td>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>문자열</td>
+      <td>immutable</td>
+    </tr>
+    <tr>
+      <td>frozenset</td>
+      <td>immutable한 set</td>
+      <td>immutable</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#immutable
+</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># 1 1
+</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># 1 2
+</span>
+<span class="c1">#mutable
+</span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 2, 3, 4]
+</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 배열 b의 두번째 값을 0으로 바꿔준다.
+</span><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 0, 3, 4] [1, 0, 3, 4]
+</span></code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="/assets/images/posts_img/Python_Greedy_2138/2138_1.png" alt="2138_1.png" /></td>
+      <td><img src="/assets/images/posts_img/Python_Greedy_2138/2138_2.png" alt="2138_2.png" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="/assets/images/posts_img/Python_Greedy_2138/2138_3.png" alt="2138_3.png" /></td>
+      <td><img src="/assets/images/posts_img/Python_Greedy_2138/2138_4.png" alt="2138_4.png" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>2) copy, deepcopy(얉은 복사, 깊은 복사)</strong></p>
+
+<p>알고리즘 공부를 하다보면 <strong>원본 배열의 보존</strong>을 위해 배열을 ‘깊은 복사’한다.</p>
+
+<p>파이썬에서는 다양한 방법으로 깊은 복사를 할 수 있다.</p>
+
+<ol>
+  <li>
+    <p>copy 모듈의 deepcopy 이용</p>
+
+    <p>파이썬의 내장 모듈 copy를 import하여 deepcopy()를 사용하는 방법</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">copy</span>
+    
+ <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>클래스가 가지고 있는 copy() 함수 사용</p>
+
+    <p>파이썬의 기본적인 클래스들이 가지고 있는 copy()함수를 사용하는 것으로, list클래스도 내장하고 있다.</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>리스트 슬라이싱</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:]</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>리스트 생성 시, 매개변수에 원본을 전달 혹은 생성 후 원본리스트 확장</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#리스트 생성 후 매개변수 원본 전달
+</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span>    
+ <span class="c1">#extend 사용
+</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+ <span class="n">b</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>배열요소 접근을 통한 복사</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span>    
+ <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+ <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+     <span class="n">b</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span>    
+ <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+ <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+     <span class="n">b</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+ <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c1"># [1, 2, 3, 4] [1, 0, 3, 4]
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>3) 리스트 슬라이싱</strong></p>
+
+<p>콜론 왼쪽 숫자 = 우리가 추출하기 원하는 시작 인덱스</p>
+
+<p>콜론 오른쪽에 써주는 숫자 = 우리가 추출하기 원하는 끝 인덱스 + 1</p>
+
+<p><strong>4) 파이썬 삼항 연산자</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">condition</span><span class="p">]</span> <span class="err">?</span> <span class="p">[</span><span class="n">true_value</span><span class="p">]</span> <span class="p">:</span> <span class="p">[</span><span class="n">false_value</span><span class="p">]</span> <span class="o">//</span> <span class="n">파이썬</span> <span class="n">미지원</span>
+
+<span class="o">//</span><span class="n">파이썬에서</span> <span class="n">위</span> <span class="n">형태를</span> <span class="n">지원하지</span> <span class="n">않고</span> <span class="n">아래</span> <span class="n">형태를</span> <span class="n">지원한다</span><span class="p">.</span>
+
+<span class="p">[</span><span class="n">true_value</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">condition</span><span class="p">]</span> <span class="k">else</span> <span class="p">[</span><span class="n">false_value</span><span class="p">]</span> <span class="o">//</span> <span class="n">파이썬</span> <span class="n">지원</span>
+</code></pre></div></div>
+
+<p><strong>5) 1e9 , 2e9</strong></p>
+
+<p>가능한 최대값이 10억 미만이라면, 무한(INF)의 값으로 1e9를 사용할 수 있다.</p>
+
+<p><strong>1e9 = 1*10^9</strong></p>
+
+<p><strong>2e9 = 2*10^9</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 특히, 2e9는 int 범위내에서 무한대 값을 나타내기 위해 사용하는 경우가 많다.
+</code></pre></div></div>
+
+<p><strong>6) for ~ else 문</strong></p>
+
+<p>파이썬에서는 for문과 else문을 함께 사용가능하다. 혹은 try ~ except문과 이용되기도 한다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#algorithm" class="page__taxonomy-item" rel="tag">Algorithm</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-01-11">January 11, 2023</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" class="pagination--pager" title="[Python_Greedy] 행렬
+">Prev</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/" rel="permalink">[Python_Greedy] 행렬
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-08T00:00:00+09:00">January 8, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_Greedy_1080
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Database/" rel="permalink">[DataBase] 데이터베이스 프로그래밍
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-01-07T00:00:00+09:00">January 7, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">DataBase Programming(C#)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Data_Structure_List/" rel="permalink">[Data Structure] 리스트
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-06T00:00:00+09:00">December 6, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Data Structure List
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/CS/Scope/" rel="permalink">[Scope] 스코프
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2022-12-05T00:00:00+09:00">December 5, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Scope
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

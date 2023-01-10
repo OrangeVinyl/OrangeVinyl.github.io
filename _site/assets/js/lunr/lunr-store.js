@@ -64,4 +64,10 @@ var store = [{
         "tags": ["Python","Algorithm","Greedy"],
         "url": "/Algorithm/Python_Greedy_%ED%96%89%EB%A0%AC/",
         "teaser": null
+      },{
+        "title": "[Python_Greedy] 전구와 스위치",
+        "excerpt":"💡 문제 풀이 키워드 1번 스위치를 눌렀을 경우, 1,2번의 전구의 상태가 바뀌고, N번 스위치를 눌렀을 경우, N-1, N번의 전구의 상태가 바뀐다 → 결국, 첫 번째 스위치는 기존의 법칙과 다르게 [i(1 &lt; i &lt; N)의 범위를 보면 1이 될 수가 없다] 예외적인 상황으로 봐야한다. 그러므로 첫 번째 스위치의 누름 유무에 따라 구분해야...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Greedy"],
+        "url": "/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/",
+        "teaser": null
       }]
