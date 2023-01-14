@@ -106,4 +106,10 @@ var store = [{
         "tags": ["Python","Algorithm","Greedy"],
         "url": "/Algorithm/Python_Greedy_%EC%A0%84%EA%B5%AC%EC%99%80%EC%8A%A4%EC%9C%84%EC%B9%98/",
         "teaser": null
+      },{
+        "title": "[Python_Greedy] 잃어버린 괄호",
+        "excerpt":"✅ 문제풀이 핵심 식의 값을 ‘최소’로 만들려고 한다에 집중해야한다. 식을 최소로 만들기 위해서는 최대한 큰 값을 빼야 하므로 중요하게 볼 것은 ‘-’ 연산자이다. 1) ‘-’ 연산자로 식을 구분하면 더해야 할 부분들이 나온다. 2) 이후, 나눠진 부분들 중 ‘+’ 연산자가 포함되어 있는 경우 해당하는 문자열을 정수화 시켜 값들을 더한다. 3) 최종적으로 얻은...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Greedy"],
+        "url": "/Algorithm/Python_Greedy_%EC%9E%83%EC%96%B4%EB%B2%84%EB%A6%B0%EA%B4%84%ED%98%B8/",
+        "teaser": null
       }]
