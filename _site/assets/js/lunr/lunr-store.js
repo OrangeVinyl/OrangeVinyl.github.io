@@ -112,4 +112,10 @@ var store = [{
         "tags": ["Python","Algorithm","Greedy"],
         "url": "/Algorithm/Python_Greedy_%EC%9E%83%EC%96%B4%EB%B2%84%EB%A6%B0%EA%B4%84%ED%98%B8/",
         "teaser": null
+      },{
+        "title": "[Python_Greedy] 동전 뒤집기",
+        "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 행 또는 열을 기준으로 선택하여 뒤집는 모든 경우의 수를 구해 최솟값을 출력한다. 행 또는 열을 뒤집는 연산을 실행할 시, 비트마스킹을 적용하여 구한다. 행 또는 열을 뒤집은 후, 나머지 기준점으로 뒤집기 실행 (행을 기준으로 뒤집는 연산을 실행했으면, 열을 기준으로 뒤집을지 그대로 둘 지 결정한다.) 세번째의 경우, 뒤집을지...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Greedy"],
+        "url": "/Algorithm/Python_Greedy_%EB%8F%99%EC%A0%84%20%EB%92%A4%EC%A7%91%EA%B8%B0/",
+        "teaser": null
       }]
