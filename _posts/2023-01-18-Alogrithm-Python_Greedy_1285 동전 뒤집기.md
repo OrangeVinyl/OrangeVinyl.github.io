@@ -71,3 +71,4 @@ print(result)
 ---
 
 ### 🚀 사용 알고리즘 및 기법
+바로가기 : [Python_비트 마스킹](https://orangevinyl.github.io/Python/Bit%20Masking/)
