@@ -136,4 +136,10 @@ var store = [{
         "tags": ["Python","Algorithm","Greedy","PriorityQueue"],
         "url": "/Algorithm/Python_Greedy_%EB%B3%B4%EC%84%9D%EB%8F%84%EB%91%91/",
         "teaser": null
+      },{
+        "title": "[Python_Greedy] 순회 강연",
+        "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 가장 중요하게 생각해야 하는건 ‘하루에 최대 한 곳’ 이라고 생각된다. 문제 풀이의 키워드는 여기에 있다. 가장 먼저 작업해야 할 것은 d값을 기준으로 오름차순 정렬을 해야한다. 하루에 최대 한 곳만 선택할 수 있으므로, p값들을 우선순위 큐에 push한 다음, 큐의 길이와 집어넣은 d값을 비교하여 리스트의 길이가 클 경우,...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Greedy"],
+        "url": "/Algorithm/Python_Greedy_%EC%88%9C%ED%9A%8C%20%EA%B0%95%EC%97%B0/",
+        "teaser": null
       }]
