@@ -95,6 +95,18 @@ var store = [{
         "url": "/Python/heapq%20module/",
         "teaser": null
       },{
+        "title": "[Python_Greedy] 30",
+        "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 문제를 바라볼때 키워드는 결국 ‘30’이다. 30의 배수 판정법을 알고 있으면 수월하게 해결 가능하다. 10의 배수의 경우는 마지막 자리가 필수적으로 ‘0’이된다. 3의 배수는 각 자리의 합이 3의 배수이다. 결국, 해당 하는 숫자들 중 가장 높은 숫자를 출력하기 위해서는 입력값을 리스트에 삽입 후, 내림차순으로 반환하면 된다. 💡 문제 풀이...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Greedy"],
+        "url": "/Algorithm/Python_Greedy_30/",
+        "teaser": null
+      },{
+        "title": "[Python_Greedy] 병든 나이트",
+        "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 문제 풀이의 핵심은 경우의 수를 나눠서 생각해야 한다는 거다 N=1일 경우, N=2일 경우, 그리고 M의 길이에 따라 자세히 나눠야 한다. 코드의 구현은 어렵지 않으나, 문제해석의 어려움이 있을 수 있다. 참고 : https://afterdawncoding.tistory.com/202 💡 문제 풀이 코드 n,m = map(int,input().split()) if n == 1: print(1) elif n ==...","categories": ["Algorithm"],
+        "tags": ["Python","Algorithm","Greedy"],
+        "url": "/Algorithm/Python_Greedy_%EB%B3%91%EB%93%A0%20%EB%82%98%EC%9D%B4%ED%8A%B8/",
+        "teaser": null
+      },{
         "title": "[Python_Implementation] 상하좌우",
         "excerpt":"✅ 문제 여행가 A는 N × N 크기의 정사각형 공간 위에 서 있다. 이 공간은 1 × 1 크기의 정사각형으로 나누어져 있다. 가장 왼쪽 위 좌표는 (1, 1)이며, 가장 오른쪽 아래 좌표는 (N, N)에 해당한다. 여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며, 시작 좌표는 항상 (1, 1)이다. 우리...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","Implementation"],
@@ -141,5 +153,11 @@ var store = [{
         "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 가장 중요하게 생각해야 하는건 ‘하루에 최대 한 곳’ 이라고 생각된다. 문제 풀이의 키워드는 여기에 있다. 가장 먼저 작업해야 할 것은 d값을 기준으로 오름차순 정렬을 해야한다. 하루에 최대 한 곳만 선택할 수 있으므로, p값들을 우선순위 큐에 push한 다음, 큐의 길이와 집어넣은 d값을 비교하여 리스트의 길이가 클 경우,...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","Greedy"],
         "url": "/Algorithm/Python_Greedy_%EC%88%9C%ED%9A%8C%20%EA%B0%95%EC%97%B0/",
+        "teaser": null
+      },{
+        "title": "[Python] Sort",
+        "excerpt":"선택 정렬 데이터가 무작위로 있을 경우, 이중에서 가장 작은 데이터를 선택해 맨 앞에 있는 데이터와 바꾸고, 그다음 작은 데이터를 선택해 앞에서 두 번째 데이터와 바꾸는 과정을 반복하는 정렬 array = [7,5,9,0,3,1,6,2,4,8] for i in range(len(array)): min_index = i # 가장 작은 원소의 인덱스 for j in range(i+1 , len(array)): if...","categories": ["Python"],
+        "tags": ["Python","Sort","Algorithm"],
+        "url": "/Python/Sort/",
         "teaser": null
       }]
