@@ -19,9 +19,9 @@ minimal_mistakes_skin: "plum" # "default" "air", "aqua", ...
 
 # Site Settings
 locale: "ko-KR" #"en-US"
-title: "Hwan's Devlog" # 상단 헤더에 보이는 블로그 명
+title: "Hwan's Devlog 📝" # 상단 헤더에 보이는 블로그 명
 title_separator: "&#124;"
-subtitle: # site tagline that appears below site title in masthead
+subtitle: '일상과 이상'
 name: "OrangeVinyl's Daily Blog" # 블로그 닉네임 설정
 description: "겸상하는 개발자입니다 ⌨️" # 블로그 설명
 url: "https://OrangeVinyl.github.io" # 블로그 URL
@@ -99,15 +99,15 @@ analytics:
 # Site Author
 author:
   name: "Hwan's Devlog" # 블로그 닉네임
-  avatar: "/assets/images/meee.png" # 블로그 프로필 사진
+  avatar: "/assets/images/blog_icon2.png" # 블로그 프로필 사진
   #   bio              : "hi all!"
   # location         : "Seoul, Korea"
   # email            : "youremailhere@xxxxxx.com"
 
   links: # 사이트 링크
-#     - label: "Email"
-#       icon: "fas fa-fw fa-envelope-square"
-#       # url: "mailto:your.name@email.com"
+      # - label: "Email"
+      #   icon: "fas fa-fw fa-envelope-square"
+      #   url: "living.hap.hazard@gmail.com"
 #     - label: "Website"
 #       icon: "fas fa-fw fa-link"
 #       # url: "https://your-website.com"
@@ -120,9 +120,9 @@ author:
 #     - label: "GitHub"
 #       icon: "fab fa-fw fa-github"
 #       url: "https://github.com/"
-#     - label: "Instagram"
-#       icon: "fab fa-fw fa-instagram"
-#       url: "https://www.instagram.com/"
+      - label: "Instagram"
+        icon: "fab fa-fw fa-instagram"
+        url: "https://www.instagram.com/9ou5o/"
 
 # Site Footer
 footer:
@@ -135,7 +135,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
+      url: 'https://github.com/OrangeVinyl/'
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
@@ -144,7 +144,7 @@ footer:
       # url:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      # url:
+      url: 'https://instagram.com/9ou5o/'
 
 # Reading Files
 include:
