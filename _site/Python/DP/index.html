@@ -1,0 +1,790 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python] DP | Hwan’s Devlog</title>
+<meta name="description" content="파이썬으로 DP 정리">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog 📝">
+<meta property="og:title" content="[Python] DP">
+<meta property="og:url" content="http://localhost:4000/Python/DP/">
+
+
+  <meta property="og:description" content="파이썬으로 DP 정리">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-02-16T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-02-16T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Python/DP/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog 📝 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://orangevinyl.github.io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://orangevinyl.github.io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://orangevinyl.github.io/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://orangevinyl.github.io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://orangevinyl.github.io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://orangevinyl.github.io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://orangevinyl.github.io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://orangevinyl.github.io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://orangevinyl.github.io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://orangevinyl.github.io/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://orangevinyl.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orangevinyl.github.io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://orangevinyl.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://orangevinyl.github.io/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog 📝
+          <span class="site-subtitle">일상과 이상</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/blog_icon2.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 40</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Python/"><span class="nav__sub-title">Python</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python] DP">
+    <meta itemprop="description" content="파이썬으로 DP 정리">
+    <meta itemprop="datePublished" content="2023-02-16T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-02-16T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] DP
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#dp">DP</a><ul><li><a href="#dp의-사용-조건">DP의 사용 조건</a></li><li><a href="#memoization기법">Memoization기법</a></li><li><a href="#dp-와-분할정복의-차이">DP 와 분할정복의 차이</a></li><li><a href="#dp-문제-푸는-순서">DP 문제 푸는 순서</a></li><li><a href="#-bottom-up-방식">① Bottom-Up 방식</a></li><li><a href="#-top-down-방식">② Top-Down 방식</a></li><li><a href="#plus-alpha">Plus Alpha</a></li></ul></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="dp">DP</h1>
+
+<p>하나의 큰 문제를 여러 개의 작은 문제로 나누어서 그 결과를 저장하여 다시 큰 문제를 해결할 때 사용하는 것</p>
+
+<p>특정한 알고리즘 보다는 하나의 문제해결 패러다임으로 볼 수 있다.</p>
+
+<h3 id="dp의-사용-조건">DP의 사용 조건</h3>
+
+<p><strong>1) Overlapping Subproblems, <code class="language-plaintext highlighter-rouge">겹치는 부분 문제</code> / 큰 문제를 작은 문제로 나눌 수 있다.</strong></p>
+
+<p><strong>2) Optimal Substructure, <code class="language-plaintext highlighter-rouge">최적 부분 구조</code> / 작은 문제에서 구한 정답은 그것을 포함하는 큰 문제에서도 동일하다.</strong></p>
+
+<h3 id="memoization기법">Memoization기법</h3>
+
+<p>DP를 구현하는 방법 중 한 종류. 한 번 구한 결과를 메모리 공간에 메모해두고 같은 식을 다시 호출하면 메모한 결과를 그대로 가져오는 기법을 의미. → 메모이제이션은 값을 저장하는 방법이므로 <code class="language-plaintext highlighter-rouge">캐싱</code>이라고도 한다.</p>
+
+<p>재귀함수를 이용하는 방법이 대표적인 Memoization방법이다.</p>
+
+<h3 id="dp-와-분할정복의-차이">DP 와 분할정복의 차이</h3>
+
+<p>DP 와 분할정보은 모두 ‘최적 부분 구조’를 가질 때 사용한다는 공통점이 있다.</p>
+
+<p>하지만, <code class="language-plaintext highlighter-rouge">‘부분 문제의 중복’</code> 에서의 차이점이 있다.</p>
+
+<p>→ DP 문제에서는 각 부분 문제들이 서로 영향을 미치며 부분 문제가 중복된다.</p>
+
+<p>→ 분할 정복 문제에서는 동일한 부분 문제가 반복적으로 계산되지 않는다.</p>
+
+<h3 id="dp-문제-푸는-순서">DP 문제 푸는 순서</h3>
+
+<p><strong>1) DP로 풀 수 있는 문제인지 확인한다.</strong></p>
+
+<p><strong>2) 문제의 변수 파악</strong></p>
+
+<p><strong>3) 변수 간 관계식 만들기(점화식)</strong></p>
+
+<p><strong>4) 메모하기(memoization or tabulation)</strong></p>
+
+<p><strong>5) 기저 상태 파악하기</strong></p>
+
+<p><strong>6) 구현하기</strong></p>
+
+<h3 id="-bottom-up-방식"><strong>① Bottom-Up 방식</strong></h3>
+
+<p>이름에서 보이듯이, <strong>아래에서 부터 계산을 수행 하고 누적시켜서 전체 큰 문제를 해결하는 방식</strong>이다.</p>
+
+<p>메모를 위해서 dp라는 배열을 만들었고 이것이 1차원이라 가정했을 때, dp[0]가 기저 상태이고 dp[n]을 목표 상태라고 하자. Bottom-up은 dp[0]부터 시작하여 반복문을 통해 점화식으로 결과를 내서 dp[n]까지 그 값을 전이시켜 재활용하는 방식이다.</p>
+
+<p><strong>왜 Tabulation?</strong></p>
+
+<p>사실 위에서 메모하기 부분에서 Memoization이라고 했는데 Bottom-up일 때는 Tabulation이라고 부른다.</p>
+
+<p>왜냐면 반복을 통해 dp[0]부터 하나 하나씩 채우는 과정을 <strong>“table-filling”</strong> 하며, 이 Table에 저장된 값에 직접 접근하여 재활용하므로 <strong>Tabulation</strong>이라는 명칭이 붙었다고 한다.</p>
+
+<p>사실상 근본적인 개념은 결과값을 기억하고 재활용한다는 측면에서 메모하기(Memoization)와 크게 다르지 않다.</p>
+
+<h3 id="-top-down-방식"><strong>② Top-Down 방식</strong></h3>
+
+<p>이는 dp[0]의 기저 상태에서 출발하는 대신 dp[n]의 값을 찾기 위해 <strong>위에서 부터 바로 호출을 시작</strong>하여 dp[0]의 상태까지 내려간 다음 해당 <strong>결과 값을 재귀를 통해 전이시켜 재활용하는 방식</strong>이다.</p>
+
+<p>피보나치의 예시처럼, f(n) = f(n-2) + f(n-1)의 과정에서 함수 호출 트리의 과정에서 보이듯, n=5일 때, f(3), f(2)의 동일한 계산이 반복적으로 나오게 된다.</p>
+
+<p>이 때, 이미 이전에 계산을 완료한 경우에는 단순히 메모리에 저장되어 있던 내역을 꺼내서 활용하면 된다. 그래서 가장 최근의 상태 값을 메모해 두었다고 하여 <strong>Memoization</strong> 이라고 부른다.</p>
+
+<h3 id="plus-alpha">Plus Alpha</h3>
+
+<hr />
+
+<ul>
+  <li>일반적으로 반복문을 이용한 다이나믹 프로그래밍이 더 성능이 좋다.</li>
+  <li>파이썬의 경우 기본 자료형인 리스트 자료형이 연결 리스트의 기능을 포함하고 있는 점이 있다.</li>
+  <li>사전 자료형(dict)의 경우, 수열처럼 연속적이지 않은 경우에 유용하다.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#python" class="page__taxonomy-item" rel="tag">Python</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-02-16">February 16, 2023</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Python/BF_%EB%B6%84%ED%95%B4%ED%95%A9/" class="pagination--pager" title="[Algorithm] 분해 합
+">Prev</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/BF_%EB%B6%84%ED%95%B4%ED%95%A9/" rel="permalink">[Algorithm] 분해 합
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Algorithm_Python_BF_2231
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/BF_%EC%98%81%ED%99%94%EA%B0%90%EB%8F%85%EC%8A%98/" rel="permalink">[Algorithm] 영화감독 슘
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Algorithm_Python_BF_1436
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/BF_%EC%B2%B4%EC%8A%A4%ED%8C%90%EB%8B%A4%EC%8B%9C%EC%B9%A0%ED%95%98%EA%B8%B0/" rel="permalink">[Algorithm] 체스판 다시 칠하기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Algorithm_Python_BF_1018
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Algorithm/Python_DP_%EA%B0%80%EC%9E%A5%EA%B8%B4%EA%B0%90%EC%86%8C%ED%95%98%EB%8A%94%EB%B6%80%EB%B6%84%EC%88%98%EC%97%B4/" rel="permalink">[Python_Greedy] 가장 긴 감소하는 부분수열
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">백준_DP_11722
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/OrangeVinyl/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

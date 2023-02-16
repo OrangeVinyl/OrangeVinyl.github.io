@@ -1,0 +1,765 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <style> 
+      ::-webkit-scrollbar{ 
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        width: 0px;
+        background-color: rgba(224, 224, 224, 0.2);
+        /* border-radius: 5px; */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        width: 0px;
+        background-color: rgba(220, 219, 218, 0.6);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        width: 10px;
+        height: 20px;
+        /* background-color: rgba(190, 190, 190, 0.2); */
+        background-color: rgba(193, 192, 191, 0.7);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-track:hover {
+        width: 10px;
+        /* background-color: rgba(150, 150, 150, 0.1); */
+        background-color: rgba(224, 224, 224, 0.5);
+        border-radius: 5px;
+        /* background: transparent; */
+        /* border-radius: 10px; */
+      }
+
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+          width:0px;
+          height: 0px;
+          /* background-color: rgb(14, 221, 24); */
+          /* border-radius: 50%; */
+      }
+    </style>
+    
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python] 이분탐색 | Hwan’s Devlog</title>
+<meta name="description" content="파이썬으로 이분탐색 정리">
+
+
+  <meta name="author" content="Hwan's Devlog">
+  
+  <meta property="article:author" content="Hwan's Devlog">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Hwan's Devlog 📝">
+<meta property="og:title" content="[Python] 이분탐색">
+<meta property="og:url" content="http://localhost:4000/Python/Binary_Search/">
+
+
+  <meta property="og:description" content="파이썬으로 이분탐색 정리">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-02-05T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2023-02-05T00:00:00+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Python/Binary_Search/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "OrangeVinyl's Daily Blog",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hwan's Devlog 📝 Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://orangevinyl.github.io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://orangevinyl.github.io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://orangevinyl.github.io/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://orangevinyl.github.io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://orangevinyl.github.io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://orangevinyl.github.io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://orangevinyl.github.io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://orangevinyl.github.io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://orangevinyl.github.io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://orangevinyl.github.io/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://orangevinyl.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orangevinyl.github.io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://orangevinyl.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://orangevinyl.github.io/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Hwan's Devlog 📝
+          <span class="site-subtitle">일상과 이상</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://OrangeVinyl.github.io/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="https://github.com/OrangeVinyl">GitHub</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/blog_icon2.png" alt="Hwan's Devlog" itemprop="image">
+      
+    </div>
+  
+
+  <!-- 2022.02.17 author content hidden -->
+  <!-- <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Hwan's Devlog</h3>
+    
+    
+  </div> -->
+
+  <div class="author__urls-wrapper">
+    <!-- <button class="btn btn--inverse">Follow</button> -->
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    <!-- <li>
+      <span class="nav__total">🌴 Total Posts: 40</span>
+    </li> -->
+    
+    
+      <li>
+        
+              <a href="/categories/Algorithm/"><span class="nav__sub-title">Algorithm</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/CS/"><span class="nav__sub-title">CS</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Data_Structure/"><span class="nav__sub-title">Data Structure</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Software_Engineering/"><span class="nav__sub-title">Software Engineering</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+              <a href="/categories/Python/"><span class="nav__sub-title">Python</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python] 이분탐색">
+    <meta itemprop="description" content="파이썬으로 이분탐색 정리">
+    <meta itemprop="datePublished" content="2023-02-05T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2023-02-05T00:00:00+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] 이분탐색
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-05T00:00:00+09:00">February 5, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#순차-탐색">순차 탐색</a></li><li><a href="#이진-탐색">이진 탐색</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p><img src="/assets/images/posts_img/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89.gif" alt="binary-and-linear-search-animations.gif" /></p>
+<h3 id="순차-탐색">순차 탐색</h3>
+
+<p>데이터의 개수가 N개일때 최대 N번의 비교 연산이 필요하므로 순차 탐색의 최악의 경우 시간 복잡도는 O(N)이다.</p>
+
+<h3 id="이진-탐색">이진 탐색</h3>
+
+<p>배열 내부의 데이터가 <code class="language-plaintext highlighter-rouge">정렬</code>되어 있어야만 사용이 가능하다.</p>
+
+<p>한 번 확인시, 확인하는 원소의 개수가 절반씩 줄어든다는 점에서 시간복잡도는 O(logN)이다.</p>
+
+<p><strong>재귀함수로 구현한 이진 탐색 소스코드(외우는게 좋다)</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
+		<span class="k">return</span> <span class="bp">None</span>
+	<span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+	<span class="c1"># 찾은 경우 중간점 인덱스 반환
+</span>
+	<span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">mid</span>
+	<span class="k">elif</span> <span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">binary_search</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="n">array</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()))</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">'fail'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">result</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>반복문으로 구현한 이진 탐색 소스코드</strong>의 경우, 함수 내부를 while문을 사용하고 리턴 값만 조절하면 된다. 나머지는 동일하다</p>
+
+<blockquote>
+  <p>코딩 테스트의 이진 탐색 문제는 탐색 범위가 큰 상황에서의 탐색을 가정하는 문제가 많다. 따라서 <code class="language-plaintext highlighter-rouge">탐색 범위가 2,000만</code>을 넘어가면 이진 탐색으로 문제에 접근해보길 권한다. <code class="language-plaintext highlighter-rouge">처리해야 할 데이터의 개수나 값이 1,000만 단위 이상으로 넘어가면</code> 이진 탐색과 같이 O(logN)의 속도를 내야 하는 알고리즘을 떠올리자!</p>
+
+</blockquote>
+
+<aside>
+💡 데이터가 정렬되어 있는 경우 중 하나로 `이진 탐색 트리`가 있다. 이진 탐색 트리는 이진 탐색이 동작할 수 있도록 고안된, 효율적인 탐색이 가능한 자료구조이다.
+
+</aside>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#python" class="page__taxonomy-item" rel="tag">Python</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-02-05">February 5, 2023</time></p>
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Python/Sort/" class="pagination--pager" title="[Python] Sort
+">Prev</a>
+    
+    
+      <a href="/Python/DFS_BFS/" class="pagination--pager" title="[Python] DFS/BFS
+">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/DP/" rel="permalink">[Python] DP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">파이썬으로 DP 정리
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/BF_%EB%B6%84%ED%95%B4%ED%95%A9/" rel="permalink">[Algorithm] 분해 합
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Algorithm_Python_BF_2231
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/BF_%EC%98%81%ED%99%94%EA%B0%90%EB%8F%85%EC%8A%98/" rel="permalink">[Algorithm] 영화감독 슘
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Algorithm_Python_BF_1436
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/Python/BF_%EC%B2%B4%EC%8A%A4%ED%8C%90%EB%8B%A4%EC%8B%9C%EC%B9%A0%ED%95%98%EA%B8%B0/" rel="permalink">[Algorithm] 체스판 다시 칠하기
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        <time datetime="2023-02-16T00:00:00+09:00">February 16, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Algorithm_Python_BF_1018
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/OrangeVinyl/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://instagram.com/9ou5o/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 OrangeVinyl's Daily Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'github-account/repo-name');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
