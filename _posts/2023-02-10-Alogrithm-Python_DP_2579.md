@@ -1,5 +1,5 @@
 ---
-title: "[Python_Greedy] 계단 오르기"
+title: "[Python_DP] 계단 오르기"
 excerpt: "백준_DP_2579"
 
 categories:

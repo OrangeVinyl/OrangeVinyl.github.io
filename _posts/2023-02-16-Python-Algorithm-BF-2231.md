@@ -1,5 +1,5 @@
 ---
-title: "[Algorithm] 분해 합"
+title: "[Python_BF] 분해 합"
 excerpt: "Algorithm_Python_BF_2231"
 
 categories: 

@@ -1,5 +1,5 @@
 ---
-title: "[Algorithm] 체스판 다시 칠하기"
+title: "[Python_BF] 체스판 다시 칠하기"
 excerpt: "Algorithm_Python_BF_1018"
 
 categories: 

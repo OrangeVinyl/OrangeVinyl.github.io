@@ -1,5 +1,5 @@
 ---
-title: "[Python_Greedy] 가장 긴 감소하는 부분수열"
+title: "[Python_DP] 가장 긴 감소하는 부분수열"
 excerpt: "백준_DP_11722"
 
 categories:

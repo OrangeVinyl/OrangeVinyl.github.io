@@ -1,5 +1,5 @@
 ---
-title: "[Python_Greedy] 2n타일링"
+title: "[Python_DP] 2n타일링"
 excerpt: "백준_DP_11726"
 
 categories:

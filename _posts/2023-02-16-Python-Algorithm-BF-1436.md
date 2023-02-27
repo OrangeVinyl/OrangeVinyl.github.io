@@ -1,5 +1,5 @@
 ---
-title: "[Algorithm] 영화감독 슘"
+title: "[Python_BF] 영화감독 슘"
 excerpt: "Algorithm_Python_BF_1436"
 
 categories: 
