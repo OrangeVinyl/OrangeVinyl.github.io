@@ -197,37 +197,37 @@ var store = [{
         "url": "/Python/DFS_BFS/",
         "teaser": null
       },{
-        "title": "[Python_Greedy] 2n타일링",
+        "title": "[Python_DP] 2n타일링",
         "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 이번 문제 풀이의 핵심은 ‘점화식’을 구해야한다. 문제의 규칙을 찾아보면 피보나치 수열이랑 동일한 것을 알 수 있다. F(n) = F(n-1) + F(n-2) 💡 문제 풀이 코드 n = int(input()) dp = [0] * (1001) dp[1] = 1 dp[2] = 2 for i in range(3,n+1): dp[i] = dp[i-1] +...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","DP"],
         "url": "/Algorithm/Python_DP_2n%ED%83%80%EC%9D%BC%EB%A7%81/",
         "teaser": null
       },{
-        "title": "[Python_Greedy] 계단 오르기",
+        "title": "[Python_DP] 계단 오르기",
         "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 마지막 계단은 무조건 도착해야 하므로 2가지의 경우로 나눌 수 있다. 바로 직전의 계단을 밟는 경우 이전의 계단은 누적값과 마지막 계단의 합을 더하면 된다. 끝에서 2번째 계단을 밝는 경우 그 앞의 계단은 밟지 못하고 마지막 계단만 밟을 수 있다. 그러므로, 끝에서 2번째 계단의 값 + 마지막 계단...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","DP"],
         "url": "/Algorithm/Python_DP_%EA%B3%84%EB%8B%A8%EC%98%A4%EB%A5%B4%EA%B8%B0/",
         "teaser": null
       },{
-        "title": "[Python_Greedy] 가장 긴 감소하는 부분수열",
+        "title": "[Python_DP] 가장 긴 감소하는 부분수열",
         "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 한 번에 문제풀이가 떠오르기 힘든 까다로운 문제이다. 제일 중요한 점은 DP배열에 어떤 값을 저장하냐에 따라 달라진다. DP배열에는 인덱스의 값까지 ‘가장 긴 감소하는 부분 수열의 **크기’를 집어넣는다.** 감소하는 부분 수열이므로 주어진 수열을 하나씩 돌면서 앞의 값들을 비교하여 앞의 값이 큰 경우 각 값의 인덱스와 일치하는 DP배열의 값...","categories": ["Algorithm"],
         "tags": ["Python","Algorithm","DP"],
         "url": "/Algorithm/Python_DP_%EA%B0%80%EC%9E%A5%EA%B8%B4%EA%B0%90%EC%86%8C%ED%95%98%EB%8A%94%EB%B6%80%EB%B6%84%EC%88%98%EC%97%B4/",
         "teaser": null
       },{
-        "title": "[Algorithm] 체스판 다시 칠하기",
+        "title": "[Python_BF] 체스판 다시 칠하기",
         "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 8X8 로 잘라야 한다면 NXM크기의 보드는 N-8+1, M-8+1 개의 비교를 할 수 있다. 가장 상단의 좌측 타일이 B 혹은 W로 시작하는 2가지의 경우가 있다. → Case를 2개로 나눠 생각한다. 판의 좌표 합이 짝수인 경우와 홀수인 경우로 나눈다. N-7 , M-7 내의 8X8에서 하나씩 돌면서 비교하는 총...","categories": ["Algorithm"],
         "tags": ["Python","BF","Algorithm"],
         "url": "/Python/BF_%EC%B2%B4%EC%8A%A4%ED%8C%90%EB%8B%A4%EC%8B%9C%EC%B9%A0%ED%95%98%EA%B8%B0/",
         "teaser": null
       },{
-        "title": "[Algorithm] 영화감독 슘",
+        "title": "[Python_BF] 영화감독 슘",
         "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 완전 탐색 중 순차 탐색을 사용하여 문제를 풀어야 한다. 너무 꼬아서 생각 할 필요 없이 666부터 +1 씩 증가하면서 증가하는 숫자에 ‘666’이 들어간다면 카운팅을 진행하고 카운팅 하는 변수가 입력값과 같을 때 증가하는 수를 출력하면 된다. 💡 문제 풀이 코드 n = int(input()) cnt = 0 target =...","categories": ["Algorithm"],
         "tags": ["Python","BF","Algorithm"],
         "url": "/Python/BF_%EC%98%81%ED%99%94%EA%B0%90%EB%8F%85%EC%8A%98/",
         "teaser": null
       },{
-        "title": "[Algorithm] 분해 합",
+        "title": "[Python_BF] 분해 합",
         "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 N과 M을 헷갈리지 않는 것이 문제의 핵심이다. 결국 구하는 것은 문제 예시의 생성자 M 이므로, 예시의 과정을 반대로 생각해야 한다. 자연수 1 부터 입력값 N까지 다 돌면서 경우의 수를 구해 N과 동일한 결과가 나오면 정답이다. → 가장 작은 생성자를 구하는 문제이므로 1부터 돌기 때문에 굳이 신경...","categories": ["Algorithm"],
         "tags": ["Python","BF","Algorithm"],
         "url": "/Python/BF_%EB%B6%84%ED%95%B4%ED%95%A9/",
@@ -237,5 +237,11 @@ var store = [{
         "excerpt":"DP 하나의 큰 문제를 여러 개의 작은 문제로 나누어서 그 결과를 저장하여 다시 큰 문제를 해결할 때 사용하는 것 특정한 알고리즘 보다는 하나의 문제해결 패러다임으로 볼 수 있다. DP의 사용 조건 1) Overlapping Subproblems, 겹치는 부분 문제 / 큰 문제를 작은 문제로 나눌 수 있다. 2) Optimal Substructure, 최적 부분...","categories": ["Python"],
         "tags": ["Python","DP","Algorithm"],
         "url": "/Python/DP/",
+        "teaser": null
+      },{
+        "title": "[Python_DP] 퇴사 2",
+        "excerpt":"✏️ 문제 ✅ 문제 풀이 핵심 i는 1부터 시작한다.1일부터 차례대로 탐색하며 진행한다. i일에 얻을 수 있는 이익은 그 전날 얻을 수 있는 이익보다는 크거나 같을 것이므로 dp[i] = max(dp[i], dp[i - 1])를 해준다 i일에 해당하는 일이 끝나는 시점인 fin_date = i + t[i] - 1를 정의하였고, fin_date가 최종일 이하면 i일에 일을 할 수 있으므로 fin_date일에 영향을 준다.따라서 dp[fin_date]...","categories": ["Algorithm"],
+        "tags": ["Python","DP","Algorithm"],
+        "url": "/Python/DP_%ED%87%B4%EC%82%AC2/",
         "teaser": null
       }]
